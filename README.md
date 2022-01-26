@@ -28,7 +28,7 @@ La aplicación web es una página con temática de Pokémon, orientada a mostrar
 
 # Descripción de las funcionalidades del servicio interno
 * Mostrar la información de todas las cartas de la Pokédex: se accede a las 151 cartas y se muestran en una lista. En caso de seleccionar una, se ven sus datos por pantalla.
-* Generar un equipo pseudoaleatorio: se seleccionan ciertos parámetros que determinarán las características del equipo final. Teniendo esto en cuenta, se seleccionan 6 Pokémon aleatorios y se plasman sus datos en un fichero de texto, adaptado para importarse desde "Pokemon Showdown"
+* Generar un equipo pseudoaleatorio: se seleccionan ciertos parámetros que determinarán las características del equipo final. Teniendo esto en cuenta, se seleccionan 6 Pokémon aleatorios y se plasman sus datos en un fichero de texto, adaptado para importarse en "Pokemon Showdown".
 * Enviar equipo por correo (¿Externo?)
 * Login con Facebook o correo electrónico (¿Externo?)
 * Mostrar una lista con todas las noticias recientes.
