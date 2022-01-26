@@ -13,7 +13,7 @@ La aplicación web es una página con temática de Pokémon, orientada a mostrar
 
 # Funcionalidades privadas
 * Visualización de la baraja de cartas coleccionables del usuario.
-* Combate contra la máquina para obtener cartas aleatorias.
+* Combate contra la máquina para obtener cartas aleatorias (contiene límite diario).
 * Obtención de cartas en base a la cantidad de accesos consecutivos a la web.
 * Registro de equipos previamente creados.
 
