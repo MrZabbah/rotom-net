@@ -1,7 +1,7 @@
 # Nombre de la aplicación
 RotomNet
 
-# Descripción de la temática
+## Descripción de la temática
 La aplicación web es una página con temática de Pokémon, orientada a mostrar las
 últimas noticias de la franquicia, crear equipos pseudoaleatorios para 
 "Pokémon Showdown" y coleccionar cartas con el objetivo de completar la primera Pokédex.
