@@ -9,7 +9,7 @@ La aplicación web es una página con temática de Pokémon, orientada a mostrar
 # Funcionalidades públicas
 * Tablón de anuncios y noticias sobre Pokémon.
 * Creación pseudoaleatoria de equipos para "Pokémon Showdown".
-* Visualización de las características de todas las cartas.
+* Visualización de las características de todas las cartas disponibles.
 
 # Funcionalidades privadas
 * Visualización de la baraja de cartas coleccionables del usuario.
