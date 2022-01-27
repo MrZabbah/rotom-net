@@ -32,12 +32,15 @@ La aplicación web es una página con temática de Pokémon, orientada a mostrar
 7. Baraja (podría ir en Usuario o por separado): contiene un número variable de Cartas que posea un Usuario.
 
 ## Descripción de las funcionalidades del servicio interno
+
 * Generar un equipo pseudoaleatorio: se seleccionan ciertos parámetros que determinarán las características del equipo final. Teniendo esto en cuenta, se seleccionan 6 Pokémon aleatorios y se plasman sus datos en un fichero de texto, adaptado para importarse en "Pokemon Showdown".
 * Enviar notificaciones por correo.
-* Login con Facebook o correo electrónic.
+* Login con Facebook o correo electrónico.
 * Publicar en redes sociales cuando consigues una carta. (¿Opcional?)
 * Registrar accesos diarios consecutivos a la aplicación.
 * Realizar un combate simplificado contra el jugador.
 * Dar una carta aleatoria al jugador si es necesario.
 
 ## Organización del proyecto
+
+https://github.com/MrZabbah/rotom-net/projects/1
