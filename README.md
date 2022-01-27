@@ -10,7 +10,6 @@ La aplicación web es una página con temática de Pokémon, orientada a mostrar
 
 ## Funcionalidades públicas
 
-* Tablón de anuncios y noticias sobre Pokémon.
 * Creación pseudoaleatoria de equipos para "Pokémon Showdown".
 * Visualización de las características de todas las cartas disponibles.
 
@@ -23,21 +22,17 @@ La aplicación web es una página con temática de Pokémon, orientada a mostrar
 
 ## Nombre y descripción de las entidades principales
 
-1. Usuario: contiene el correo electrónico, la contraseña, (opcionalmente) una Baraja de cartas y uno o varios Equipos.
+1. Usuario: contiene el correo electrónico, la contraseña, una lista de Cartas y uno o varios Equipos.
 2. Pokémon: contiene 4 ataques, uno o dos tipos, estadísticas, habilidad, naturaleza, EVs y un ítem.
 3. Carta: contiene un Pokémon y su representación gráfica.
 4. Equipo: contiene 6 Pokémon.
-5. Noticia: contiene un titular, un texto y una o varias imágenes.
-6. Pokédex: contiene 151 Cartas.
-7. Baraja (podría ir en Usuario o por separado): contiene un número variable de Cartas que posea un Usuario.
+5. Pokédex: contiene 151 Cartas.
 
 ## Descripción de las funcionalidades del servicio interno
 
 * Generar un equipo pseudoaleatorio: se seleccionan ciertos parámetros que determinarán las características del equipo final. Teniendo esto en cuenta, se seleccionan 6 Pokémon aleatorios y se plasman sus datos en un fichero de texto, adaptado para importarse en "Pokemon Showdown".
 * Enviar notificaciones por correo.
-* Login con Facebook o correo electrónico.
-* Publicar en redes sociales cuando consigues una carta. (¿Opcional?)
-* Registrar accesos diarios consecutivos a la aplicación.
+* Publicar en redes sociales cuando consigues una carta. 
 * Realizar un combate simplificado contra el jugador.
 * Dar una carta aleatoria al jugador si es necesario.
 
