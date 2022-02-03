@@ -26,7 +26,6 @@ La aplicación web es una página con temática de Pokémon, orientada a mostrar
 2. Pokémon: contiene 4 ataques, uno o dos tipos, estadísticas, habilidad, naturaleza, EVs y un ítem.
 3. Carta: contiene un Pokémon y su representación gráfica.
 4. Equipo: contiene 6 Pokémon.
-5. Pokédex: contiene 151 Cartas.
 
 ## Descripción de las funcionalidades del servicio interno
 
