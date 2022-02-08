@@ -22,9 +22,9 @@ La aplicación web es una página con temática de Pokémon, orientada a mostrar
 
 ## Nombre y descripción de las entidades principales
 
-1. Usuario: contiene el correo electrónico, la contraseña, una lista de Cartas y uno o varios Equipos.
-2. Pokémon: contiene 4 ataques, uno o dos tipos, estadísticas, habilidad, naturaleza, EVs y un ítem.
-3. Carta: contiene un Pokémon y su representación gráfica.
+1. Usuario: contiene el correo electrónico, la contraseña, su imagen, una lista de Cartas y uno o varios Equipos.
+2. Pokémon: contiene 4 ataques, uno o dos tipos, habilidad, naturaleza, EVs y un ítem.
+3. Carta: contiene un Pokémon, su representación gráfica y sus estadísticas.
 4. Equipo: contiene 6 Pokémon.
 
 ## Descripción de las funcionalidades del servicio interno
@@ -38,3 +38,7 @@ La aplicación web es una página con temática de Pokémon, orientada a mostrar
 ## Organización del proyecto
 
 https://github.com/MrZabbah/rotom-net/projects/1
+
+## Diagrama UML
+![UML](https://user-images.githubusercontent.com/60218308/152989452-54f71ea2-c2b6-453d-82d4-67f214cdd3cb.PNG)
+
