@@ -1,0 +1,16 @@
+<header>
+	<h1 align='center'>Board</h1>
+</header>
+<article align='center'>
+	Hello, this is the board section
+	<div>
+		{{#cards}}
+		<div>
+			{{#.}}
+			{{_number}} pokemon
+			&emsp; &emsp;
+			{{/.}}
+		</div>
+		{{/cards}}
+	</div>
+</article>
