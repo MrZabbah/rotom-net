@@ -1,0 +1,23 @@
+<html>
+	<header>
+		<title>Random team generated</title>
+	</header>
+	<body>
+		<div>
+			<p>Congratulations, your team has been successfully created!</p>
+			<p>Your requirements were: </p>
+			<p>Team name: {{teamName}}</p>
+			<p>Legendaries: {{#legendaryCheck}} Yes {{/legendaryCheck}} {{^legendaryCheck}} No {{/legendaryCheck}}</p>
+			{{^anyType}}
+			<p>Types: </p>
+			{{/anyType}}
+			{{#selectedTypes}}
+				<li>{{.}}</li>
+			{{/selectedTypes}}
+			{{^selectedTypes}}
+				<p>No specific types were selected</p>
+			{{/selectedTypes}}
+		</div>
+		<a href="/">Back to main menu</a>
+	</body>
+</html>

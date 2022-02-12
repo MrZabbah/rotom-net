@@ -1,0 +1,57 @@
+<html>
+	<header>
+		<title>Random Team Generator</title>
+	</header>
+	<body>
+		<article align='center'>
+			<form action='/createRandomTeam' method='post'>
+				<p>Name of the team: <input type='text' name='teamName'></p>
+				<input type='checkbox' id='legendaryCheck' name = 'legendaryCheck'>
+				<label for='legendaryCheck'>I want a legendary Pokemon</label>
+				<div>
+					<p>Which types do you wish your team to have?</p>
+					<p>If more than six options are checked, only the first six will be selected</p>
+					<p>If no type is selected, the team will be generated randomly amongst all 18 types</p>
+					<input type='checkbox' id='fireCheck' name = 'fireCheck'>
+					<label for='fireCheck'>Fire</label>
+					<input type='checkbox' id='waterCheck' name = 'waterCheck'>
+					<label for='waterCheck'>Water</label>
+					<input type='checkbox' id='grassCheck' name = 'grassCheck'>
+					<label for='grassCheck'>Grass</label>
+					<input type='checkbox' id='electricCheck' name = 'electricCheck'>
+					<label for='electricCheck'>Electric</label>
+					<input type='checkbox' id='groundCheck' name = 'groundCheck'>
+					<label for='groundCheck'>Ground</label>
+					<input type='checkbox' id='rockCheck' name = 'rockCheck'>
+					<label for='rockCheck'>Rock</label>
+					<input type='checkbox' id='poisonCheck' name = 'poisonCheck'>
+					<label for='poisonCheck'>Poison</label>
+					<input type='checkbox' id='psychicCheck' name = 'psychicCheck'>
+					<label for='psychicCheck'>Psychic</label>
+					<input type='checkbox' id='flyingCheck' name = 'flyingCheck'>
+					<label for='flyingCheck'>Flying</label>
+					<input type='checkbox' id='bugCheck' name = 'bugCheck'>
+					<label for='bugCheck'>Bug</label>
+					<input type='checkbox' id='normalCheck' name = 'normalCheck'>
+					<label for='normalCheck'>Normal</label>
+					<input type='checkbox' id='ghostCheck' name = 'ghostCheck'>
+					<label for='ghostCheck'>Ghost</label>
+					<input type='checkbox' id='fightingCheck' name = 'fightingCheck'>
+					<label for='fightingCheck'>Fighting</label>
+					<input type='checkbox' id='steelCheck' name = 'steelCheck'>
+					<label for='steelCheck'>Steel</label>
+					<input type='checkbox' id='iceCheck' name = 'iceCheck'>
+					<label for='iceCheck'>Ice</label>
+					<input type='checkbox' id='dragonCheck' name = 'dragonCheck'>
+					<label for='dragonCheck'>Dragon</label>
+					<input type='checkbox' id='darkCheck' name = 'darkCheck'>
+					<label for='darkCheck'>Dark</label>
+					<input type='checkbox' id='fairyCheck' name = 'fairyCheck'>
+					<label for='fairyCheck'>Fairy</label>
+				</div>
+				<br>
+				<input type='submit' value='Create random team'>
+			</form>
+		</article>		
+	</body>
+</html>
