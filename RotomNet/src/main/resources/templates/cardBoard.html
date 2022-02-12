@@ -2,15 +2,14 @@
 	<h1 align='center'>Board</h1>
 </header>
 <article align='center'>
+<link rel="stylesheet" type="text/css" href="/css/card.css">
+
 	Hello, this is the board section
-	<div>
+	<br/>
 		{{#cards}}
-		<div>
 			{{#.}}
-			{{_number}} pokemon
-			&emsp; &emsp;
+			{{>card}}
 			{{/.}}
-		</div>
+		<br/>
 		{{/cards}}
-	</div>
 </article>
