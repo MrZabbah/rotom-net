@@ -13,8 +13,12 @@ import es.trident.rotomnet.service.PokemonService;
 @Controller
 public class TeamGeneratorController {
 	
-	@Autowired
 	private PokemonService _pokemonService;
+	
+	public TeamGeneratorController(PokemonService pokemonService) {
+		_pokemonService = pokemonService;
+		_pokemonService.createPokemon();
+	}
 	
 	@GetMapping("/teamGenerator")
 	public String teamGenerator() {
@@ -38,7 +42,7 @@ public class TeamGeneratorController {
 		model.addAttribute("legendaryCheck",legendaryCheck);
 		model.addAttribute("selectedTypes",selectedTypes);
 		model.addAttribute("anyType",anyType);
-		model.addAttribute("team",_pokemonService.getRandomTeam(selectedTypes,legendaryCheck));
+		model.addAttribute("team",_pokemonService.getRandomTeam(teamName,selectedTypes,legendaryCheck));
 		return "teamCreated";
 	}
 

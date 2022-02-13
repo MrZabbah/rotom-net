@@ -1,8 +1,14 @@
 package es.trident.rotomnet.model;
 
-public class Pokemon {
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
+@Entity
+public class Pokemon {
+	
+	@Id
 	private int _pokedexNumber;
+	
 	private String _name;
 	private String _attack1;
 	private String _attack2;
@@ -20,9 +26,14 @@ public class Pokemon {
 	private String _nature;
 	private String _item;
 	private boolean _legendary;
+	private boolean _readyToBattle;
+	
+	protected Pokemon() {
+		
+	}
 	
 	public Pokemon(int pokedexNumber, String name, String attack1, String attack2, String attack3, String attack4, String type1, String type2, int healthEVs,
-			int attackEVs, int spAttackEVs, int defenseEVs, int spDefenseEVs, int speedEVs, String ability, String nature, String item, boolean legendary) {
+			int attackEVs, int spAttackEVs, int defenseEVs, int spDefenseEVs, int speedEVs, String ability, String nature, String item, boolean legendary,boolean readyToBattle) {
 		
 		_pokedexNumber = pokedexNumber;
 		_name = name;
@@ -42,6 +53,7 @@ public class Pokemon {
 		_nature = nature;
 		_item = item;
 		_legendary = legendary;
+		_readyToBattle = readyToBattle;
 	}
 	
 	public int getPokedexNumber() {
@@ -98,59 +110,65 @@ public class Pokemon {
 	public boolean getLegendary() {
 		return _legendary;
 	}
+	public boolean getReadyToBattle() {
+		return _readyToBattle;
+	}
 	
-	public void getPokedexNumber(int pokedexNumber) {
+	public void setPokedexNumber(int pokedexNumber) {
 		_pokedexNumber = pokedexNumber;
 	}
-	public void getName(String name) {
+	public void setName(String name) {
 		_name = name;
 	}
-	public void getAttack1(String attack1) {
+	public void setAttack1(String attack1) {
 		_attack1 = attack1;
 	}
-	public void getAttack2(String attack2) {
+	public void setAttack2(String attack2) {
 		_attack2 = attack2;
 	}
-	public void getAttack3(String attack3) {
+	public void setAttack3(String attack3) {
 		_attack3 = attack3;
 	}
-	public void getAttack4(String attack4) {
+	public void setAttack4(String attack4) {
 		_attack4 = attack4;
 	}
-	public void getType1(String type1) {
+	public void setType1(String type1) {
 		_type1 = type1;
 	}
-	public void getType2(String type2) {
+	public void setType2(String type2) {
 		_type2 = type2;
 	}
-	public void getHealthEVs(int healthEVs) {
+	public void setHealthEVs(int healthEVs) {
 		_healthEVs = healthEVs;
 	}
-	public void getAttackEVs(int attackEVs) {
+	public void setAttackEVs(int attackEVs) {
 		_attackEVs = attackEVs;
 	}
-	public void getSpAttackEVs(int spAttackEVs) {
+	public void setSpAttackEVs(int spAttackEVs) {
 		_spAttackEVs = spAttackEVs;
 	}
-	public void getDefenseEVs(int defenseEVs) {
+	public void setDefenseEVs(int defenseEVs) {
 		_defenseEVs = defenseEVs;
 	}
-	public void getSpDefenseEVs(int spDefenseEVs) {
+	public void setSpDefenseEVs(int spDefenseEVs) {
 		_spDefenseEVs = spDefenseEVs;
 	}
-	public void getSpeedEVs(int speedEVs) {
+	public void setSpeedEVs(int speedEVs) {
 		_speedEVs = speedEVs;
 	}
-	public void getAbility(String ability) {
+	public void setAbility(String ability) {
 		_ability = ability;
 	}
-	public void getNature(String nature) {
+	public void setNature(String nature) {
 		_nature = nature;
 	}
-	public void getItem(String item) {
+	public void setItem(String item) {
 		_item = item;
 	}
-	public void getLegendary(boolean legendary) {
+	public void setLegendary(boolean legendary) {
 		_legendary = legendary;
+	}
+	public void setReadyToBattle(boolean readyToBattle) {
+		_readyToBattle = readyToBattle;
 	}
 }

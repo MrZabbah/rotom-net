@@ -3,13 +3,20 @@ package es.trident.rotomnet.service;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import es.trident.rotomnet.model.Pokemon;
 import es.trident.rotomnet.model.PokemonCard;
+import es.trident.rotomnet.model.Team;
+
+
 
 @Service
 public class PokemonService {
+	
+	@Autowired
+	private PokemonRepository _pokemonRepository;
 	
 	private final String [] POKEMON_TYPES = {"Fire","Water","Grass","Electric","Ground","Rock","Poison","Psychic","Flying","Bug","Normal","Ghost","Fighting","Steel","Ice","Dragon","Dark","Fairy"};
 	
@@ -67,17 +74,59 @@ public class PokemonService {
 		return selectedTypes;
 	}
 	
-	public Pokemon[] getRandomTeam(ArrayList<String> types, boolean legendaryCheck) {
+	public void createPokemon() {
+		Pokemon salamence = new Pokemon(1,"Salamence","Fly","Outrage","Earthquake","Dragon dance","Dragon","Flying",0,252,0,3,0,252,"Moxie","Adamant","Heavy Duty boots",false, true);
+		Pokemon blastoise = new Pokemon(2,"Blastoise","Hydro-pump","Rapid-spin","Scald","Ice beam","water","",0,252,0,3,0,252,"Torrent","Modest","Leftovers",false, true);
+		_pokemonRepository.save(salamence);
+		_pokemonRepository.save(blastoise);
+	}
+	
+	private void getNonLegendaries(int number, Pokemon[] team){
+		ArrayList<Pokemon> nonLegendaries = (ArrayList<Pokemon>)_pokemonRepository.findBy_legendaryAnd_readyToBattle(false,true);
+		for(int i = 0; i < number;++i) {
+			int index = (int)Math.random()%nonLegendaries.size();
+			team[i] = nonLegendaries.get(index);
+		}
+	} 
+	
+	private void fillListByTypes(ArrayList<String>types, ArrayList<Pokemon> myList, boolean legendaries) {
+		for(int i = 0; i < types.size();++i) {
+			myList.addAll((ArrayList<Pokemon>)_pokemonRepository.findByTypesAndLegendary(types.get(i), types.get(i),legendaries));
+		}
+	}
+	
+	private void getNonLegendariesByType(ArrayList<String>types,int number, Pokemon[] team) {
+		ArrayList<Pokemon> nonLegendaries = new ArrayList<Pokemon>();
+		fillListByTypes(types,nonLegendaries,false);
+		for(int i = 0; i < number;++i) {
+			int index = (int)Math.random()%nonLegendaries.size();
+			team[i] = nonLegendaries.get(index);
+		}
+	}
+	
+	public Team getRandomTeam(String teamName, ArrayList<String> types, boolean legendaryCheck) {
 		Pokemon[] team = new Pokemon[6];
-		Pokemon salamence = new Pokemon(1,"Salamence","Fly","Outrage","Earthquake","Dragon dance","Dragon","Flying",0,252,0,3,0,252,"Moxie","Adamant","Heavy Duty boots",false);
-		Pokemon blastoise = new Pokemon(2,"Blastoise","Hydro-pump","Rapid-spin","Scald","Ice beam","water","",0,252,0,3,0,252,"Torrent","Modest","Leftovers",false);
-		for(int i = 0; i < 6; ++i) {
-			if(i<3) {
-				team[i] = salamence;
+		if(types.isEmpty()) {
+			if(legendaryCheck) {
+				ArrayList<Pokemon> legendaries = (ArrayList<Pokemon>)_pokemonRepository.findBy_legendaryAnd_readyToBattle(legendaryCheck, true);
+				int index = (int)Math.random()%legendaries.size();
+				team[5] = legendaries.get(index);
+				getNonLegendaries(5,team);
 			} else {
-				team[i] = blastoise;
+				getNonLegendaries(6,team);
+			}
+		} else {
+			if(legendaryCheck) {
+				ArrayList<Pokemon> legendaries = new ArrayList<Pokemon>();
+				fillListByTypes(types,legendaries,legendaryCheck);
+				int index =  (int)Math.random()%legendaries.size();
+				team[5] = legendaries.get(index);
+				getNonLegendariesByType(types,5,team);
+			} else {
+				getNonLegendariesByType(types,6,team);				
 			}
 		}
-		return team;
+		Team myTeam = new Team(team,teamName);
+		return myTeam;
 	}
 }
