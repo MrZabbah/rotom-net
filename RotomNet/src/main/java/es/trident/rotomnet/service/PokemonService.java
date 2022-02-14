@@ -75,55 +75,130 @@ public class PokemonService {
 	}
 	
 	public void createPokemon() {
-		Pokemon salamence = new Pokemon(1,"Salamence","Fly","Outrage","Earthquake","Dragon dance","Dragon","Flying",0,252,0,3,0,252,"Moxie","Adamant","Heavy Duty boots",false, true);
-		Pokemon blastoise = new Pokemon(2,"Blastoise","Hydro-pump","Rapid-spin","Scald","Ice beam","water","",0,252,0,3,0,252,"Torrent","Modest","Leftovers",false, true);
-		_pokemonRepository.save(salamence);
-		_pokemonRepository.save(blastoise);
+		ArrayList<Pokemon> pokes = new ArrayList<Pokemon>();
+		//Grass
+		pokes.add(new Pokemon(3, "Venusaur", "Giga drain", "Sludge bomb", "Leech Seed", "Substitute", "Grass","Poison",252,0,252,0,6,0,"Chlorophyll", "Modest", "Black sludge", false,true));
+		
+		//Fire
+		pokes.add(new Pokemon(6,"Charizard","Fire blast","Air slash","Earthquake","Roost","Fire","Flying",0,6,252,0,0,252,"Solar Power","Modest","Heavy-Duty boots",false,true ));
+		
+		//Water
+		pokes.add(new Pokemon(9,"Blastoise","Protect","Rapid Spin","Ice beam","Scald","Water","",252,0,252,0,6,0,"Torrent","Modest","Leftovers",false,true ));
+		pokes.add(new Pokemon(131,"Lapras","Freeze dry","Ice beam","Sparkling aria","Toxic","Water","Ice",252,0,252,0,6,0,"Water absorb","Modest","Leftovers",false,true));
+		pokes.add(new Pokemon(91,"Cloyster","Hydro pump","Icicle spear","Shell smash","Rock blast","Water","Ice",6,252,0,252,0,0,"Skill link","Adamant","White herb",false,true));
+		pokes.add(new Pokemon(130,"Gyarados","Bounce","Waterfall","Dragon dance","Power whip","Water","Flying",6,252,0,0,0,252,"Moxie","Adamant","Leftovers",false,true));
+		pokes.add(new Pokemon(119,"Seaking","Scald","Megahorn","Drill run","Knock off","Water","",252,252,6,0,0,0,"Lightning rod","Naive","Life orb",false,true));
+		pokes.add(new Pokemon(141,"Kabutops","Liquidation","Aqua jet","Swords dance","Stone edge","Water","Rock",0,252,0,6,0,252,"Swift swim","Adamant","Life orb",false,true));
+		
+		//Electric
+		pokes.add(new Pokemon(26,"Raichu","Nasty plot","Thunderbolt","Volt switch","Surf","Electric","",0,0,252,0,6,252,"Modest","Lightning rod","Life orb",false,true));
+		pokes.add(new Pokemon(135,"Jolteon","Volt switch","Tunderbolt","Hyper voice","Shadow ball","Electric","",0,0,252,0,6,252,"Volt absorb","Timid","Choice specs",false,true));
+		pokes.add(new Pokemon(466,"Electivire","Earthquake","Volt switch","Flamethrower","Ice punch","Electric","",6,0,252,0,0,252,"Motor Drive","Quirky","Life orb",false,true));
+		pokes.add(new Pokemon(145,"Zapdos","Discharge","Roost","Hurricane","Heat wave","Electric","Flying",0,0,252,6,0,252,"Static","Modest","Leftovers",true,true));
+		
+		//Ground
+		
+		//Rock
+		
+		//Poison
+		
+		//Psychic
+		pokes.add(new Pokemon(150,"Mewtwo","Psystrike","Nasty plot","Fire blast","Recover","Psychic","",0,0,255,0,6,255,"Pressure","Modest","Leftovers",true,true));
+		pokes.add(new Pokemon(151,"Mew","Psychic fangs", "Flare blitz", "Dragon dance", "Close combat","Psychic","",6,255,0,0,0,255,"Synchronize","Adamant","Leftovers",true,true));
+		
+		//Flying
+		
+		//Bug
+		
+		//Normal
+		
+		//Ghost
+		
+		//Fighting
+		
+		//Steel
+		
+		//Ice
+		
+		//Dragon
+		
+		//Dark
+		
+		//Fairy
+		
+		
+		for(int i= 0;i< pokes.size();++i) {
+			_pokemonRepository.save(pokes.get(i));
+		}
+		
 	}
 	
-	private void getNonLegendaries(int number, Pokemon[] team){
-		ArrayList<Pokemon> nonLegendaries = (ArrayList<Pokemon>)_pokemonRepository.findBy_legendaryAnd_readyToBattle(false,true);
+	private ArrayList<Pokemon> getNonLegendaries(int number){
+		ArrayList<Pokemon> auxList = new ArrayList<Pokemon>();
+		ArrayList<Pokemon> nonLegendaries = (ArrayList<Pokemon>)_pokemonRepository.findByLegendaryAndReadyToBattle(false,true);
+		ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
+		int index = -1;
 		for(int i = 0; i < number;++i) {
-			int index = (int)Math.random()%nonLegendaries.size();
-			team[i] = nonLegendaries.get(index);
+			do {
+				index = ((int)(Math.random()*10))%nonLegendaries.size();
+			}while(selectedIndexes.contains(index));
+			selectedIndexes.add(index);
+			auxList.add(nonLegendaries.get(index));
 		}
+		return auxList;
 	} 
 	
-	private void fillListByTypes(ArrayList<String>types, ArrayList<Pokemon> myList, boolean legendaries) {
+	private ArrayList<Pokemon> fillListByTypes(ArrayList<String>types, boolean legendaries) {
+		 ArrayList<Pokemon> myList = new ArrayList<Pokemon>();
 		for(int i = 0; i < types.size();++i) {
 			myList.addAll((ArrayList<Pokemon>)_pokemonRepository.findByTypesAndLegendary(types.get(i), types.get(i),legendaries));
 		}
+		return myList;
 	}
 	
-	private void getNonLegendariesByType(ArrayList<String>types,int number, Pokemon[] team) {
-		ArrayList<Pokemon> nonLegendaries = new ArrayList<Pokemon>();
-		fillListByTypes(types,nonLegendaries,false);
+	private ArrayList<Pokemon> getNonLegendariesByType(ArrayList<String>types,int number) {
+		ArrayList<Pokemon> auxList = new ArrayList<Pokemon>();
+		ArrayList<Pokemon> nonLegendaries = fillListByTypes(types,false);
+		ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
+		int index = -1;
 		for(int i = 0; i < number;++i) {
-			int index = (int)Math.random()%nonLegendaries.size();
-			team[i] = nonLegendaries.get(index);
+			do {
+				index = ((int)(Math.random()*10))%nonLegendaries.size();
+			}while(selectedIndexes.contains(index));
+			selectedIndexes.add(index);
+			auxList.add(nonLegendaries.get(index));
 		}
+		return auxList;
 	}
 	
 	public Team getRandomTeam(String teamName, ArrayList<String> types, boolean legendaryCheck) {
-		Pokemon[] team = new Pokemon[6];
+		ArrayList<Pokemon> team;
+		int index = -1;
 		if(types.isEmpty()) {
 			if(legendaryCheck) {
-				ArrayList<Pokemon> legendaries = (ArrayList<Pokemon>)_pokemonRepository.findBy_legendaryAnd_readyToBattle(legendaryCheck, true);
-				int index = (int)Math.random()%legendaries.size();
-				team[5] = legendaries.get(index);
-				getNonLegendaries(5,team);
+				ArrayList<Pokemon> legendaries = (ArrayList<Pokemon>)_pokemonRepository.findByLegendaryAndReadyToBattle(legendaryCheck, true);
+				ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
+				do {
+					index = ((int)(Math.random()*10))%(legendaries.size());
+				}while(selectedIndexes.contains(index));
+				selectedIndexes.add(index);
+				team= getNonLegendaries(5);
+				team.add(legendaries.get(index));
 			} else {
-				getNonLegendaries(6,team);
+				team = getNonLegendaries(6);
 			}
 		} else {
 			if(legendaryCheck) {
-				ArrayList<Pokemon> legendaries = new ArrayList<Pokemon>();
-				fillListByTypes(types,legendaries,legendaryCheck);
-				int index =  (int)Math.random()%legendaries.size();
-				team[5] = legendaries.get(index);
-				getNonLegendariesByType(types,5,team);
+				ArrayList<Pokemon> legendaries = fillListByTypes(types,legendaryCheck);
+				ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
+				do {
+					index =  (int)(Math.random()*10)%legendaries.size();
+				}while(selectedIndexes.contains(index));
+				selectedIndexes.add(index);
+				team = getNonLegendariesByType(types,5);
+				team.add(legendaries.get(index));
 			} else {
-				getNonLegendariesByType(types,6,team);				
+				team = getNonLegendariesByType(types,6);	
 			}
 		}
 		Team myTeam = new Team(team,teamName);

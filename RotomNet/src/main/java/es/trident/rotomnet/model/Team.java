@@ -1,5 +1,7 @@
 package es.trident.rotomnet.model;
 
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -11,36 +13,36 @@ public class Team {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int _id;
+	private int id;
 	
 	@OneToMany
-	private Pokemon[] _pokemon;
-	private String _name;
+	private List<Pokemon> teamPokemon;
+	private String name;
 	
 	protected Team() {}
 	
-	public Team(Pokemon[] pokemon, String name) {
-		_pokemon = pokemon;
-		_name = name;
+	public Team(List<Pokemon> teamPokemon, String name) {
+		this.teamPokemon = teamPokemon;
+		this.name = name;
 	}
 	
-	public Pokemon[] getPokemon() {
-		return _pokemon;
+	public List<Pokemon> getPokemon() {
+		return teamPokemon;
 	}
 	public int getId() {
-		return _id;
+		return id;
 	}
 	public String getName() {
-		return _name;
+		return name;
 	}
-	public void setPokemon(Pokemon[] pokemon) {
-		_pokemon = pokemon;
+	public void setPokemon(List<Pokemon> teamPokemon) {
+		this.teamPokemon = teamPokemon;
 	}
 	public void setId(int id) {
-		_id = id;
+		id = id;
 	}
 	public void setName(String name) {
-		_name = name;
+		name = name;
 	}
 }
 

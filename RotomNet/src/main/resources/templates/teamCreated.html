@@ -25,10 +25,12 @@
 			<p class='BiggerText'>Your team is: </p>
 			<div class='TypeList'>
 				{{#team}}
+					{{#teamPokemon}}
 						<p>{{name}} -> {{type1}}{{#type2}}/{{type2}}{{/type2}}</p>
 						<p>Attacks: <br>&emsp;{{attack1}}<br>&emsp;{{attack2}}<br>&emsp;{{attack3}}<br>&emsp;{{attack4}}</p>
 						<p>Nature: {{nature}}&emsp;Ability: {{ability}}&emsp;Item: {{item}}</p>
 						<br>
+					{{/teamPokemon}}
 				{{/team}}
 			</div>
 		</div>
