@@ -35,4 +35,5 @@ public class PokemonCard {
 		this._shiny = _shiny;
 	}
 
+
 }

@@ -2,13 +2,23 @@ package es.trident.rotomnet.service;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import es.trident.rotomnet.model.Pokemon;
 import es.trident.rotomnet.model.PokemonCard;
+import es.trident.rotomnet.model.RottomCard;
+import es.trident.rotomnet.repository.PokemonRepository;
+import es.trident.rotomnet.repository.RottomCardRepository;
 
 @Service
 public class PokemonService {
 	
+	@Autowired
+	private PokemonRepository r;
+	@Autowired
+	private RottomCardRepository c;
+
 	public List<List<PokemonCard>> getAllCards() {
 		return List.of(
 				List.of(				
@@ -47,5 +57,11 @@ public class PokemonService {
 						new PokemonCard(24, false, false)
 						)
 				);
+	}
+	
+	public void create() {
+		Pokemon b = new Pokemon(1, "Bulbasaur");
+		r.save(new Pokemon(4, "Chicorita"));
+		c.save(new RottomCard(b, 4, 5, 7));
 	}
 }

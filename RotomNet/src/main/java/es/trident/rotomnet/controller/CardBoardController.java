@@ -1,5 +1,7 @@
 package es.trident.rotomnet.controller;
 
+import javax.annotation.PostConstruct;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,11 @@ public class CardBoardController {
 
 	@Autowired
 	private PokemonService _pokemonService;
+	
+	@PostConstruct
+	public void BoardController() {
+		_pokemonService.create();
+	}
 	
 	@GetMapping("/card")
 	public String card() {
