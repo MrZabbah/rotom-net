@@ -1,15 +1,13 @@
-<header>
-	<h1 align='center'>Board</h1>
-</header>
-<article align='center'>
-<link rel="stylesheet" type="text/css" href="/css/card.css">
-
-	Hello, this is the board section
-	<br/>
-		{{#cards}}
-			{{#.}}
-			{{>card}}
-			{{/.}}
-		<br/>
-		{{/cards}}
+<link rel="stylesheet" type="text/css" href="/css/cardBoard.css">
+<article align='center' class="Board">
+	<br />
+	<h1 align='center'>
+		{{boardTitle}}
+	</h1>
+	{{#cards}}
+	{{#.}}
+	{{>card}}
+	{{/.}}
+	<br />
+	{{/cards}}
 </article>

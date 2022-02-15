@@ -22,6 +22,15 @@ public class CardBoardController {
 	public String pokedex(Model model) {
 		
 		model.addAttribute("cards", _pokemonService.getAllCards());
+		model.addAttribute("boardTitle", "ROTTOM CARD SET: FIRST GEN");
+		return("pokedex");
+	}
+	
+	@GetMapping("/deck")
+	public String userDeck(Model model) {
+		
+		model.addAttribute("cards", _pokemonService.getAllCards());
+		model.addAttribute("boardTitle", "YOUR DECK");
 		return("pokedex");
 	}
 }
