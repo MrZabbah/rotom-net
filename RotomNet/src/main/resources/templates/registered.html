@@ -8,8 +8,11 @@
 	{{>header}}	
 	{{#users}}
 		<p>Nombre: {{username}}</p><br>
-		<p>Contraseña: {{pwd}}</p><br><br>
+		<p>Contraseña: {{pwd}}</p><br>
+		<p>Tiene imagen?: {{image}}<br>
+		<img src="/{{userId}}/image" alt="">
 	{{/users}}
+	
 	
 </body>
 </html>

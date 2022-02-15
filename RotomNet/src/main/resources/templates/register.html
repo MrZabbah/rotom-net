@@ -9,12 +9,14 @@
 	{{>header}}	
 	<div class = "register-form-container">			
 		<div class = "form-container">
-			<form action="/registered" method="POST" class="register-form"><br>
+			<form action="/registered" method="post" class="register-form" enctype="multipart/form-data"><br>
 				<h1>User Register</h1>
 				<label for="username">Username</label><br>
 				<input type="text" id="username" name="username"><br>
-				<label for="username">Password</label><br>
+				<label for="pwd">Password</label><br>
 				<input type="password" id="pwd" name="pwd"><br>
+				<label for= "image">User Image</label><br>
+				<input type='file' name='image' accept=".jpg, .jpeg">
 				<input type="submit" value="Sign Up">				
 			</form>
 		</div>

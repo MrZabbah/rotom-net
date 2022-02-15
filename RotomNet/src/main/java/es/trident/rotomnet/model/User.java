@@ -1,18 +1,20 @@
 package es.trident.rotomnet.model;
 
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
+import java.sql.Blob;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Lob;
 
-import org.springframework.data.annotation.Id;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
+
 
 @Entity
-public class User {
+public class User {	
 	
-	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private long userId;
@@ -22,16 +24,23 @@ public class User {
 	private int daysLogged;
 	private String lastLog;
 	
+	//User Image
+	private boolean image; //If there is an image.
+	
+	@Lob
+	@JsonIgnore
+	private Blob imageFile;
+	
 	//List<Team> teams;
 	//Dictionary<int, tipo_raro> deck;
 	
 	protected User(){}
 	
-	public User(String username, String pwd) {
+	public User(String username, String pwd, int daysLogged, String lastLog) {
 		this.username = username;
 		this.pwd = pwd;	
-		daysLogged = 1;		
-        lastLog = dtf.format(LocalDateTime.now());
+		this.daysLogged = daysLogged;		
+        this.lastLog = lastLog;
 	}
 	
 	//Getter & Setters
@@ -59,6 +68,17 @@ public class User {
 	public void setLastLog(String lastLog) {
 		this.lastLog = lastLog;
 	}
-	
+	public boolean getImage() {
+		return image;
+	}
+	public void setImage(boolean image) {
+		this.image = image;
+	}
+	public Blob getImageFile() {
+		return imageFile;
+	}
+	public void setImageFile(Blob imageFile) {
+		this.imageFile = imageFile;
+	}
 
 }
