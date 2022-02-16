@@ -1,22 +1,28 @@
 package es.trident.rotomnet.controller;
 
 import java.util.ArrayList;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import es.trident.rotomnet.model.Team;
 import es.trident.rotomnet.service.PokemonService;
+import es.trident.rotomnet.service.TeamRepository;
+import es.trident.rotomnet.service.TeamService;
 
 @Controller
 public class TeamGeneratorController {
-	
+		
 	private PokemonService _pokemonService;
+	private TeamService _teamService;
 	
-	public TeamGeneratorController(PokemonService pokemonService) {
+	public TeamGeneratorController(PokemonService pokemonService, TeamService teamService) {
 		_pokemonService = pokemonService;
+		_teamService = teamService;
 		_pokemonService.createPokemon();
 	}
 	
@@ -38,12 +44,19 @@ public class TeamGeneratorController {
 		if(selectedTypes.isEmpty()) {
 			anyType = true;
 		}
-		model.addAttribute("teamName",teamName);
+		_teamService.setCurrentTeam(_pokemonService.getRandomTeam(teamName,selectedTypes,legendaryCheck));
 		model.addAttribute("legendaryCheck",legendaryCheck);
 		model.addAttribute("selectedTypes",selectedTypes);
 		model.addAttribute("anyType",anyType);
-		model.addAttribute("team",_pokemonService.getRandomTeam(teamName,selectedTypes,legendaryCheck));
+		model.addAttribute("team",_teamService.getCurrentTeam());
 		return "teamCreated";
 	}
+	
+	@PostMapping("/saveTeam")
+	public String saveTeam(Model model) {
+		_teamService.saveCurrentTeam();
+		return "redirect:/";
+	}
+	
 
 }

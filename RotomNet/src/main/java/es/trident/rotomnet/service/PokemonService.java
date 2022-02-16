@@ -75,7 +75,90 @@ public class PokemonService {
 	}
 	
 	public void createPokemon() {
-		ArrayList<Pokemon> pokes = new ArrayList<Pokemon>();		
+		ArrayList<Pokemon> pokes = new ArrayList<Pokemon>();	
+		
+		//Only cards
+		pokes.add(new Pokemon(1, "Bulbasaur", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","Poison",5,8,-1,3,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(2, "Ivysaur", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","Poison",3,9,-1,9,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(4, "Charmander", "Unknown", "Unknown", "Unknown", "Unknown", "Fire","",1,1,-1,4,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(5, "Charmeleon", "Unknown", "Unknown", "Unknown", "Unknown", "Fire","",2,6,-1,6,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(7, "Squirtle", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",3,2,-1,3,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(8, "Wartortle", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",6,9,-1,2,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(10, "Caterpie", "Unknown", "Unknown", "Unknown", "Unknown", "Bug","",6,4,-1,9,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(11, "Metapod", "Unknown", "Unknown", "Unknown", "Unknown", "Bug","",2,2,-1,9,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(13, "Weedle", "Unknown", "Unknown", "Unknown", "Unknown", "Bug","Poison",6,3,-1,9,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(14, "Kakuna", "Unknown", "Unknown", "Unknown", "Unknown", "Bug","Poison",2,7,-1,8,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(16, "Pidgey", "Unknown", "Unknown", "Unknown", "Unknown", "Normal","Flying",3,1,-1,8,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(17, "Pidgeotto", "Unknown", "Unknown", "Unknown", "Unknown", "Normal","Flying",2,6,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(19, "Rattata", "Unknown", "Unknown", "Unknown", "Unknown", "Normal","",2,7,-1,7,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(21, "Spearow", "Unknown", "Unknown", "Unknown", "Unknown", "Normal","Flying",5,5,-1,9,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(23, "Ekans", "Unknown", "Unknown", "Unknown", "Unknown", "Poison","",6,10,-1,6,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(25, "Pikachu", "Unknown", "Unknown", "Unknown", "Unknown", "Electric","",1,10,-1,8,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(27, "Sandshrew", "Unknown", "Unknown", "Unknown", "Unknown", "Ground","",6,9,-1,1,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(29, "Nidoran(F)", "Unknown", "Unknown", "Unknown", "Unknown", "Poison","",1,6,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(30, "Nidorina", "Unknown", "Unknown", "Unknown", "Unknown", "Poison","",6,3,-1,7,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(32, "Nidoran(M)","Unknown", "Unknown", "Unknown", "Unknown", "Poison","",2,4,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(33, "Nidorino", "Unknown", "Unknown", "Unknown", "Unknown", "Poison","",5,7,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(35, "Clefairy", "Unknown", "Unknown", "Unknown", "Unknown", "Fairy","",6,10,-1,3,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(37, "Vulpix", "Unknown", "Unknown", "Unknown", "Unknown", "Fire","",2,5,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(39, "Jigglypuff", "Unknown", "Unknown", "Unknown", "Unknown", "Normal","Fairy",6,7,-1,5,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(41, "Zubat", "Unknown", "Unknown", "Unknown", "Unknown", "Poison","Flying",2,10,-1,7,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(42, "Golbat", "Unknown", "Unknown", "Unknown", "Unknown", "Poison","Flying",6,4,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(43, "Oddish", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","Poison",6,10,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(44, "Gloom", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","Poison",1,4,-1,2,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(46, "Paras", "Unknown", "Unknown", "Unknown", "Unknown", "Bug","Grass",4,9,-1,5,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(48, "Venonat", "Unknown", "Unknown", "Unknown", "Unknown", "Bug","Poison",3,5,-1,4,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(50, "Diglett", "Unknown", "Unknown", "Unknown", "Unknown", "Ground","",4,1,-1,7,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(52, "Meowth", "Unknown", "Unknown", "Unknown", "Unknown", "Normal","",3,6,-1,8,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(54, "Psyduck", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",2,3,-1,8,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(56, "Mankey", "Unknown", "Unknown", "Unknown", "Unknown", "Fighting","",5,2,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(58, "Growlithe", "Unknown", "Unknown", "Unknown", "Unknown", "Fire","",1,3,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(60, "Poliwag", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",5,6,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(61, "Poliwhirl", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",5,6,-1,5,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(63, "Abra", "Unknown", "Unknown", "Unknown", "Unknown", "Psychic","",1,10,-1,8,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(64, "Kadabra", "Unknown", "Unknown", "Unknown", "Unknown", "Psychic","",4,10,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(66, "Machop", "Unknown", "Unknown", "Unknown", "Unknown", "Fighting","",1,2,-1,8,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(67, "Machoke", "Unknown", "Unknown", "Unknown", "Unknown", "Fighting","",2,3,-1,1,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(69, "Bellsprout", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","Poison",5,10,-1,1,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(70, "Weepinbell", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","Poison",5,9,-1,8,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(72, "Tentacool", "Unknown", "Unknown", "Unknown", "Unknown", "Water","Poison",6,5,-1,4,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(74, "Geodude", "Unknown", "Unknown", "Unknown", "Unknown", "Rock","Ground",4,5,-1,2,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(75, "Graveler", "Unknown", "Unknown", "Unknown", "Unknown", "Rock","Ground",4,6,-1,4,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(77, "Ponyta", "Unknown", "Unknown", "Unknown", "Unknown", "Fire","",1,10,-1,9,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(80, "Slowbro", "Unknown", "Unknown", "Unknown", "Unknown", "Water","Psychic",5,4,-1,5,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(81, "Magnemite", "Unknown", "Unknown", "Unknown", "Unknown", "Electric","Steel",2,3,-1,6,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(82, "Magneton", "Unknown", "Unknown", "Unknown", "Unknown", "Electric","Steel",4,3,-1,4,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(84, "Doduo", "Unknown", "Unknown", "Unknown", "Unknown", "Normal","Flying",2,2,-1,5,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(86, "Seel", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",6,10,-1,6,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(88, "Grimer", "Unknown", "Unknown", "Unknown", "Unknown", "Poison","",5,7,-1,9,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(90, "Shellder", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",4,4,-1,2,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(92, "Gastly", "Unknown", "Unknown", "Unknown", "Unknown", "Ghost","Poison",3,10,-1,4,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(93, "Haunter", "Unknown", "Unknown", "Unknown", "Unknown", "Ghost","Poison",5,4,-1,9,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(95, "Onix", "Unknown", "Unknown", "Unknown", "Unknown", "Rock","Ground",6,1,-1,7,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(96, "Drowzee", "Unknown", "Unknown", "Unknown", "Unknown", "Psychic","",4,8,-1,9,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(98, "Krabby", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",4,4,-1,3,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(100, "Voltorb", "Unknown", "Unknown", "Unknown", "Unknown", "Electric","",2,3,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(102, "Exeggcute", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","Psychic",5,3,-1,3,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(104, "Cubone", "Unknown", "Unknown", "Unknown", "Unknown", "Ground","",1,9,-1,7,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(108, "Lickitung", "Unknown", "Unknown", "Unknown", "Unknown", "Normal","",6,1,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(109, "Koffing", "Unknown", "Unknown", "Unknown", "Unknown", "Poison","",2,7,-1,8,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(111, "Rhyhorn", "Unknown", "Unknown", "Unknown", "Unknown", "Ground","Rock",6,4,-1,7,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(114, "Tangela", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","",1,4,-1,5,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(116, "Horsea", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",4,3,-1,9,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(117, "Seadra", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",5,9,-1,8,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(118, "Goldeen", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",5,4,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(120, "Staryu", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",5,3,-1,3,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(125, "Electabuzz", "Unknown", "Unknown", "Unknown", "Unknown", "Electric","",6,3,-1,10,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(126, "Magmar", "Unknown", "Unknown", "Unknown", "Unknown", "Fire","",3,2,-1,8,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(129, "Magikarp", "Unknown", "Unknown", "Unknown", "Unknown", "Water","",1,7,-1,4,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(132, "Ditto", "Unknown", "Unknown", "Unknown", "Unknown", "Normal","",5,6,-1,6,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(133, "Eevee", "Unknown", "Unknown", "Unknown", "Unknown", "Normal","",1,5,-1,7,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(137, "Porygon", "Unknown", "Unknown", "Unknown", "Unknown", "Normal","",3,6,-1,9,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(138, "Omanyte", "Unknown", "Unknown", "Unknown", "Unknown", "Rock","Water",3,7,-1,2,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(140, "Kabuto", "Unknown", "Unknown", "Unknown", "Unknown", "Rock","Water",3,7,-1,2,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(147, "Dratini", "Unknown", "Unknown", "Unknown", "Unknown", "Dragon","",5,7,-1,4,-1,-1,"None", "None", "", false,false));
+		pokes.add(new Pokemon(148, "Dragonair", "Unknown", "Unknown", "Unknown", "Unknown", "Dragon","",3,3,-1,6,-1,-1,"None", "None", "", false,false));
+		
 		//Grass
 		pokes.add(new Pokemon(3, "Venusaur", "Giga drain", "Sludge bomb", "Leech Seed", "Substitute", "Grass","Poison",252,0,252,0,6,0,"Chlorophyll", "Modest", "Black sludge", false,true));
 		pokes.add(new Pokemon(45,"Vileplume","Sludge bomb","Giga drain","Sleep powder","Strength sap","Grass","Poison",252,0,252,0,6,0,"Effect spore","Modest","Black Sludge",false,true));
@@ -296,11 +379,7 @@ public class PokemonService {
 		if(types.isEmpty()) {
 			if(legendaryCheck) {
 				ArrayList<Pokemon> legendaries = (ArrayList<Pokemon>)_pokemonRepository.findByLegendaryAndReadyToBattle(legendaryCheck, true);
-				ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
-				do {
-					index = ((int)(Math.random()*100))%(legendaries.size());
-				}while(selectedIndexes.contains(index));
-				selectedIndexes.add(index);
+				index = ((int)(Math.random()*100))%(legendaries.size());
 				team= getNonLegendaries(5);
 				team.add(legendaries.get(index));
 			} else {
@@ -309,11 +388,7 @@ public class PokemonService {
 		} else {
 			if(legendaryCheck) {
 				ArrayList<Pokemon> legendaries = fillListByTypes(types,legendaryCheck);
-				ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
-				do {
-					index =  (int)(Math.random()*100)%legendaries.size();
-				}while(selectedIndexes.contains(index));
-				selectedIndexes.add(index);
+				index =  (int)(Math.random()*100)%legendaries.size();
 				team = getNonLegendariesByType(types,5);
 				team.add(legendaries.get(index));
 			} else {

@@ -3,8 +3,17 @@
 	padding: 0;
 	box-sizing: border-box;
 }
+
+body.globalDiv{
+	background-color:black;
+	top :90px;
+	bottom : 0px;
+	position: absolute;
+	width:100%;
+	box-align:center;
+}
 div.Box{
-	background-color : #CCF;
+	background:white;
 	box-align :center;
 	margin-left : 300px;
 	margin-right: 300px;
@@ -13,11 +22,11 @@ div.Box{
 	padding : 30px;
 }
 div.TypeList{
-	background-color: #DDF;
+	background-color: #DDD;
 	box-align:center;
 	text-align:left;
 	padding:10px;
-	margin-top:10px
+	margin-top:10px;
 }
 p.BiggerText{
 	font-size:20px;
@@ -26,4 +35,10 @@ p.BiggerBoldText{
 	font-size:30px;
 	text-align:center;
 	font-weight: bold;
+}
+button.customButton{
+	box-align:center;
+}
+button.customButton:hover{
+	background-color:#BBB;
 }
