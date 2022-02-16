@@ -44,7 +44,7 @@ public class UserController {
 		//Access the UserService and save the new user into the database
 		userService.saveNewUser(username, pwd, image);		
 		
-		model.addAttribute("users", userService.getAllUsers());
+		model.addAttribute("user", userService.getUserByUsernameAndPwd(username, pwd));
 		return "registered";
 	}
 	@GetMapping("/{id}/image")

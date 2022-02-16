@@ -40,4 +40,8 @@ public class UserService {
 	public User findUserById(long id) {
 		return repository.findById(id).orElseThrow();
 	}
+
+	public User getUserByUsernameAndPwd(String username, String pwd) {
+		return repository.findByUsernameAndPwd(username, pwd);
+	}
 }

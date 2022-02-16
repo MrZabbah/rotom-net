@@ -1,17 +1,36 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-	
+	<link href="css/registered.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
 	{{>header}}	
+<!--
 	{{#users}}
 		<p>Nombre: {{username}}</p><br>
 		<p>Contraseña: {{pwd}}</p><br>
 		<p>Tiene imagen?: {{image}}<br>
 		<img src="/{{userId}}/image" alt="">
 	{{/users}}
+-->
+	<div class = "registered-form-container">			
+		<div class = "registered-container">
+			<h1>User registered</h1>
+			<div class = "user-image-container">
+				<img src="/{{user.userId}}/image" alt="">
+			</div>
+			<p>Username: {{user.username}}</p>
+			<p>Password: {{user.pwd}}</p>
+			<p>Days Logged: {{user.daysLogged}}</p>
+			<p>Last Login: {{user.lastLog}}</p>
+			
+			<form action="/register" method="GET" class="back-button">
+				<input type="submit" value="All Users">
+			</form>
+			
+		</div>
+	</div>
 	
 	
 </body>
