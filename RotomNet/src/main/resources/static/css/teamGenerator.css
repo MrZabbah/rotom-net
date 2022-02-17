@@ -1,12 +1,22 @@
 * {
 	margin: 0;
 	padding: 0;
-	box-sizing: border-box;
+}
+div.globalDiv{
+	background-color:black;
+	width: 100%;
+	height:100%;
+	margin:0px;
+	background-repeat:true;
+	
 }
 
 h1 {
 	font-size : 40px;
 	text-align:center;
+	background-color:white;
+	margin-left: 400px;
+	margin-right:400px;
 }
 
 div.PokemonForm{
@@ -14,10 +24,12 @@ div.PokemonForm{
 	text-align: left;
 	margin-left:50px;
 	margin-right:50px;
+	
 }
 
 div.PokemonFormBox{
-	background-color : #CCF;
+	background:white;
+	border-radius:10px;
 	box-align :center;
 	margin-left : 300px;
 	margin-right: 300px;
@@ -25,8 +37,9 @@ div.PokemonFormBox{
 	padding : 30px;
 }
 div.PokemonFormInputs{
-	background-color : #DDF;
+	background-color : #DDD;
 	box-align:center;
+	border-radius:10px;
 	padding:10px;
 	height: 210px;
 	margin-top:10px;

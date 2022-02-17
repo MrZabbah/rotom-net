@@ -1,13 +1,14 @@
 <html>
 	<header>
-		<title>Random team generated</title>
+		<title background="white">Random team generated </title>
 		<link rel='stylesheet' type='text/css' href='/css/teamGenerated.css'>
 	</header>
 	<body>
+	<div class="globalDiv">
 		<div class='Box'>
 			<p class='BiggerBoldText'>Congratulations, your team has been successfully created!</p><br>
 			<p class='BiggerText'>Your requirements were: </p>
-			<p>Team name: {{teamName}}</p>
+			<p>Team name:{{#team}} {{name}} {{/team}}</p>
 			<p>Legendaries: {{#legendaryCheck}} Yes {{/legendaryCheck}} {{^legendaryCheck}} No {{/legendaryCheck}}</p>
 			{{^anyType}}
 			<p>Types: </p>
@@ -34,6 +35,17 @@
 				{{/team}}
 			</div>
 		</div>
-		<p align='center'><a href="/" >Back to main menu</a></p><br><br>
+		<form action='saveTeam' method='post' align='center'>
+			<input type='submit' value='Save Team'>
+		</form>
+		<br>
+		<form action='teamGenerator'method='post' align='center'>
+			<input type='submit' value='Try again'>
+		</form>
+		<br>
+		<form action='exit' align='center'>
+			<input type='submit' value='Exit'>
+		</form>
+	</div>	
 	</body>
 </html>
