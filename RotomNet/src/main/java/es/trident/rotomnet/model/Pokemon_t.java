@@ -4,7 +4,7 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Pokemon {
+public class Pokemon_t {
 	
 	@Id
 	private int pokedexNumber;
@@ -28,11 +28,11 @@ public class Pokemon {
 	private boolean legendary;
 	private boolean readyToBattle;
 	
-	protected Pokemon() {
+	protected Pokemon_t() {
 		
 	}
 	
-	public Pokemon(int pokedexNumber, String name, String attack1, String attack2, String attack3, String attack4, String type1, String type2, int healthEVs,
+	public Pokemon_t(int pokedexNumber, String name, String attack1, String attack2, String attack3, String attack4, String type1, String type2, int healthEVs,
 			int attackEVs, int spAttackEVs, int defenseEVs, int spDefenseEVs, int speedEVs, String ability, String nature, String item, boolean legendary,boolean readyToBattle) {
 		
 		this.pokedexNumber = pokedexNumber;

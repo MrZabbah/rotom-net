@@ -12,20 +12,20 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import es.trident.rotomnet.model.Team;
-import es.trident.rotomnet.service.PokemonService;
-import es.trident.rotomnet.service.TeamRepository;
-import es.trident.rotomnet.service.TeamService;
+import es.trident.rotomnet.model.Team_t;
+import es.trident.rotomnet.service.PokemonService_t;
+import es.trident.rotomnet.service.TeamRepository_t;
+import es.trident.rotomnet.service.TeamService_t;
 
 @Controller
-public class TeamGeneratorController {
+public class TeamGeneratorController_t {
 		
-	private PokemonService _pokemonService;
-	private TeamService _teamService;
+	private PokemonService_t _pokemonService;
+	private TeamService_t _teamService;
 	
-	public TeamGeneratorController(PokemonService pokemonService, TeamService teamService) {
-		_pokemonService = pokemonService;
-		_teamService = teamService;
+	public TeamGeneratorController_t(PokemonService_t pokemonService_t, TeamService_t teamService_t) {
+		_pokemonService = pokemonService_t;
+		_teamService = teamService_t;
 		_pokemonService.createPokemon();
 		//_teamService.createTeams();
 	}
@@ -69,7 +69,7 @@ public class TeamGeneratorController {
 	
 	@GetMapping("/displayTeams")
 	public String teamList(Model model, Pageable page) {
-		Page<Team> teamsReceived = _teamService.getAllTeams(page);
+		Page<Team_t> teamsReceived = _teamService.getAllTeams(page);
 		model.addAttribute("teamList",teamsReceived);
 		model.addAttribute("previous",teamsReceived.hasPrevious());
 		model.addAttribute("next",teamsReceived.hasNext());

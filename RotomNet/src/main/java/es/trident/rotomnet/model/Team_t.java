@@ -10,24 +10,24 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 @Entity
-public class Team {
+public class Team_t {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private int id;
 	
 	@ManyToMany
-	private List<Pokemon> teamPokemon;
+	private List<Pokemon_t> teamPokemon;
 	private String name;
 	
-	protected Team() {}
+	protected Team_t() {}
 	
-	public Team(List<Pokemon> teamPokemon, String name) {
+	public Team_t(List<Pokemon_t> teamPokemon, String name) {
 		this.teamPokemon = teamPokemon;
 		this.name = name;
 	}
 	
-	public List<Pokemon> getPokemon() {
+	public List<Pokemon_t> getPokemon() {
 		return teamPokemon;
 	}
 	public int getId() {
@@ -36,7 +36,7 @@ public class Team {
 	public String getName() {
 		return name;
 	}
-	public void setPokemon(List<Pokemon> teamPokemon) {
+	public void setPokemon(List<Pokemon_t> teamPokemon) {
 		this.teamPokemon = teamPokemon;
 	}
 	public void setId(int id) {

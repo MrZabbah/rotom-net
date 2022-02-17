@@ -6,17 +6,17 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import es.trident.rotomnet.model.Pokemon;
+import es.trident.rotomnet.model.Pokemon_t;
 import es.trident.rotomnet.model.PokemonCard;
-import es.trident.rotomnet.model.Team;
+import es.trident.rotomnet.model.Team_t;
 
 
 
 @Service
-public class PokemonService {
+public class PokemonService_t {
 	
 	@Autowired
-	private PokemonRepository _pokemonRepository;
+	private PokemonRepository_t _pokemonRepository;
 	
 	private final String [] POKEMON_TYPES = {"Fire","Water","Grass","Electric","Ground","Rock","Poison","Psychic","Flying","Bug","Normal","Ghost","Fighting","Steel","Ice","Dragon","Dark","Fairy"};
 	
@@ -75,7 +75,7 @@ public class PokemonService {
 	}
 	
 	public void createPokemon() {
-		ArrayList<Pokemon> pokes = new ArrayList<Pokemon>();	
+		ArrayList<Pokemon_t> pokes = new ArrayList<Pokemon_t>();	
 		
 		//Only cards
 		/*pokes.add(new Pokemon(1, "Bulbasaur", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","Poison",5,8,-1,3,-1,-1,"None", "None", "", false,false));
@@ -160,14 +160,14 @@ public class PokemonService {
 		pokes.add(new Pokemon(148, "Dragonair", "Unknown", "Unknown", "Unknown", "Unknown", "Dragon","",3,3,-1,6,-1,-1,"None", "None", "", false,false));
 		*/
 		//Grass
-		pokes.add(new Pokemon(3, "Venusaur", "Giga drain", "Sludge bomb", "Leech Seed", "Substitute", "Grass","Poison",252,0,252,0,6,0,"Chlorophyll", "Modest", "Black sludge", false,true));
-		pokes.add(new Pokemon(45,"Vileplume","Sludge bomb","Giga drain","Sleep powder","Strength sap","Grass","Poison",252,0,252,0,6,0,"Effect spore","Modest","Black Sludge",false,true));
-		pokes.add(new Pokemon(71,"Victreebel","Double-edge","Leaf blade","Sleep powder","Swords dance","Grass","Poison",252,252,0,0,0,6,"Adamant","Chlorophyll","Black sludge",false,true));
-		pokes.add(new Pokemon(103,"Exeggutor","Leech seed","Giga drain","Psychic","Substitute","Grass","Psychic",252,0,252,0,6,0,"Harvest","Calm","Sitrus berry", false,true));
-		pokes.add(new Pokemon(465,"Tangrowth","Giga drain","Sludge bomb","Leech seed","Knock off","Grass","",252,6,0,252,0,0,"Regenerator","Bold","Rocky helmet",false,true));
-		pokes.add(new Pokemon(154,"Meganium","Toxic","Protect","Synthesis","Giga drain","Grass","",252,0,6,0,252,0,"Overgrow","Calm","Leftovers",false,true));
-		pokes.add(new Pokemon(182,"Bellosom","Quiver dance","Moonblast","Giga drain","Strength sap","Grass","",0,0,252,0,6,252,"Chlorophyll","Modest","Leftovers",false,true));
-		pokes.add(new Pokemon(640,"Virizion","Swords dance","Close combat","Substitute","Leaf blade","Grass","Fighting",6,252,0,0,0,252,"Justified","Adamant","Lum berry",true,true));
+		pokes.add(new Pokemon_t(3, "Venusaur", "Giga drain", "Sludge bomb", "Leech Seed", "Substitute", "Grass","Poison",252,0,252,0,6,0,"Chlorophyll", "Modest", "Black sludge", false,true));
+		pokes.add(new Pokemon_t(45,"Vileplume","Sludge bomb","Giga drain","Sleep powder","Strength sap","Grass","Poison",252,0,252,0,6,0,"Effect spore","Modest","Black Sludge",false,true));
+		pokes.add(new Pokemon_t(71,"Victreebel","Double-edge","Leaf blade","Sleep powder","Swords dance","Grass","Poison",252,252,0,0,0,6,"Adamant","Chlorophyll","Black sludge",false,true));
+		pokes.add(new Pokemon_t(103,"Exeggutor","Leech seed","Giga drain","Psychic","Substitute","Grass","Psychic",252,0,252,0,6,0,"Harvest","Calm","Sitrus berry", false,true));
+		pokes.add(new Pokemon_t(465,"Tangrowth","Giga drain","Sludge bomb","Leech seed","Knock off","Grass","",252,6,0,252,0,0,"Regenerator","Bold","Rocky helmet",false,true));
+		pokes.add(new Pokemon_t(154,"Meganium","Toxic","Protect","Synthesis","Giga drain","Grass","",252,0,6,0,252,0,"Overgrow","Calm","Leftovers",false,true));
+		pokes.add(new Pokemon_t(182,"Bellosom","Quiver dance","Moonblast","Giga drain","Strength sap","Grass","",0,0,252,0,6,252,"Chlorophyll","Modest","Leftovers",false,true));
+		pokes.add(new Pokemon_t(640,"Virizion","Swords dance","Close combat","Substitute","Leaf blade","Grass","Fighting",6,252,0,0,0,252,"Justified","Adamant","Lum berry",true,true));
 		
 		//Fire
 		/*pokes.add(new Pokemon(6,"Charizard","Fire blast","Air slash","Earthquake","Roost","Fire","Flying",0,6,252,0,0,252,"Solar Power","Modest","Heavy-Duty boots",false,true ));
@@ -335,9 +335,9 @@ public class PokemonService {
 		
 	}
 	
-	private ArrayList<Pokemon> getNonLegendaries(int number){
-		ArrayList<Pokemon> auxList = new ArrayList<Pokemon>();
-		ArrayList<Pokemon> nonLegendaries = (ArrayList<Pokemon>)_pokemonRepository.findByLegendaryAndReadyToBattle(false,true);
+	private ArrayList<Pokemon_t> getNonLegendaries(int number){
+		ArrayList<Pokemon_t> auxList = new ArrayList<Pokemon_t>();
+		ArrayList<Pokemon_t> nonLegendaries = (ArrayList<Pokemon_t>)_pokemonRepository.findByLegendaryAndReadyToBattle(false,true);
 		ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
 		int index = -1;
 		for(int i = 0; i < number;++i) {
@@ -350,17 +350,17 @@ public class PokemonService {
 		return auxList;
 	} 
 	
-	private ArrayList<Pokemon> fillListByTypes(ArrayList<String>types, boolean legendaries) {
-		 ArrayList<Pokemon> myList = new ArrayList<Pokemon>();
+	private ArrayList<Pokemon_t> fillListByTypes(ArrayList<String>types, boolean legendaries) {
+		 ArrayList<Pokemon_t> myList = new ArrayList<Pokemon_t>();
 		for(int i = 0; i < types.size();++i) {
-			myList.addAll((ArrayList<Pokemon>)_pokemonRepository.findByTypesAndLegendaryAndReadyToBattle(types.get(i), types.get(i),legendaries, true));
+			myList.addAll((ArrayList<Pokemon_t>)_pokemonRepository.findByTypesAndLegendaryAndReadyToBattle(types.get(i), types.get(i),legendaries, true));
 		}
 		return myList;
 	}
 	
-	private ArrayList<Pokemon> getNonLegendariesByType(ArrayList<String>types,int number) {
-		ArrayList<Pokemon> auxList = new ArrayList<Pokemon>();
-		ArrayList<Pokemon> nonLegendaries = fillListByTypes(types,false);
+	private ArrayList<Pokemon_t> getNonLegendariesByType(ArrayList<String>types,int number) {
+		ArrayList<Pokemon_t> auxList = new ArrayList<Pokemon_t>();
+		ArrayList<Pokemon_t> nonLegendaries = fillListByTypes(types,false);
 		ArrayList<Integer> selectedIndexes = new ArrayList<Integer>();
 		int index = -1;
 		for(int i = 0; i < number;++i) {
@@ -373,12 +373,12 @@ public class PokemonService {
 		return auxList;
 	}
 	
-	public Team getRandomTeam(String teamName, ArrayList<String> types, boolean legendaryCheck) {
-		ArrayList<Pokemon> team;
+	public Team_t getRandomTeam(String teamName, ArrayList<String> types, boolean legendaryCheck) {
+		ArrayList<Pokemon_t> team;
 		int index = -1;
 		if(types.isEmpty()) {
 			if(legendaryCheck) {
-				ArrayList<Pokemon> legendaries = (ArrayList<Pokemon>)_pokemonRepository.findByLegendaryAndReadyToBattle(legendaryCheck, true);
+				ArrayList<Pokemon_t> legendaries = (ArrayList<Pokemon_t>)_pokemonRepository.findByLegendaryAndReadyToBattle(legendaryCheck, true);
 				index = ((int)(Math.random()*100))%(legendaries.size());
 				team= getNonLegendaries(5);
 				team.add(legendaries.get(index));
@@ -387,7 +387,7 @@ public class PokemonService {
 			}
 		} else {
 			if(legendaryCheck) {
-				ArrayList<Pokemon> legendaries = fillListByTypes(types,legendaryCheck);
+				ArrayList<Pokemon_t> legendaries = fillListByTypes(types,legendaryCheck);
 				index =  (int)(Math.random()*100)%legendaries.size();
 				team = getNonLegendariesByType(types,5);
 				team.add(legendaries.get(index));
@@ -395,7 +395,7 @@ public class PokemonService {
 				team = getNonLegendariesByType(types,6);	
 			}
 		}
-		Team myTeam = new Team(team,teamName);
+		Team_t myTeam = new Team_t(team,teamName);
 		return myTeam;
 	}
 }
