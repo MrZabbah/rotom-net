@@ -4,16 +4,14 @@
 	box-sizing: border-box;
 }
 
-body.globalDiv{
+div.globalDiv{
 	background-color:black;
-	top :90px;
-	bottom : 0px;
-	position: absolute;
-	width:100%;
-	box-align:center;
+	width: 100%;
+	height:100%;
 }
 div.Box{
 	background:white;
+	border-radius:10px;
 	box-align :center;
 	margin-left : 300px;
 	margin-right: 300px;
@@ -22,6 +20,7 @@ div.Box{
 	padding : 30px;
 }
 div.TypeList{
+	border-radius:10px;
 	background-color: #DDD;
 	box-align:center;
 	text-align:left;
