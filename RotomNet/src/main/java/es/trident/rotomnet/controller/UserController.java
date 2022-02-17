@@ -42,11 +42,19 @@ public class UserController {
 			@RequestParam MultipartFile image) throws IOException {
 		
 		//Access the UserService and save the new user into the database
-		userService.saveNewUser(username, pwd, image);		
+		userService.saveNewUser(username, pwd, image);	
 		
+		//Add the user to the model to show it in the User Registered page
 		model.addAttribute("user", userService.getUserByUsernameAndPwd(username, pwd));
 		return "registered";
 	}
+	
+	@GetMapping("/users")
+	public String allUsers(Model model){
+		model.addAttribute("users", userService.getAllUsers());
+		return "users";
+	}
+	
 	@GetMapping("/{id}/image")
 	public ResponseEntity<Object> downloadUserImage(@PathVariable long id) throws SQLException, MalformedURLException{
 		

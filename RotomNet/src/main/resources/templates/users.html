@@ -1,0 +1,35 @@
+<!DOCTYPE HTML>
+<html>
+<head>		
+		<link href="css/users.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	{{>header}}	
+	<div class = "user-container">	
+		<h1>All Registered Users</h1>		
+		<table class="user-table">
+			<tr>
+				<th>User image</th>
+				<th>Username</th>
+				<th>Password</th>
+				<th>Days logged</th>
+				<th>Last day logged</th>
+			</tr>
+			{{#users}}
+				<tr>
+					<td class = "td-image">
+						<img src="/{{userId}}/image" alt=""></img>
+					</td> 	
+					<td>{{username}}</td>
+					<td>{{pwd}}</td>
+					<td>{{daysLogged}}</td>
+					<td>{{lastLog}}</td>			
+				</tr>
+			{{/users}}			
+		</table>
+		<h1></h1>
+	</div>
+
+</body>
+</html>
