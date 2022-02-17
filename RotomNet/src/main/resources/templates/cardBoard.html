@@ -1,15 +1,28 @@
-<header>
-	<h1 align='center'>Board</h1>
-</header>
-<article align='center'>
-<link rel="stylesheet" type="text/css" href="/css/card.css">
-
-	Hello, this is the board section
-	<br/>
-		{{#cards}}
-			{{#.}}
-			{{>card}}
-			{{/.}}
-		<br/>
-		{{/cards}}
+<link rel="stylesheet" type="text/css" href="/css/cardBoard.css">
+<article align='center' class="Board">
+	<br />
+	<h1 align='center'>
+		{{boardTitle}}
+	</h1>
+	{{#userDeck}}
+		<h3 align='center'>
+			{{ratioString}}
+		</h3>
+	{{/userDeck}}
+	{{#cards}}
+	{{#.}}
+	{{#noOwner}}
+		{{>noOwnercard}}
+	{{/noOwner}}
+	{{^noOwner}}
+		{{#userDeck}}
+			{{>deckCard}}
+		{{/userDeck}}
+		{{^userDeck}}
+			{{>pokedexCard}}
+		{{/userDeck}}
+	{{/noOwner}}
+	{{/.}}
+	<br />
+	{{/cards}}
 </article>

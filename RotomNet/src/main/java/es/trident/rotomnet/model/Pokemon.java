@@ -1,5 +1,7 @@
 package es.trident.rotomnet.model;
 
+import java.util.Objects;
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
@@ -7,6 +9,7 @@ import javax.persistence.Id;
 public class Pokemon {
 	
 	@Id
+	@Column(name = "DEX_ID")
 	private int pokedexNumber;
 	
 	private String name;
@@ -30,6 +33,10 @@ public class Pokemon {
 	
 	protected Pokemon() {
 		
+	}
+	
+	public Pokemon(int pokedexNumber) {
+		this.pokedexNumber = pokedexNumber;
 	}
 	
 	public Pokemon(int pokedexNumber, String name, String attack1, String attack2, String attack3, String attack4, String type1, String type2, int healthEVs,
@@ -170,4 +177,23 @@ public class Pokemon {
 	public void setReadyToBattle(boolean readyToBattle) {
 		this.readyToBattle = readyToBattle;
 	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(pokedexNumber);
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Pokemon other = (Pokemon) obj;
+		return pokedexNumber == other.pokedexNumber;
+	}
+
+	
 }
