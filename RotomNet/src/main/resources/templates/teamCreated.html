@@ -34,10 +34,17 @@
 				{{/team}}
 			</div>
 		</div>
-		<form action='/saveTeam' method='post' align='center'>
-			<input type='submit' value='Save Team'></input>
+		<form action='saveTeam' method='post' align='center'>
+			<input type='submit' value='Save Team'>
 		</form>
-		<p align='center'><a href="/" >Back to main menu</a></p><br><br>
+		<br>
+		<form action='teamGenerator'method='post' align='center'>
+			<input type='submit' value='Try again'>
+		</form>
+		<br>
+		<form action='exit' align='center'>
+			<input type='submit' value='Exit'>
+		</form>
 		
 		</body>
 </html>

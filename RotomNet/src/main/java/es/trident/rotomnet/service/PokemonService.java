@@ -78,7 +78,7 @@ public class PokemonService {
 		ArrayList<Pokemon> pokes = new ArrayList<Pokemon>();	
 		
 		//Only cards
-		pokes.add(new Pokemon(1, "Bulbasaur", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","Poison",5,8,-1,3,-1,-1,"None", "None", "", false,false));
+		/*pokes.add(new Pokemon(1, "Bulbasaur", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","Poison",5,8,-1,3,-1,-1,"None", "None", "", false,false));
 		pokes.add(new Pokemon(2, "Ivysaur", "Unknown", "Unknown", "Unknown", "Unknown", "Grass","Poison",3,9,-1,9,-1,-1,"None", "None", "", false,false));
 		pokes.add(new Pokemon(4, "Charmander", "Unknown", "Unknown", "Unknown", "Unknown", "Fire","",1,1,-1,4,-1,-1,"None", "None", "", false,false));
 		pokes.add(new Pokemon(5, "Charmeleon", "Unknown", "Unknown", "Unknown", "Unknown", "Fire","",2,6,-1,6,-1,-1,"None", "None", "", false,false));
@@ -158,7 +158,7 @@ public class PokemonService {
 		pokes.add(new Pokemon(140, "Kabuto", "Unknown", "Unknown", "Unknown", "Unknown", "Rock","Water",3,7,-1,2,-1,-1,"None", "None", "", false,false));
 		pokes.add(new Pokemon(147, "Dratini", "Unknown", "Unknown", "Unknown", "Unknown", "Dragon","",5,7,-1,4,-1,-1,"None", "None", "", false,false));
 		pokes.add(new Pokemon(148, "Dragonair", "Unknown", "Unknown", "Unknown", "Unknown", "Dragon","",3,3,-1,6,-1,-1,"None", "None", "", false,false));
-		
+		*/
 		//Grass
 		pokes.add(new Pokemon(3, "Venusaur", "Giga drain", "Sludge bomb", "Leech Seed", "Substitute", "Grass","Poison",252,0,252,0,6,0,"Chlorophyll", "Modest", "Black sludge", false,true));
 		pokes.add(new Pokemon(45,"Vileplume","Sludge bomb","Giga drain","Sleep powder","Strength sap","Grass","Poison",252,0,252,0,6,0,"Effect spore","Modest","Black Sludge",false,true));
@@ -170,7 +170,7 @@ public class PokemonService {
 		pokes.add(new Pokemon(640,"Virizion","Swords dance","Close combat","Substitute","Leaf blade","Grass","Fighting",6,252,0,0,0,252,"Justified","Adamant","Lum berry",true,true));
 		
 		//Fire
-		pokes.add(new Pokemon(6,"Charizard","Fire blast","Air slash","Earthquake","Roost","Fire","Flying",0,6,252,0,0,252,"Solar Power","Modest","Heavy-Duty boots",false,true ));
+		/*pokes.add(new Pokemon(6,"Charizard","Fire blast","Air slash","Earthquake","Roost","Fire","Flying",0,6,252,0,0,252,"Solar Power","Modest","Heavy-Duty boots",false,true ));
 		pokes.add(new Pokemon(38,"Ninetales","Fire blast","Substitute","Nasty plot","Solar beam","Fire","",0,0,252,0,6,252,"Drought","Modest","Heat rock",false,true));
 		pokes.add(new Pokemon(59,"Arcanine","Flare blitz","Extreme speed","Will-o-wisp","Morning sun","Fire","",252,252,0,0,0,6,"Flash fire","Adamant","Heavy-Duty boots",false,true));
 		pokes.add(new Pokemon(78,"Rapidash","Flare blitz","Will-o wisp","Morning sun","Stomping tantrum","Fire","",6,252,0,0,0,252,"Flash fire","Adamant","Heavy-Duty boots", false,true));
@@ -328,7 +328,7 @@ public class PokemonService {
 		pokes.add(new Pokemon(282,"Gardevoir","Psyshock","Calm mind","Moonblast","Mystical fire","Psychic","Fairy",0,0,252,0,6,252,"Trace","Modest","Life orb",false,true));
 		pokes.add(new Pokemon(468,"Togekiss","Air slash","Dazzling gleam","Nasty plot","Roost","Fairy","Flying",6,0,252,0,0,252,"Serene grace","Modest","Heavy-Duty boots",false,true));
 		pokes.add(new Pokemon(716,"Xerneas","Geomancy","Moonblast","Psyshock","Thunderbolt","Fairy","",0,0,252,0,6,252,"Fairy aura","Modest","Power herb",true,true));
-		
+		*/
 		for(int i= 0;i< pokes.size();++i) {
 			_pokemonRepository.save(pokes.get(i));
 		}
@@ -353,7 +353,7 @@ public class PokemonService {
 	private ArrayList<Pokemon> fillListByTypes(ArrayList<String>types, boolean legendaries) {
 		 ArrayList<Pokemon> myList = new ArrayList<Pokemon>();
 		for(int i = 0; i < types.size();++i) {
-			myList.addAll((ArrayList<Pokemon>)_pokemonRepository.findByTypesAndLegendary(types.get(i), types.get(i),legendaries));
+			myList.addAll((ArrayList<Pokemon>)_pokemonRepository.findByTypesAndLegendaryAndReadyToBattle(types.get(i), types.get(i),legendaries, true));
 		}
 		return myList;
 	}

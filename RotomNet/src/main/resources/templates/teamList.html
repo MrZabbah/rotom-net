@@ -1,0 +1,32 @@
+<html>
+	<body>
+		<p>Team list</p>
+		<ul>
+		{{#teamList}}
+			<a href="showTeam/{{id}}">
+				<ul>
+				Team {{id}} ({{name}}):
+				{{#teamPokemon}}
+					{{name}} | 
+				{{/teamPokemon}}
+				<br>
+				</ul>
+			</a>
+		{{/teamList}}
+		{{#previous}}
+			<a href="/displayTeams?page={{previousPage}}">Previous&emsp;</a>
+			{{/previous}}
+			{{#next}}
+			<a href="/displayTeams?page={{nextPage}}">Next</a>
+			{{/next}}
+		</ul>
+		{{^teamList}}
+			No current teams
+		{{/teamList}}
+		<form action="/exit" align="center">
+			<input type='submit' value="Exit">
+		</form>
+		
+		
+	</body>
+</html>
