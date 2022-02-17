@@ -35,6 +35,10 @@ public class Pokemon {
 		
 	}
 	
+	public Pokemon(int pokedexNumber) {
+		this.pokedexNumber = pokedexNumber;
+	}
+	
 	public Pokemon(int pokedexNumber, String name, String attack1, String attack2, String attack3, String attack4, String type1, String type2, int healthEVs,
 			int attackEVs, int spAttackEVs, int defenseEVs, int spDefenseEVs, int speedEVs, String ability, String nature, String item, boolean legendary,boolean readyToBattle) {
 		

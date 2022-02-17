@@ -41,6 +41,7 @@ public class CardBoardController {
 	public String userDeck(Model model) {
 		
 		model.addAttribute("cards", _pokemonService.getUserCards(userRepo.getById(1)));
+		model.addAttribute("ratioString", _pokemonService.getUserDiscoverRatio(userRepo.getById(1)));
 		model.addAttribute("userDeck", true);
 		model.addAttribute("boardTitle", "YOUR DECK");
 		return("pokedex");

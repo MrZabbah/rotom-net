@@ -11,5 +11,6 @@ import es.trident.rotomnet.model.UserRotomCardId;
 
 public interface UserRotomCardRepository extends JpaRepository<UserRotomCard,UserRotomCardId>{
 	List<UserRotomCard> findByUser(User user);
+	int countByUser(User user);
 	List<UserRotomCard> findByUserAndRotomCard(User user, RotomCard rotomCard);	
 }

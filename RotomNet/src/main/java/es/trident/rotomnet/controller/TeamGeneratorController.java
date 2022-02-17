@@ -1,7 +1,6 @@
 package es.trident.rotomnet.controller;
 
 import java.util.ArrayList;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import es.trident.rotomnet.model.Team;
 import es.trident.rotomnet.service.PokemonService;
-import es.trident.rotomnet.service.TeamRepository;
 import es.trident.rotomnet.service.TeamService;
 
 @Controller
