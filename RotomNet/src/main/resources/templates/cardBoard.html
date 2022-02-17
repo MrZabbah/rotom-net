@@ -6,7 +6,17 @@
 	</h1>
 	{{#cards}}
 	{{#.}}
-	{{>card}}
+	{{#noOwner}}
+		{{>noOwnercard}}
+	{{/noOwner}}
+	{{^noOwner}}
+		{{#userDeck}}
+			{{>deckCard}}
+		{{/userDeck}}
+		{{^userDeck}}
+			{{>pokedexCard}}
+		{{/userDeck}}
+	{{/noOwner}}
 	{{/.}}
 	<br />
 	{{/cards}}

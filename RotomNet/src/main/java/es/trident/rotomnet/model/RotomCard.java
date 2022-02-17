@@ -10,22 +10,22 @@ import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
-public class RottomCard {
+public class RotomCard {
 	@Id
-    @Column(name = "POKEMON_ID")
+    @Column(name = "CARD_ID")
     private int pokemonId;
 
     @OneToOne
     @MapsId
-    @PrimaryKeyJoinColumn(name="POKEMON_ID", referencedColumnName="DEX_ID")
+    @PrimaryKeyJoinColumn(name="CARD_ID", referencedColumnName="DEX_ID")
 	private Pokemon pokemon;
 	private int health;
 	private int attack;
 	private int defense;
 	
-	protected RottomCard() {}
+	protected RotomCard() {}
 	
-	public RottomCard(Pokemon pokemon, int health, int attack, int defense) {
+	public RotomCard(Pokemon pokemon, int health, int attack, int defense) {
 		
 		this.pokemon = pokemon;
 		this.health = health;
@@ -45,6 +45,10 @@ public class RottomCard {
 	public int getDefense() { return defense; }
 	public void setDefense(int defense) { this.defense = defense; }
 
+	public int getPokemonDexIndex() {
+		return pokemon.getId();
+	}
+	
 	@Override
 	public int hashCode() {
 		return Objects.hash(attack, defense, health, pokemon);
@@ -58,7 +62,7 @@ public class RottomCard {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		RottomCard other = (RottomCard) obj;
+		RotomCard other = (RotomCard) obj;
 		return Objects.equals(pokemon, other.pokemon);
 	}
 	

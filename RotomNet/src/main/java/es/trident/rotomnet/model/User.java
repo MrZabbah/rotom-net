@@ -2,12 +2,14 @@ package es.trident.rotomnet.model;
 
 import java.util.Objects;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
 public class User {
 	@Id
+	@Column(name = "USER_ID")
 	private int id;
 	private String name;
 	

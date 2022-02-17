@@ -4,25 +4,31 @@ import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
+
+import com.google.common.collect.Ordering;
+import com.google.common.primitives.Ints;
 
 @Entity
-@IdClass(UserRottomCardId.class)
-public class UserRottomCard {
+@IdClass(UserRotomCardId.class)
+public class UserRotomCard {
 	
 	@Id
+	@MapsId("user")
 	@ManyToOne
 	private User user;
 	@Id
+	@MapsId("rotomCard")
 	@ManyToOne
-	private RottomCard rottomCard;
+	private RotomCard rotomCard;
 	private int amount;
 	private boolean isShinyUnlocked;
 	
-	protected UserRottomCard() {}
+	public UserRotomCard() { }
 	
-	public UserRottomCard(User user, RottomCard rottomCard, boolean isShinyUnlocked) {
+	public UserRotomCard(User user, RotomCard rotomCard, boolean isShinyUnlocked) {
 		this.user = user;
-		this.rottomCard = rottomCard;
+		this.rotomCard = rotomCard;
 		this.amount = 1;
 		this.isShinyUnlocked = isShinyUnlocked;
 	}
@@ -30,8 +36,8 @@ public class UserRottomCard {
 	public User getUser() { return user; }
 	public void setUser(User user) { this.user = user; }
 	
-	public RottomCard getRottomCard() { return rottomCard; }
-	public void setRottomCard(RottomCard rottomCard) { this.rottomCard = rottomCard; }
+	public RotomCard getRottomCard() { return rotomCard; }
+	public void setRottomCard(RotomCard rotomCard) { this.rotomCard = rotomCard; }
 	
 	public int getAmount() { return amount; }
 	public void setAmount(int amount) { this.amount = amount; }
@@ -41,5 +47,9 @@ public class UserRottomCard {
 	
 	public void increaseAmountBy(int increment) {
 		amount += increment;
+	}
+	
+	public boolean noOwner() {
+		return amount < 1;
 	}
 }

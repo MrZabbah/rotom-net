@@ -1,0 +1,56 @@
+<div class="Back">
+	<div class="Container">
+		{{#userDeck}}
+		{{#isShinyUnlocked}}
+		<div class="PokemonCard" label="shiny_effect | shiny_thin_border">
+			<div class="Hover" label="shiny_strong_bck">
+				<div class="InnerHover" label="shiny_bck">
+					{{/isShinyUnlocked}}
+					{{^isShinyUnlocked}}
+					<div class="PokemonCard">
+						<div class="Hover">
+							<div class="InnerHover">
+								{{/isShinyUnlocked}}
+								{{#isShinyUnlocked}}
+								<h2 label="shiny_text">
+									{{/isShinyUnlocked}}
+									{{^isShinyUnlocked}}
+									<h2>
+										{{/isShinyUnlocked}}
+										{{rotomCard.pokemon.id}}
+									</h2>
+							</div>
+						</div>
+						<div class="Name">
+							<h2 label="heal">
+								♥{{rotomCard.health}}
+							</h2>
+							{{#isShinyUnlocked}}
+							<h2 label="shiny_text">
+								{{/isShinyUnlocked}}
+								{{^isShinyUnlocked}}
+								<h2>
+									{{/isShinyUnlocked}}
+									{{rotomCard.pokemon.name}}
+								</h2>
+								{{#isShinyUnlocked}}
+								<h3 label="shiny_bck | shiny_text | shiny_thin_border">
+									{{/isShinyUnlocked}}
+									{{^isShinyUnlocked}}
+									<h3>
+										{{/isShinyUnlocked}}
+										x{{amount}}
+									</h3>
+									<div class="Stats">
+										<h2 label="atck">
+											⚔{{rotomCard.attack}}
+										</h2>
+										<h2 label="def">
+											🛡{{rotomCard.defense}}
+										</h2>
+									</div>
+						</div>
+					</div>
+					{{/userDeck}}
+				</div>
+			</div>
