@@ -1,24 +1,24 @@
 package es.trident.rotomnet.model;
 
 import java.util.Objects;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
 @Entity
-public class Pokemon {
+public class User {
 	@Id
-	@Column(name = "DEX_ID")
+	@Column(name = "USER_ID")
 	private int id;
 	private String name;
 	
-	protected Pokemon() {}
+	protected User() {}
 	
-	public Pokemon(int id, String name) {
+	public User(int id, String name) {
 		this.id = id;
-		this.name = name;
+		this.name=name;
 	}
-	
 	@Override
 	public int hashCode() {
 		return Objects.hash(id, name);
@@ -31,7 +31,7 @@ public class Pokemon {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Pokemon other = (Pokemon) obj;
+		User other = (User) obj;
 		return id == other.id;
 	}
 	public int getId() {
@@ -46,5 +46,6 @@ public class Pokemon {
 	public void setName(String name) {
 		this.name = name;
 	}
-
+	
+	
 }
