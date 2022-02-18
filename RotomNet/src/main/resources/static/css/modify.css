@@ -6,7 +6,7 @@ body{
 .user-container{
 	border-radius: 10px;
 	background: white;	
-	margin:50px 200px;
+	margin:35px 200px;
 	text-align: center;
 	
 	
@@ -21,7 +21,7 @@ body{
 
 .user-table th, .user-table td {
 	border: 2px solid rgba(100, 100, 100, 0.7);
-    padding: 5px 20px;
+    padding: 2px 30px;
 }
 
 .user-table th {
@@ -32,8 +32,8 @@ body{
 }
 
 .user-table .td-image{
-	height: 70px;
-	width:70px;	
+	height: 60px;
+	width:60px;	
 }
 
 .user-table .td-image img{
@@ -50,31 +50,37 @@ body{
 	padding: 25px 0px;	
 }
 
-.user-table .modify-form input[type=submit]{
-	border-radius:50%;
-	background-color: rgba(0,255, 0, 0.8);
-	color:white;
-	font-size:25px;
-	width:40px;
-	height:40px;
-	border-style: 1px solid black;
+.modify-form input{
+	width:70%;
+	padding: 12px 20px;
+	margin: 12px 0px;
+	box-sizing: border-box;
+	border-radius: 4px;	
+	transition: all ease-in-out 200ms;
+	background:white;
+	background-color: #eee;
 }
 
-.user-table .delete-form input[type=submit]{
-	border-radius:50%;
-	background-color: rgba(255, 0, 0, 0.8);
-	color:white;
-	font-size:25px;
-	width:40px;
-	height:40px;
-	border-style: 1px solid black;
+.modify-form input:focus{
+	outline: 2px solid black;
 }
 
-	
+.modify-form label{
+	text-transform:uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 200;
+	font-size: 13px;
+	left: 0;
+}
 
-
-
-
-
-
-
+.modify-form input[type=submit]{
+	border-radius:50px;
+	background-color: #7cd7e7;
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 200;
+	font-size: 15px;
+	margin-top: 25px;
+	margin-bottom: 25px;
+	outline: 2px solid #439bab;
+}

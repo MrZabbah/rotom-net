@@ -49,10 +49,31 @@ public class UserController {
 		return "registered";
 	}
 	
+	@PostMapping("/modified_user_{id}")
+	public String modifyUser(Model model, @RequestParam String username, @RequestParam String pwd,
+			@RequestParam MultipartFile image, @PathVariable long id) throws IOException {
+		
+		userService.modifyUser(id, username, pwd, image);
+		return "redirect:/users";
+	}
+	
 	@GetMapping("/users")
 	public String allUsers(Model model){
 		model.addAttribute("users", userService.getAllUsers());
 		return "users";
+	}
+	
+	@PostMapping("/{id}/delete")
+	public String deleteSelectedUser(Model model, @PathVariable long id) {
+		userService.deleteUser(id);
+		return "redirect:/users";
+	}
+	
+	@PostMapping("/{id}_modify")
+	public String modifySelectedUser(Model model, @PathVariable long id) {
+		User user = userService.findUserById(id);
+		model.addAttribute("user", user);
+		return "modify";
 	}
 	
 	@GetMapping("/{id}/image")

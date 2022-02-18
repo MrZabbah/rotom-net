@@ -2,6 +2,7 @@
 <html>
 <head>		
 		<link href="css/users.css" rel="stylesheet" type="text/css">
+		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 </head>
 
 <body>
@@ -15,6 +16,8 @@
 				<th>Password</th>
 				<th>Days logged</th>
 				<th>Last day logged</th>
+				<th>Modify user?</th>
+				<th>Delete user?</th>
 			</tr>
 			{{#users}}
 				<tr>
@@ -24,7 +27,17 @@
 					<td>{{username}}</td>
 					<td>{{pwd}}</td>
 					<td>{{daysLogged}}</td>
-					<td>{{lastLog}}</td>			
+					<td>{{lastLog}}</td>	
+					<td>
+						<form action="/{{userId}}_modify" class="modify-form" method="POST">
+							<input type="submit" value="🛠">
+						</form>
+					</td>		
+					<td>
+						<form action="/{{userId}}/delete" class="delete-form" method="POST">
+							<input type="submit" class="btn-trash" value="🗑">
+						</form>
+					</td>	
 				</tr>
 			{{/users}}			
 		</table>
