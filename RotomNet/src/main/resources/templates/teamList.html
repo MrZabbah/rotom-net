@@ -10,24 +10,33 @@
 				{{#teamPokemon}}
 					{{name}} | 
 				{{/teamPokemon}}
-				<br>
 				</ul>
 			</a>
+			&emsp;&emsp;
+			<form action='/deleteTeam/{{id}}' method='post' id='inlineDisplay'>
+				<input type='submit' value='Delete' class = 'customButton'>
+			</form>
+				<br>
+				<br>
 		{{/teamList}}
-		{{#previous}}
-			<a href="/displayTeams?page={{previousPage}}">Previous&emsp;</a>
-			{{/previous}}
-			{{#next}}
-			<a href="/displayTeams?page={{nextPage}}">Next</a>
-			{{/next}}
 		</ul>
+		<br>
+		{{#next}}
+			<a href="/displayTeams?page={{nextPage}}" class='transparentLink' >Next</a>
+		{{/next}}
+		{{#previous}}
+			<a href="/displayTeams?page={{previousPage}}" class='transparentLink' >Previous</a>
+			&emsp;&emsp;
+		{{/previous}}
 		{{^teamList}}
 			No current teams
 		{{/teamList}}
+		</div>
+		<br>
 		<form action="/exit" align="center">
-			<input type='submit' value="Exit">
+			<input type='submit' value="Back to main page">
 		</form>
-		
-		
+		<br>
+		<br>
 	</body>
 </html>

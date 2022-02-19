@@ -25,7 +25,7 @@ public class TeamGeneratorController {
 		_pokemonService = pokemonService;
 		_teamService = teamService;
 		_pokemonService.createPokemon();
-		//_teamService.createTeams();
+		_teamService.createTeams();
 	}
 	
 	@GetMapping("/exit")
@@ -85,7 +85,8 @@ public class TeamGeneratorController {
 	@PostMapping("/deleteTeam/{id}")
 	public String deleteTeam(@PathVariable int id) {
 		_teamService.deleteTeam(id);
-		return "redirect:/";
+		return "redirect:/displayTeams";
 	}
+	
 
 }
