@@ -1,5 +1,6 @@
 package es.trident.rotomnet.service;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collections;
@@ -33,7 +34,7 @@ public class PokemonService {
 	@Autowired
 	private UserRotomCardRepository userCardsRepository;
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 
 	private final String[] POKEMON_TYPES = { "Fire", "Water", "Grass", "Electric", "Ground", "Rock", "Poison",
 			"Psychic", "Flying", "Bug", "Normal", "Ghost", "Fighting", "Steel", "Ice", "Dragon", "Dark", "Fairy" };
@@ -538,19 +539,21 @@ public class PokemonService {
 
 		cardRepository.saveAll(cards);
 
-		User ua = new User(1, "Juan");
-		User ub = new User(2, "Nacho");
-		userRepository.save(ua);
-		userRepository.save(ub);
-		
-		Random r = new Random();
-		int ini = r.nextInt(0, 151);
-		int fin = r.nextInt(ini, 151);
-		List<UserRotomCard> userCards = new ArrayList<>();
-		for (int i = ini; i <= fin ; i++) {
-			userCards.add(new UserRotomCard(ua, cards.get(i), r.nextBoolean()));
-		}
-		userCardsRepository.saveAll(userCards);
+
+		try {
+			User ua = userService.saveNewUser("Test", "test");
+			Random r = new Random();
+			int ini = r.nextInt(0, 151);
+			int fin = r.nextInt(ini, 151);
+			List<UserRotomCard> userCards = new ArrayList<>();
+			for (int i = ini; i <= fin ; i++) {
+				userCards.add(new UserRotomCard(ua, cards.get(i), r.nextBoolean()));
+			}
+			userCardsRepository.saveAll(userCards);
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}	
 
 	}
 	

@@ -1,0 +1,40 @@
+<!DOCTYPE HTML>
+<html>
+<head>		
+		<link href="css/modify.css" rel="stylesheet" type="text/css">
+</head>
+<body>
+	{{>header}}	
+	<div class = "user-container">	
+		<h1>Modify User</h1>		
+		<table class="user-table">
+			<tr>
+				<th>User image</th>
+				<th>Username</th>
+				<th>Password</th>
+				<th>Days logged</th>
+				<th>Last day logged</th>
+			</tr>
+			<tr>
+				<td class = "td-image">
+					<img src="/{{user.userId}}/image" alt=""></img>
+				</td> 	
+				<td>{{user.username}}</td>
+				<td>{{user.pwd}}</td>
+				<td>{{user.daysLogged}}</td>
+				<td>{{user.lastLog}}</td>		
+			</tr>			
+		</table>
+		<form action="/modified_user_{{user.userId}}" method="post" class="modify-form" enctype="multipart/form-data"><br>
+				<label for="username">New Username</label><br>
+				<input type="text" id="username" name="username"><br>
+				<label for="pwd">New Password</label><br>
+				<input type="password" id="pwd" name="pwd"><br>
+				<label for= "image">New User Image</label><br>
+				<input type='file' name='image' accept=".jpg, .jpeg">
+				<input type="submit" value="Accept Changes">				
+			</form>
+	</div>
+
+</body>
+</html>

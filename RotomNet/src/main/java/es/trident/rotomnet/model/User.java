@@ -5,24 +5,46 @@ import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import java.sql.Blob;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Lob;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
 public class User {
 	@Id
 	@Column(name = "USER_ID")
-	private int id;
-	private String name;
+	@GeneratedValue(strategy = GenerationType.AUTO)
+	private long userId;
 	
-	protected User() {}
-	
-	public User(int id, String name) {
-		this.id = id;
-		this.name=name;
+	private String username;
+	private String pwd;
+	private int daysLogged;
+	private String lastLog;
+
+	// User Image
+	private boolean image; // If there is an image.
+
+	@Lob
+	@JsonIgnore
+	private Blob imageFile;
+
+	protected User() {
 	}
+
+	public User(String username, String pwd, int daysLogged, String lastLog) {
+		this.username = username;
+		this.pwd = pwd;
+		this.daysLogged = daysLogged;
+		this.lastLog = lastLog;
+	}
+
 	@Override
 	public int hashCode() {
-		return Objects.hash(id, name);
+		return Objects.hash(userId, username);
 	}
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -32,20 +54,57 @@ public class User {
 		if (getClass() != obj.getClass())
 			return false;
 		User other = (User) obj;
-		return id == other.id;
+		return userId == other.userId;
 	}
-	public int getId() {
-		return id;
-	}
-	public void setId(int id) {
-		this.id = id;
-	}
-	public String getName() {
-		return name;
-	}
-	public void setName(String name) {
-		this.name = name;
-	}
+
+	// Getter & Setters
 	
-	
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getPwd() {
+		return pwd;
+	}
+
+	public void setPwd(String pwd) {
+		this.pwd = pwd;
+	}
+
+	public int getDaysLogged() {
+		return daysLogged;
+	}
+
+	public void setDaysLogged(int daysLogged) {
+		this.daysLogged = daysLogged;
+	}
+
+	public String getLastLog() {
+		return lastLog;
+	}
+
+	public void setLastLog(String lastLog) {
+		this.lastLog = lastLog;
+	}
+
+	public boolean getImage() {
+		return image;
+	}
+
+	public void setImage(boolean image) {
+		this.image = image;
+	}
+
+	public Blob getImageFile() {
+		return imageFile;
+	}
+
+	public void setImageFile(Blob imageFile) {
+		this.imageFile = imageFile;
+	}
+
 }

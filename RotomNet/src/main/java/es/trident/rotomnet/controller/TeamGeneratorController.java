@@ -76,7 +76,7 @@ public class TeamGeneratorController {
 		return "teamList";
 	}
 	
-	@GetMapping("/showTeam/{id}")
+	@GetMapping("/showTeam_{id}")
 	public String showTeam(Model model, @PathVariable int id) {
 		model.addAttribute("team",_teamService.getTeamById(id));
 		return "teamDisplay";

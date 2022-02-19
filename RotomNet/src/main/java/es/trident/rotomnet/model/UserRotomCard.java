@@ -1,5 +1,6 @@
 package es.trident.rotomnet.model;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;

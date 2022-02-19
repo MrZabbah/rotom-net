@@ -3,8 +3,10 @@
 		<title background="white">Random team generated </title>
 		<link rel='stylesheet' type='text/css' href='/css/teamGenerated.css'>
 	</header>
-	<body style='background-color:black'>
-		<div id='Box'>
+	<body>
+	{{>header}}
+	<div class="globalDiv">
+		<div class='Box'>
 			<p class='BiggerBoldText'>Congratulations, your team has been successfully created!</p><br>
 			<p class='BiggerText'>Your requirements were: </p>
 			<p>Team name:{{#team}} {{name}} {{/team}}</p>

@@ -1,10 +1,6 @@
 <html>
-	<header>
-		<link rel = 'stylesheet' type = 'text/css' href = '/css/teamDisplay.css'>
-		<title>Display selected team</title>
-	</header>
-	<body style='background-color:black'>
-	<div id="Box">
+	<body>
+		{{>header}}
 		{{#team}}
 			<h1>Team {{id}}</h1>
 			<div id='PokeList'>

@@ -1,15 +1,10 @@
 <html>
-	<header>
-		<title>Team list diplay</title>
-		<link rel = 'stylesheet' type = 'text/css' href = '/css/teamList.css'>
-	</header>
-	<body style='background-color:black'>
-		<div id='containerBox'>
-		<h1>Team list</h1>
-		<br>
+	<body>
+	{{>header}}
+		<p>Team list</p>
 		<ul>
 		{{#teamList}}
-			<a href="showTeam/{{id}}" id='inlineDisplay'>
+			<a href="showTeam_{{id}}">
 				<ul>
 				Team {{id}} ({{name}}):
 				{{#teamPokemon}}

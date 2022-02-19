@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 import es.trident.rotomnet.repository.UserRepository;
 import es.trident.rotomnet.service.PokemonService;
+import es.trident.rotomnet.service.UserService;
 
 @Controller
 public class CardBoardController {
@@ -16,7 +17,7 @@ public class CardBoardController {
 	@Autowired
 	private PokemonService _pokemonService;
 	@Autowired
-	private UserRepository userRepo;
+	private UserService userService;
 	
 	@PostConstruct
 	public void BoardController() {
@@ -40,8 +41,8 @@ public class CardBoardController {
 	@GetMapping("/deck")
 	public String userDeck(Model model) {
 		
-		model.addAttribute("cards", _pokemonService.getUserCards(userRepo.getById(1)));
-		model.addAttribute("ratioString", _pokemonService.getUserDiscoverRatio(userRepo.getById(1)));
+		model.addAttribute("cards", _pokemonService.getUserCards(userService.getUserByUsernameAndPwd("Test", "test")));
+		model.addAttribute("ratioString", _pokemonService.getUserDiscoverRatio(userService.getUserByUsernameAndPwd("Test", "test")));
 		model.addAttribute("userDeck", true);
 		model.addAttribute("boardTitle", "YOUR DECK");
 		return("pokedex");

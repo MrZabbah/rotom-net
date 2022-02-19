@@ -9,7 +9,7 @@ import javax.persistence.ManyToOne;
 @SuppressWarnings("serial")
 public class UserRotomCardId implements Serializable{
 
-	private int user;
+	private long user;
 
 	private int rotomCard;
 	
@@ -39,11 +39,11 @@ public class UserRotomCardId implements Serializable{
 		return Objects.equals(rotomCard, other.rotomCard) && Objects.equals(user, other.user);
 	}
 
-	public int getUser() {
+	public long getUser() {
 		return user;
 	}
 
-	public void setUser(int user) {
+	public void setUser(long user) {
 		this.user = user;
 	}
 
