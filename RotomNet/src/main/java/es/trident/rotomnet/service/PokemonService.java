@@ -323,7 +323,7 @@ public class PokemonService {
 				0, 252, 0, 6, 0, 252, "Keen eye", "Adamant", "Stick", false, true));
 		pokes.add(new Pokemon(85, "Dodrio", "Drill peck", "Roost", "Double edge", "Swords dance", "Normal", "Flying", 0,
 				252, 0, 6, 0, 252, "Early bird", "Adamant", "Life orb", false, true));
-		pokes.add(new Pokemon(12, "Butterfree", "Quiver dance", "Sleep powder", "Hurricane", "Bug buzz", "Buf",
+		pokes.add(new Pokemon(12, "Butterfree", "Quiver dance", "Sleep powder", "Hurricane", "Bug buzz", "Bug",
 				"Flying", 0, 0, 252, 0, 6, 252, "Tinted lens", "Modest", "Heavy-Duty boots", false, true));
 		pokes.add(new Pokemon(15, "Beedrill", "Drill run", "Poison jab", "Aerial ace", "Bug bite", "Bug", "Poison", 0,
 				252, 0, 6, 0, 252, "Swarm", "Adamant", "Life orb", false, true));
@@ -582,8 +582,6 @@ public class PokemonService {
 
 	public void createPokemon() {
 		ArrayList<Pokemon> pokes = new ArrayList<Pokemon>();
-
-		// Only cards
 
 		// Grass
 

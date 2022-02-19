@@ -1,22 +1,27 @@
 <html>
-	<body>
+	<header>
+		<link rel = 'stylesheet' type = 'text/css' href = '/css/teamDisplay.css'>
+		<title>Display selected team</title>
+	</header>
+	<body style='background-color:black'>
+	<div id="Box">
 		{{#team}}
-			<p>Team {{id}}:</p>
+			<h1>Team {{id}}</h1>
+			<div id='PokeList'>
 			<p>Name: {{name}}</p>
 			<p>Pokemon: </p>
 				{{#teamPokemon}}
-				<li>
-					<p>{{name}} -> {{type1}}{{#type2}}/{{type2}}{{/type2}}</p>
-					<p>Attacks: <br>&emsp;{{attack1}}<br>&emsp;{{attack2}}<br>&emsp;{{attack3}}<br>&emsp;{{attack4}}</p>
-					<p>Nature: {{nature}}&emsp;Ability: {{ability}}&emsp;Item: {{item}}</p>
+					<p>&emsp;{{name}} -> {{type1}}{{#type2}}/{{type2}}{{/type2}}</p>
+					<p>&emsp;Attacks: <br>&emsp;&emsp;{{attack1}}<br>&emsp;&emsp;{{attack2}}<br>&emsp;&emsp;{{attack3}}<br>&emsp;&emsp;{{attack4}}</p>
+					<p>&emsp;Nature: {{nature}}&emsp;Ability: {{ability}}&emsp;Item: {{item}}</p>
 					<br>
-				</li>
 				{{/teamPokemon}}
-				
-			<form action="/deleteTeam/{{id}}" method='post'>
+			<br>
+			<br>
+			<form action="/deleteTeam/{{id}}" method='post' align='center' >
 				<input type='submit' value='Delete this team'>
 			</form>
 		{{/team}}
-		
+	</div>
 	</body>
 </html>

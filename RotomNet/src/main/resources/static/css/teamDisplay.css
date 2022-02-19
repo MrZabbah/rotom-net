@@ -1,9 +1,7 @@
-*{
+* {
 	margin: 0;
 	padding: 0;
-	
 }
-
 
 #Box{
 	background:white;
@@ -14,8 +12,7 @@
 	margin-top: 130px;
 	padding : 30px;
 }
-
-#TypeList{
+#PokeList{
 	border-radius:10px;
 	background-color: #DDD;
 	box-align:center;
@@ -23,19 +20,10 @@
 	padding:20px;
 	margin-top:10px;
 }
-p.BiggerText{
-	font-size:20px;
-}
-p.BiggerBoldText{
-	font-size:30px;
+h1 {
+	font-size : 30px;
 	text-align:center;
-	font-weight: bold;
-}
-
-form.transparentForm{
-	background-color:transparent;
-	display:inline-block;
-}
-input.customButton:hover{
-	background-color:#BBB;
+	background-color:white;
+	margin-left: 200px;
+	margin-right:200px;
 }
