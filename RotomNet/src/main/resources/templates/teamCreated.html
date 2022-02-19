@@ -1,12 +1,11 @@
 <html>
-	<header>
+	<head>
 		<title background="white">Random team generated </title>
 		<link rel='stylesheet' type='text/css' href='/css/teamGenerated.css'>
-	</header>
-	<body>
-	{{>header}}
-	<div class="globalDiv">
-		<div class='Box'>
+	</head>
+	<body style='background-color:black'>
+		{{>header}}
+		<div id='Box'>
 			<p class='BiggerBoldText'>Congratulations, your team has been successfully created!</p><br>
 			<p class='BiggerText'>Your requirements were: </p>
 			<p>Team name:{{#team}} {{name}} {{/team}}</p>
@@ -50,5 +49,5 @@
 		</div>	
 		<br>
 		<br>
-	</body style='background-color:black'>
+	</body >
 </html>

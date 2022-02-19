@@ -1,13 +1,12 @@
 <html>
-	<header>
+	<head>
 		<title>Random Team Generator</title>
 		<link rel = 'stylesheet' type = 'text/css' href = '/css/teamGenerator.css'>
-	</header>
+	</head>
 
-	<body>
-	{{>header}}
-	<div class = 'globalDiv'>
-	<h1>Random Team Generator</h1>
+	<body style='background-color:black'>
+	{{>header}}	
+		<h1 id='titleH1'>Random Team Generator</h1>
 		<div class='PokemonFormBox'>
 			<div class='PokemonForm'>
 				<form action='/createRandomTeam' method='post'>
@@ -64,7 +63,7 @@
 					</div>
 				</div>
 				<br>
-				<input type='submit' value='Create random team' class='InteractiveButton'>
+				<input type='submit' value='Create random team' class='customButton'>
 			</div>
 				
 			</form>	

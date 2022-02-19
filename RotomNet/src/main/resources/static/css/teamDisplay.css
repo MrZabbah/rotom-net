@@ -20,10 +20,22 @@
 	padding:20px;
 	margin-top:10px;
 }
-h1 {
+#titleH1 {
 	font-size : 30px;
 	text-align:center;
 	background-color:white;
 	margin-left: 200px;
 	margin-right:200px;
+}
+input.customButton{
+	border-radius:50px;
+	background-color: #7cd7e7;
+	text-transform: uppercase;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 200;
+	width:120px;
+	height:30px;
+	font-size: 15px;
+	margin-top: 25px;
+	outline: 2px solid #439bab;
 }

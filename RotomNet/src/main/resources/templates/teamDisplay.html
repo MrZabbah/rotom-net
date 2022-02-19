@@ -1,8 +1,13 @@
 <html>
-	<body>
+	<head>
+		<title>Display selected team</title>
+		<link rel = 'stylesheet' type = 'text/css' href='/css/teamDisplay.css'>
+	</head>
+	<body style='background-color:black'>
 		{{>header}}
+		<div id='Box'>
 		{{#team}}
-			<h1>Team {{id}}</h1>
+			<h1 id='titleH1'>Team {{id}}</h1>
 			<div id='PokeList'>
 			<p>Name: {{name}}</p>
 			<p>Pokemon: </p>
@@ -12,10 +17,11 @@
 					<p>&emsp;Nature: {{nature}}&emsp;Ability: {{ability}}&emsp;Item: {{item}}</p>
 					<br>
 				{{/teamPokemon}}
+			</div>
 			<br>
 			<br>
 			<form action="/deleteTeam/{{id}}" method='post' align='center' >
-				<input type='submit' value='Delete this team'>
+				<input type='submit' value='Delete team' class='customButton'>
 			</form>
 		{{/team}}
 	</div>
