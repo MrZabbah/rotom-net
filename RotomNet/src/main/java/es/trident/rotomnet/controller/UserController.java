@@ -42,10 +42,11 @@ public class UserController {
 			@RequestParam MultipartFile image) throws IOException {
 		
 		//Access the UserService and save the new user into the database
-		userService.saveNewUser(username, pwd, image);	
+		User u = userService.saveNewUser(username, pwd, image);	
 		
 		//Add the user to the model to show it in the User Registered page
-		model.addAttribute("user", userService.getUserByUsernameAndPwd(username, pwd));
+		model.addAttribute("user", u);
+		
 		return "registered";
 	}
 	

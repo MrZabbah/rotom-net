@@ -11,7 +11,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import es.trident.rotomnet.model.User;
-import es.trident.rotomnet.model.UserRepository;
+import es.trident.rotomnet.repository.UserRepository;
 
 @Service
 public class UserService {
@@ -20,7 +20,17 @@ public class UserService {
 	private UserRepository repository;	
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	
-	public void saveNewUser(String username, String pwd, MultipartFile image) throws IOException {
+	
+	public User saveNewUser(String username, String pwd) throws IOException {
+		String time = dtf.format(LocalDateTime.now());
+		User u = new User(username, pwd, 1, time);
+		u.setImage(false);
+		u.setImageFile(null);
+		repository.save(u);
+		return u;
+	}
+	
+	public User saveNewUser(String username, String pwd, MultipartFile image) throws IOException {
 		String time = dtf.format(LocalDateTime.now());
 		User u = new User(username, pwd, 1, time);
 		if(image.isEmpty()) {
@@ -31,6 +41,7 @@ public class UserService {
 			u.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
 		}		
 		repository.save(u);
+		return u;
 	}
 	
 	public List<User> getAllUsers(){

@@ -1,0 +1,52 @@
+<html>
+	<header>
+		<title background="white">Random team generated </title>
+		<link rel='stylesheet' type='text/css' href='/css/teamGenerated.css'>
+	</header>
+	<body>
+	{{>header}}
+	<div class="globalDiv">
+		<div class='Box'>
+			<p class='BiggerBoldText'>Congratulations, your team has been successfully created!</p><br>
+			<p class='BiggerText'>Your requirements were: </p>
+			<p>Team name:{{#team}} {{name}} {{/team}}</p>
+			<p>Legendaries: {{#legendaryCheck}} Yes {{/legendaryCheck}} {{^legendaryCheck}} No {{/legendaryCheck}}</p>
+			{{^anyType}}
+			<p>Types: </p>
+			<div class='TypeList'>
+				{{#selectedTypes}}
+					<li>{{.}}</li>
+				{{/selectedTypes}}
+			</div>
+			{{/anyType}}
+			
+			{{^selectedTypes}}
+				<p>No specific types were selected</p>
+			{{/selectedTypes}}
+			<br>
+			<p class='BiggerText'>Your team is: </p>
+			<div class='TypeList'>
+				{{#team}}
+					{{#teamPokemon}}
+						<p>{{name}} -> {{type1}}{{#type2}}/{{type2}}{{/type2}}</p>
+						<p>Attacks: <br>&emsp;{{attack1}}<br>&emsp;{{attack2}}<br>&emsp;{{attack3}}<br>&emsp;{{attack4}}</p>
+						<p>Nature: {{nature}}&emsp;Ability: {{ability}}&emsp;Item: {{item}}</p>
+						<br>
+					{{/teamPokemon}}
+				{{/team}}
+			</div>
+		</div>
+		<form action='saveTeam' method='post' align='center'>
+			<input type='submit' value='Save Team'>
+		</form>
+		<br>
+		<form action='teamGenerator'method='post' align='center'>
+			<input type='submit' value='Try again'>
+		</form>
+		<br>
+		<form action='exit' align='center'>
+			<input type='submit' value='Exit'>
+		</form>
+	</div>	
+	</body>
+</html>
