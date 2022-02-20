@@ -45,7 +45,7 @@ public class TeamService {
 	public void createTeams() {
 		ArrayList<String> types = new ArrayList<String>();
 		types.add("Grass");
-		for(int i = 0; i < 2; ++i) {
+		for(int i = 0; i < 22; ++i) {
 			Team auxTeam = pokemonService.getRandomTeam("Name",types,false);
 			_teamRepository.save(auxTeam);
 		}
