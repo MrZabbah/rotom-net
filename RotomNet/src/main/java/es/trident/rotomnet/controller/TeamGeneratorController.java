@@ -24,8 +24,6 @@ public class TeamGeneratorController {
 	public TeamGeneratorController(PokemonService pokemonService, TeamService teamService) {
 		_pokemonService = pokemonService;
 		_teamService = teamService;
-		_pokemonService.createPokemon();
-		_teamService.createTeams();
 	}
 	
 	@GetMapping("/exit")

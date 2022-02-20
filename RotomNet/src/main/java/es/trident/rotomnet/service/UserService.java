@@ -15,13 +15,12 @@ import es.trident.rotomnet.repository.UserRepository;
 
 @Service
 public class UserService {
-	
+
 	@Autowired
-	private UserRepository repository;	
+	private UserRepository repository;
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-	
-	
-	public User saveNewUser(String username, String pwd) throws IOException {
+
+	public User saveNewUser(String username, String pwd) {
 		String time = dtf.format(LocalDateTime.now());
 		User u = new User(username, pwd, 1, time);
 		u.setImage(false);
@@ -29,29 +28,31 @@ public class UserService {
 		repository.save(u);
 		return u;
 	}
-	
-	public User saveNewUser(String username, String pwd, MultipartFile image) throws IOException {
+
+	public User saveNewUser(String username, String pwd, MultipartFile image) {
 		String time = dtf.format(LocalDateTime.now());
 		User u = new User(username, pwd, 1, time);
-		if(image.isEmpty()) {
+		
+		try {
+			u.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+			u.setImage(true);
+		} catch (IOException e) {
 			u.setImage(false);
 			u.setImageFile(null);
-		}else {
-			u.setImage(true);
-			u.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
-		}		
+		}
+		
 		repository.save(u);
 		return u;
 	}
-	
-	public List<User> getAllUsers(){
+
+	public List<User> getAllUsers() {
 		return repository.findAll();
 	}
 
 	public User findUserById(long id) {
 		return repository.findById(id).orElseThrow();
 	}
-	
+
 	public void deleteUser(long id) {
 		repository.deleteById(id);
 	}
@@ -62,11 +63,15 @@ public class UserService {
 
 	public void modifyUser(long id, String username, String pwd, MultipartFile image) throws IOException {
 		User u = repository.findById(id).orElseThrow();
-		
-		//Modify the user if parameters are not null. 
-		if(!username.equals("")) {u.setUsername(username);}
-		if(!pwd.equals("")) {u.setPwd(pwd);}
-		if(!image.isEmpty()) {
+
+		// Modify the user if parameters are not null.
+		if (!username.equals("")) {
+			u.setUsername(username);
+		}
+		if (!pwd.equals("")) {
+			u.setPwd(pwd);
+		}
+		if (!image.isEmpty()) {
 			u.setImage(true);
 			u.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
 		}

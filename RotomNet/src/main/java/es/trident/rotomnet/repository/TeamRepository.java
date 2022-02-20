@@ -1,4 +1,4 @@
-package es.trident.rotomnet.service;
+package es.trident.rotomnet.repository;
 
 
 

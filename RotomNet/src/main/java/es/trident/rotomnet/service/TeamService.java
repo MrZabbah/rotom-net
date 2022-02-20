@@ -1,6 +1,7 @@
 package es.trident.rotomnet.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import es.trident.rotomnet.model.Team;
+import es.trident.rotomnet.repository.TeamRepository;
 
 @Service
 public class TeamService {
@@ -16,8 +18,6 @@ public class TeamService {
 	@Autowired
 	private TeamRepository _teamRepository;
 	
-	@Autowired
-	private PokemonService pokemonService;
 	
 	private Team currentTeam;
 	
@@ -41,14 +41,5 @@ public class TeamService {
 		Team teamToDelete = _teamRepository.findById(id).orElseThrow();
 		_teamRepository.deleteById(id);
 	}
-	
-	public void createTeams() {
-		ArrayList<String> types = new ArrayList<String>();
-		types.add("Grass");
-		for(int i = 0; i < 22; ++i) {
-			Team auxTeam = pokemonService.getRandomTeam("Name",types,false);
-			_teamRepository.save(auxTeam);
-		}
-		
-	}
+
 }

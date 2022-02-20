@@ -1,7 +1,10 @@
 package es.trident.rotomnet.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +12,8 @@ import java.sql.Blob;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -22,6 +27,8 @@ public class User {
 	private String pwd;
 	private int daysLogged;
 	private String lastLog;
+	@OneToMany(mappedBy="user" ,cascade = CascadeType.ALL)
+	private List<UserRotomCard> deck;
 
 	// User Image
 	private boolean image; // If there is an image.
@@ -38,6 +45,7 @@ public class User {
 		this.pwd = pwd;
 		this.daysLogged = daysLogged;
 		this.lastLog = lastLog;
+		deck = new ArrayList<UserRotomCard>();
 	}
 
 	@Override
@@ -106,5 +114,14 @@ public class User {
 	public void setImageFile(Blob imageFile) {
 		this.imageFile = imageFile;
 	}
+
+	public List<UserRotomCard> getDeck() {
+		return deck;
+	}
+
+	public void setDeck(List<UserRotomCard> deck) {
+		this.deck = deck;
+	}
+	
 
 }
