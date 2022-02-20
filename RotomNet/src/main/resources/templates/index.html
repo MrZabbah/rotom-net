@@ -1,25 +1,36 @@
 <!DOCTYPE HTML>
 <html>
-
 	<head>
+		<link rel='stylesheet' type='text/css' href='/css/index.css'>
 		<title>RotomNet</title>
 	</head>
-	
-	<body>
+	<body style='background-color:black'>
 	{{>header}}
-		<header>
-			<h1>Main Page</h1>
-		</header>
-		<article>
-		Hello, this is the main page for RotomNet
-		<br><br>
-		<a href="/pokedex">Sample link to navigate to Pokedex</a>
-		<br>
-		<a href="/deck">Sample link to navigate to sample user deck</a>
-		<br>
-		<a href="/teamGenerator">Sample link to navigate to TeamGenerator</a>
-		<br>
-		<a href="/displayTeams">Sample link to navigate to saved Teams</a>
-		</article>
+	<divid='Column1'>
+		<div class='TextFrame' id='FrameColumn1'>
+			<h1 class='TitleH1'>¡Bienvenid@ a RotomNet!</h1><br>
+			<p class ='normalText'>RotomNet es una nueva web que busca ayudar a jugadores inexpertos a introducirse en el mundo de Pokémon y el 
+			competitivo de Pokémon Showdown.</p>
+			<p class='StrongerText'>¿A qué estás esperando?</p>
+		</div>
+	</div>
+	<div id='Column2'>
+		<div class='TextFrame' id='Frame1Column2'>
+			<h1 class='TitleH1'>¡Crea equipos aleatorios!</h1><br>
+			<p class ='normalText'>RotomNet ofrece una herramienta para crear equipos aleatorios compatibles con Pokémon Showdown. Tan solo ajusta
+			un par de parámetros y...</p>
+			<p class='StrongerText'>¡A jugar!</p><br>
+		</div>
+		<div class='TextFrame' id='Frame2Column2'>
+			<h1 class='TitleH1'>¡Regístrate!</h1><br>
+			<p class ='normalText'>Los usuarios registrados tienen acceso a funcionalidades exclusivas:</p>
+				<li>Almacenamiento de equipos creados</li>
+				<li>Colección de cartas</li>
+				<li>Combate contra la IA</li>
+			<p class='StrongerText'>¿Serás capaz de conseguir todas las cartas de la Pokédex?</p><br>
+		</div>
+		</div>
+	</div>
+		
 	</body>
 </html>

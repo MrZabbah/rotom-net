@@ -1,0 +1,56 @@
+*{
+	margin:0;
+	padding:0;
+}
+
+#Column1{
+	display:inline;
+	float:left;
+	width:50%;
+	height:100%;
+	margin:0px;
+}
+#Column2{
+	display:inline;
+	float:right;	
+	width:50%;
+	height:100%;
+	margin:0px;
+}
+div.TextFrame{
+	background-color:white;
+	border-radius:10px;
+	padding:20px;
+	width:35%;
+}
+#FrameColumn1{
+	position:absolute;
+	top:45%;
+	float:left;
+	margin-left:10%;
+}
+#Frame1Column2{
+	position:absolute;
+	top:30%;
+	float:right;
+	margin-right:10%;
+}
+#Frame2Column2{
+	position:absolute;
+	top:60%;
+	float:right;
+	margin-right:10%
+}
+
+h1.TitleH1{
+	font-size:30px;
+	font-weight:bold;
+	text-align:center;
+}
+p.StrongerText{
+	font-size:17px;
+	font-weight:bold;
+}
+p.normalText{
+	font-size:15px;
+}

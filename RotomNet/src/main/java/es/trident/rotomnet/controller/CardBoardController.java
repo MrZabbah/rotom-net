@@ -34,7 +34,7 @@ public class CardBoardController {
 		
 		model.addAttribute("cards", _pokemonService.getAllCards());
 		model.addAttribute("userDeck", false);
-		model.addAttribute("boardTitle", "ROTTOM CARD SET: FIRST GEN");
+		model.addAttribute("boardTitle", "ROTOM CARD SET: FIRST GEN");
 		return("pokedex");
 	}
 	
