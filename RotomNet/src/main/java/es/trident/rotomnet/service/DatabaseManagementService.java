@@ -30,7 +30,7 @@ public class DatabaseManagementService {
 	@Autowired
 	private UserService userService;
 	@Autowired
-	private PokemonService pokemonService;
+	private TeamService teamService;
 
 	
 	public boolean isNewDevice() {
@@ -74,7 +74,7 @@ public class DatabaseManagementService {
 		ArrayList<String> types = new ArrayList<String>();
 		List<Team> defaultTeams = new ArrayList<Team>();
 		for (int i = 0; i < 22; ++i) {
-			defaultTeams.add(pokemonService.getRandomTeam("Name", types, false));
+			defaultTeams.add(teamService.getRandomTeam("Name", types, false));
 		}
 		_teamRepository.saveAll(defaultTeams);
 	}

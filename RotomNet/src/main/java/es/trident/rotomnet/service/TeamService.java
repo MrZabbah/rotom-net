@@ -9,6 +9,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import es.trident.rotomnet.model.Pokemon;
 import es.trident.rotomnet.model.Team;
 import es.trident.rotomnet.repository.TeamRepository;
 
@@ -17,6 +18,8 @@ public class TeamService {
 	
 	@Autowired
 	private TeamRepository _teamRepository;
+	@Autowired
+	private PokemonService pokemonService;
 	
 	
 	private Team currentTeam;
@@ -40,6 +43,24 @@ public class TeamService {
 	public void deleteTeam(int id) {
 		Team teamToDelete = _teamRepository.findById(id).orElseThrow();
 		_teamRepository.deleteById(id);
+	}
+	
+	public Team getRandomTeam(String teamName, ArrayList<String> types, boolean legendaryCheck) {
+		ArrayList<Pokemon> team, legendaries = new ArrayList<>();
+		int numberOfNonLegendary = 6;
+
+		if (legendaryCheck) {
+			legendaries = pokemonService.getRandomPokemonListBy(1, true, types);
+			numberOfNonLegendary--;
+		}
+		
+		team = pokemonService.getRandomPokemonListBy(numberOfNonLegendary, false, types);
+		
+		if (legendaryCheck)
+			team.add(legendaries.get(0));
+
+		Team myTeam = new Team(team, teamName);
+		return myTeam;
 	}
 
 }

@@ -17,74 +17,80 @@ import es.trident.rotomnet.service.TeamService;
 
 @Controller
 public class TeamGeneratorController {
-		
+
 	private PokemonService _pokemonService;
 	private TeamService _teamService;
-	
+
 	public TeamGeneratorController(PokemonService pokemonService, TeamService teamService) {
 		_pokemonService = pokemonService;
 		_teamService = teamService;
 	}
-	
+
 	@GetMapping("/exit")
 	public String exit() {
 		return "redirect:/";
 	}
-	
+
 	@RequestMapping("/teamGenerator")
 	public String teamGenerator() {
 		return "teamGeneratorForm";
 	}
-	
+
 	@PostMapping("/createRandomTeam")
-	public String createRandomTeam(Model model, @RequestParam String teamName, @RequestParam(required=false) boolean legendaryCheck,
-			 @RequestParam(required=false) boolean fireCheck, @RequestParam(required=false) boolean waterCheck, @RequestParam(required=false) boolean grassCheck, @RequestParam(required=false) boolean electricCheck,
-			 @RequestParam(required=false) boolean groundCheck, @RequestParam(required=false) boolean rockCheck, @RequestParam(required=false) boolean poisonCheck, @RequestParam(required=false) boolean psychicCheck,
-			 @RequestParam(required=false) boolean flyingCheck, @RequestParam(required=false) boolean bugCheck, @RequestParam(required=false) boolean normalCheck, @RequestParam(required=false) boolean ghostCheck,
-			 @RequestParam(required=false) boolean fightingCheck, @RequestParam(required=false) boolean steelCheck, @RequestParam(required=false) boolean iceCheck, @RequestParam(required=false) boolean dragonCheck,
-			 @RequestParam(required=false) boolean darkCheck, @RequestParam(required=false) boolean fairyCheck) {
-		boolean[] types = {fireCheck,waterCheck,grassCheck,electricCheck,groundCheck,rockCheck,poisonCheck,psychicCheck,flyingCheck,bugCheck,normalCheck,ghostCheck,fightingCheck,steelCheck,iceCheck,dragonCheck,darkCheck,fairyCheck};
+	public String createRandomTeam(Model model, @RequestParam String teamName,
+			@RequestParam(required = false) boolean legendaryCheck, @RequestParam(required = false) boolean fireCheck,
+			@RequestParam(required = false) boolean waterCheck, @RequestParam(required = false) boolean grassCheck,
+			@RequestParam(required = false) boolean electricCheck, @RequestParam(required = false) boolean groundCheck,
+			@RequestParam(required = false) boolean rockCheck, @RequestParam(required = false) boolean poisonCheck,
+			@RequestParam(required = false) boolean psychicCheck, @RequestParam(required = false) boolean flyingCheck,
+			@RequestParam(required = false) boolean bugCheck, @RequestParam(required = false) boolean normalCheck,
+			@RequestParam(required = false) boolean ghostCheck, @RequestParam(required = false) boolean fightingCheck,
+			@RequestParam(required = false) boolean steelCheck, @RequestParam(required = false) boolean iceCheck,
+			@RequestParam(required = false) boolean dragonCheck, @RequestParam(required = false) boolean darkCheck,
+			@RequestParam(required = false) boolean fairyCheck) {
+		boolean[] types = { fireCheck, waterCheck, grassCheck, electricCheck, groundCheck, rockCheck, poisonCheck,
+				psychicCheck, flyingCheck, bugCheck, normalCheck, ghostCheck, fightingCheck, steelCheck, iceCheck,
+				dragonCheck, darkCheck, fairyCheck };
 		boolean anyType = false;
-		ArrayList<String> selectedTypes = _pokemonService.checkAnyType(types);
-		if(selectedTypes.isEmpty()) {
+		ArrayList<String> selectedTypes = _pokemonService.getTypesFromRequest(types);
+		if (selectedTypes.isEmpty()) {
 			anyType = true;
 		}
-		_teamService.setCurrentTeam(_pokemonService.getRandomTeam(teamName,selectedTypes,legendaryCheck));
-		model.addAttribute("legendaryCheck",legendaryCheck);
-		model.addAttribute("selectedTypes",selectedTypes);
-		model.addAttribute("anyType",anyType);
-		model.addAttribute("team",_teamService.getCurrentTeam());
+		_teamService.setCurrentTeam(_teamService.getRandomTeam(teamName, selectedTypes, legendaryCheck));
+		model.addAttribute("legendaryCheck", legendaryCheck);
+		model.addAttribute("selectedTypes", selectedTypes);
+		model.addAttribute("anyType", anyType);
+		model.addAttribute("team", _teamService.getCurrentTeam());
 		return "teamCreated";
 	}
-	
+
 	@PostMapping("/saveTeam")
 	public String saveTeam(Model model) {
 		_teamService.saveCurrentTeam();
 		return "redirect:/";
 	}
-	
+
 	@GetMapping("/displayTeams")
 	public String teamList(Model model, Pageable page) {
 		Page<Team> teamsReceived = _teamService.getAllTeams(page);
-		model.addAttribute("teamList",teamsReceived);
-		model.addAttribute("previous",teamsReceived.hasPrevious());
-		model.addAttribute("next",teamsReceived.hasNext());
-		model.addAttribute("nextPage",teamsReceived.getNumber()+1);
-		model.addAttribute("previousPage",teamsReceived.getNumber()-1);
+		model.addAttribute("teamList", teamsReceived);
+		model.addAttribute("previous", teamsReceived.hasPrevious());
+		model.addAttribute("next", teamsReceived.hasNext());
+		model.addAttribute("nextPage", teamsReceived.getNumber() + 1);
+		model.addAttribute("previousPage", teamsReceived.getNumber() - 1);
 		return "teamList";
 	}
-	
+
 	@GetMapping("/showTeam_{id}")
 	public String showTeam(Model model, @PathVariable int id) {
-		model.addAttribute("team",_teamService.getTeamById(id));
+		model.addAttribute("team", _teamService.getTeamById(id));
 		return "teamDisplay";
 	}
-	
+
 	@PostMapping("/deleteTeam/{id}")
 	public String deleteTeam(@PathVariable int id) {
 		_teamService.deleteTeam(id);
 		return "redirect:/displayTeams";
 	}
-	
 
 }
