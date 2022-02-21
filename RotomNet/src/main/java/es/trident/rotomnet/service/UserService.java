@@ -60,16 +60,20 @@ public class UserService {
 		return repository.findByUsernameAndPwd(username, pwd);
 	}
 
-	public void modifyUser(long id, String username, String pwd, MultipartFile image) throws IOException {
-		User u = repository.findById(id).orElseThrow();
+	public void modifyUser(String username, String newUsername, String pwd, MultipartFile image) throws IOException {
+		User u = repository.findByUsername(username);
 		
 		//Modify the user if parameters are not null. 
-		if(!username.equals("")) {u.setUsername(username);}
+		if(!newUsername.equals("")) {u.setUsername(newUsername);}
 		if(!pwd.equals("")) {u.setPwd(pwd);}
 		if(!image.isEmpty()) {
 			u.setImage(true);
 			u.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
 		}
 		repository.save(u);
+	}
+
+	public User findUserByUsername(String username) {
+		return repository.findByUsername(username);
 	}
 }

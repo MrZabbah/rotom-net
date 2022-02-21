@@ -33,7 +33,8 @@ public class UserController {
 	
 	
 	@GetMapping("/register")
-	public String login(Model model){			
+	public String login(Model model){	
+		model.addAttribute("duplicatedUsername", false);
 		return "register";
 	}
 	
@@ -41,6 +42,10 @@ public class UserController {
 	public String register(Model model, @RequestParam String username, @RequestParam String pwd,
 			@RequestParam MultipartFile image) throws IOException {
 		
+		if(userService.findUserByUsername(username) != null) {
+			model.addAttribute("duplicatedUsername", true);
+			return "register";
+		}
 		//Access the UserService and save the new user into the database
 		User u = userService.saveNewUser(username, pwd, image);	
 		
@@ -50,12 +55,20 @@ public class UserController {
 		return "registered";
 	}
 	
-	@PostMapping("/modified_user_{id}")
-	public String modifyUser(Model model, @RequestParam String username, @RequestParam String pwd,
-			@RequestParam MultipartFile image, @PathVariable long id) throws IOException {
+	@PostMapping("/modified_user_{username}")
+	public String modifyUser(Model model, @RequestParam String newUsername, @RequestParam String pwd,
+			@RequestParam MultipartFile image, @PathVariable String username) throws IOException {
 		
-		userService.modifyUser(id, username, pwd, image);
-		return "redirect:/users";
+		User u = userService.findUserByUsername(newUsername);
+		if(u != null) {
+			model.addAttribute("user", u);
+			model.addAttribute("duplicatedUsername", true);
+			return "modify";
+		}else {			
+			userService.modifyUser(username, newUsername, pwd, image);
+			return "redirect:/users";
+		}
+		
 	}
 	
 	@GetMapping("/users")
@@ -70,9 +83,10 @@ public class UserController {
 		return "redirect:/users";
 	}
 	
-	@PostMapping("/{id}_modify")
-	public String modifySelectedUser(Model model, @PathVariable long id) {
-		User user = userService.findUserById(id);
+	@PostMapping("/modify_{username}")
+	public String modifySelectedUser(Model model, @PathVariable String username) {
+		User user = userService.findUserByUsername(username);
+		model.addAttribute("duplicatedUsername", false);
 		model.addAttribute("user", user);
 		return "modify";
 	}
