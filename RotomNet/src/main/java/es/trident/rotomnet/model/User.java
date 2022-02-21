@@ -27,6 +27,8 @@ public class User {
 	private String pwd;
 	private int daysLogged;
 	private String lastLog;
+	@OneToMany(mappedBy="user" ,cascade = CascadeType.ALL)
+	private List<UserRotomCard> deck;
 
 	// User Image
 	private boolean image; // If there is an image.
@@ -46,7 +48,10 @@ public class User {
 		this.pwd = pwd;
 		this.daysLogged = daysLogged;
 		this.lastLog = lastLog;
+
 		this.teams = new ArrayList<Team>();
+		deck = new ArrayList<UserRotomCard>();
+
 	}
 
 	@Override
@@ -123,5 +128,14 @@ public class User {
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}
+
+	public List<UserRotomCard> getDeck() {
+		return deck;
+	}
+
+	public void setDeck(List<UserRotomCard> deck) {
+		this.deck = deck;
+	}
+	
 
 }

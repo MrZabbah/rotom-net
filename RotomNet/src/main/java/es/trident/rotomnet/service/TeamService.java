@@ -1,6 +1,7 @@
 package es.trident.rotomnet.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,13 +9,19 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
+import es.trident.rotomnet.model.Pokemon;
 import es.trident.rotomnet.model.Team;
+
 import es.trident.rotomnet.model.User;
+
+import es.trident.rotomnet.repository.TeamRepository;
+
 
 @Service
 public class TeamService {
 	
 	@Autowired
+
 	private TeamRepository teamRepository;
 	
 	@Autowired
@@ -27,6 +34,7 @@ public class TeamService {
 		currentTeam.setUser(selectedUser);
 		userService.saveUserWithNewTeam(selectedUser);
 		teamRepository.save(currentTeam);
+
 	}
 	public Page<Team> getTeamsByUsername(Pageable page, String username) {
 		return teamRepository.findByUser(page,username);
@@ -42,13 +50,31 @@ public class TeamService {
 		teamRepository.deleteById(id);
 	}
 	
+
 	public void createTeams() {
 		ArrayList<String> types = new ArrayList<String>();
 		types.add("Grass");
 		for(int i = 0; i < 22; ++i) {
 			Team auxTeam = pokemonService.getRandomTeam("Name",types,false);
 			teamRepository.save(auxTeam);
+
+	public Team getRandomTeam(String teamName, ArrayList<String> types, boolean legendaryCheck) {
+		ArrayList<Pokemon> team, legendaries = new ArrayList<>();
+		int numberOfNonLegendary = 6;
+
+		if (legendaryCheck) {
+			legendaries = pokemonService.getRandomPokemonListBy(1, true, types);
+			numberOfNonLegendary--;
+
 		}
 		
+		team = pokemonService.getRandomPokemonListBy(numberOfNonLegendary, false, types);
+		
+		if (legendaryCheck)
+			team.add(legendaries.get(0));
+
+		Team myTeam = new Team(team, teamName);
+		return myTeam;
 	}
+
 }

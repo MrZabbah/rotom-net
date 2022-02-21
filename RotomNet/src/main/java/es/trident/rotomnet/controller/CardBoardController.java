@@ -8,6 +8,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import es.trident.rotomnet.repository.UserRepository;
+import es.trident.rotomnet.service.DatabaseManagementService;
 import es.trident.rotomnet.service.PokemonService;
 import es.trident.rotomnet.service.UserService;
 
@@ -18,11 +19,7 @@ public class CardBoardController {
 	private PokemonService _pokemonService;
 	@Autowired
 	private UserService userService;
-	
-	@PostConstruct
-	public void BoardController() {
-		_pokemonService.create();
-	}
+
 	
 	@GetMapping("/card")
 	public String card() {

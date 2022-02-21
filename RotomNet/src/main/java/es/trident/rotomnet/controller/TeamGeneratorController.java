@@ -22,7 +22,7 @@ import es.trident.rotomnet.service.UserService;
 
 @Controller
 public class TeamGeneratorController {
-		
+
 	private PokemonService _pokemonService;
 	private TeamService _teamService;
 	private UserService _userService;
@@ -33,19 +33,21 @@ public class TeamGeneratorController {
 		_userService = userService;
 		_pokemonService.createPokemon();
 		//_teamService.createTeams();
+
 	}
-	
+
 	@GetMapping("/exit")
 	public String exit() {
 		return "redirect:/";
 	}
-	
+
 	@RequestMapping("/teamGenerator")
 	public String teamGenerator() {
 		return "teamGeneratorForm";
 	}
-	
+
 	@PostMapping("/createRandomTeam")
+
 	public String createRandomTeam(Model model, @RequestParam String teamName, @RequestParam(required=false) boolean legendaryCheck,
 			 @RequestParam(required=false) boolean fireCheck, @RequestParam(required=false) boolean waterCheck, @RequestParam(required=false) boolean grassCheck, @RequestParam(required=false) boolean electricCheck,
 			 @RequestParam(required=false) boolean groundCheck, @RequestParam(required=false) boolean rockCheck, @RequestParam(required=false) boolean poisonCheck, @RequestParam(required=false) boolean psychicCheck,
@@ -53,11 +55,13 @@ public class TeamGeneratorController {
 			 @RequestParam(required=false) boolean fightingCheck, @RequestParam(required=false) boolean steelCheck, @RequestParam(required=false) boolean iceCheck, @RequestParam(required=false) boolean dragonCheck,
 			 @RequestParam(required=false) boolean darkCheck, @RequestParam(required=false) boolean fairyCheck, HttpSession session) {
 		boolean[] types = {fireCheck,waterCheck,grassCheck,electricCheck,groundCheck,rockCheck,poisonCheck,psychicCheck,flyingCheck,bugCheck,normalCheck,ghostCheck,fightingCheck,steelCheck,iceCheck,dragonCheck,darkCheck,fairyCheck};
+
 		boolean anyType = false;
-		ArrayList<String> selectedTypes = _pokemonService.checkAnyType(types);
-		if(selectedTypes.isEmpty()) {
+		ArrayList<String> selectedTypes = _pokemonService.getTypesFromRequest(types);
+		if (selectedTypes.isEmpty()) {
 			anyType = true;
 		}
+
 		Team currentTeam = _pokemonService.getRandomTeam(teamName,selectedTypes,legendaryCheck);
 		session.setAttribute("legendaryCheck",legendaryCheck);
 		session.setAttribute("selectedTypes",selectedTypes);
@@ -68,9 +72,10 @@ public class TeamGeneratorController {
 		model.addAttribute("anyType",anyType);
 		model.addAttribute("team",currentTeam);
 		model.addAttribute("wrongUsername",false);
+
 		return "teamCreated";
 	}
-	
+
 	@PostMapping("/saveTeam")
 	public String saveTeam(Model model, @RequestParam String username, HttpSession session) {
 		User selectedUser = _userService.findUserByUsername(username);
@@ -87,6 +92,7 @@ public class TeamGeneratorController {
 		}
 		return "redirect:/";
 	}
+
 	
 	@GetMapping("/displayTeams_{username}")
 	public String teamList(Model model, Pageable page,@PathVariable String username) {
@@ -98,18 +104,17 @@ public class TeamGeneratorController {
 		model.addAttribute("previousPage",teamsReceived.getNumber()-1);
 		return "teamList";
 	}
-	
+
 	@GetMapping("/showTeam_{id}")
 	public String showTeam(Model model, @PathVariable int id) {
-		model.addAttribute("team",_teamService.getTeamById(id));
+		model.addAttribute("team", _teamService.getTeamById(id));
 		return "teamDisplay";
 	}
-	
+
 	@PostMapping("/deleteTeam/{id}")
 	public String deleteTeam(@PathVariable int id) {
 		_teamService.deleteTeam(id);
 		return "redirect:/displayTeams";
 	}
-	
 
 }

@@ -10,8 +10,16 @@
 		<div class = "form-container">
 			<form action="/registered" method="post" class="register-form" enctype="multipart/form-data"><br>
 				<h1>User Register</h1>
-				<label for="username">Username</label><br>
-				<input type="text" id="username" name="username"><br>
+				{{#duplicatedUsername}}
+					<label for="username">Username already in use!</label><br>
+					<input type="text" id="username" name="username" class="wrong-text"><br>
+				{{/duplicatedUsername}}
+				
+				{{^duplicatedUsername}}
+					<label for="username">Username</label><br>
+					<input type="text" id="username" name="username"><br>				
+				{{/duplicatedUsername}}
+				
 				<label for="pwd">Password</label><br>
 				<input type="password" id="pwd" name="pwd"><br>
 				<label for= "image">User Image</label><br>

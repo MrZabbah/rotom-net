@@ -1,14 +1,11 @@
 package es.trident.rotomnet.model;
 
-import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
-import com.google.common.collect.Ordering;
-import com.google.common.primitives.Ints;
 
 @Entity
 @IdClass(UserRotomCardId.class)
