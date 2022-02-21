@@ -9,37 +9,37 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import es.trident.rotomnet.model.Team;
+import es.trident.rotomnet.model.User;
 
 @Service
 public class TeamService {
 	
 	@Autowired
-	private TeamRepository _teamRepository;
+	private TeamRepository teamRepository;
 	
 	@Autowired
 	private PokemonService pokemonService;
+	@Autowired
+	private UserService userService;
+		
+	public void saveCurrentTeam(User selectedUser, Team currentTeam) {
+		selectedUser.getTeams().add(currentTeam);
+		currentTeam.setUser(selectedUser);
+		userService.saveUserWithNewTeam(selectedUser);
+		teamRepository.save(currentTeam);
+	}
+	public Page<Team> getTeamsByUsername(Pageable page, String username) {
+		return teamRepository.findByUser(page,username);
+	}
 	
-	private Team currentTeam;
-	
-	public Team getCurrentTeam() {
-		return currentTeam;
-	}
-	public void setCurrentTeam(Team currentTeam) {
-		this.currentTeam = currentTeam;
-	}
-	public void saveCurrentTeam() {
-		_teamRepository.save(currentTeam);
-	}
-	public Page<Team> getAllTeams(Pageable page) {
-		return _teamRepository.findAll(page);
-	}
 	public Team getTeamById(int id) {
-		Optional<Team> team = _teamRepository.findById(id);
+		Optional<Team> team = teamRepository.findById(id);
 		return team.orElseThrow();
 	}
+	
 	public void deleteTeam(int id) {
-		Team teamToDelete = _teamRepository.findById(id).orElseThrow();
-		_teamRepository.deleteById(id);
+		Team teamToDelete = teamRepository.findById(id).orElseThrow();
+		teamRepository.deleteById(id);
 	}
 	
 	public void createTeams() {
@@ -47,7 +47,7 @@ public class TeamService {
 		types.add("Grass");
 		for(int i = 0; i < 22; ++i) {
 			Team auxTeam = pokemonService.getRandomTeam("Name",types,false);
-			_teamRepository.save(auxTeam);
+			teamRepository.save(auxTeam);
 		}
 		
 	}

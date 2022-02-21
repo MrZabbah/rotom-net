@@ -817,7 +817,7 @@ public class PokemonService {
 				team = getNonLegendariesByType(types, 6);
 			}
 		}
-		Team myTeam = new Team(team, teamName);
+		Team myTeam = new Team(team, teamName, null);
 		return myTeam;
 	}
 }

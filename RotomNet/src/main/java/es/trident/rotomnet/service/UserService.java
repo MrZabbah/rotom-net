@@ -44,6 +44,10 @@ public class UserService {
 		return u;
 	}
 	
+	public User findUserByUsername(String username) {
+		return repository.findByUsername(username);
+	}
+	
 	public List<User> getAllUsers(){
 		return repository.findAll();
 	}
@@ -58,6 +62,10 @@ public class UserService {
 
 	public User getUserByUsernameAndPwd(String username, String pwd) {
 		return repository.findByUsernameAndPwd(username, pwd);
+	}
+	
+	public void saveUserWithNewTeam(User user) {
+		repository.save(user);
 	}
 
 	public void modifyUser(long id, String username, String pwd, MultipartFile image) throws IOException {

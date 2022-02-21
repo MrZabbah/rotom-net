@@ -1,7 +1,10 @@
 package es.trident.rotomnet.model;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
@@ -9,6 +12,8 @@ import java.sql.Blob;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Lob;
+import javax.persistence.OneToMany;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 @Entity
@@ -29,6 +34,9 @@ public class User {
 	@Lob
 	@JsonIgnore
 	private Blob imageFile;
+	
+	@OneToMany(cascade = CascadeType.ALL)
+	private List<Team> teams;
 
 	protected User() {
 	}
@@ -38,6 +46,7 @@ public class User {
 		this.pwd = pwd;
 		this.daysLogged = daysLogged;
 		this.lastLog = lastLog;
+		this.teams = new ArrayList<Team>();
 	}
 
 	@Override
@@ -69,6 +78,10 @@ public class User {
 
 	public String getPwd() {
 		return pwd;
+	}
+	
+	public List<Team> getTeams(){
+		return teams;
 	}
 
 	public void setPwd(String pwd) {
@@ -105,6 +118,10 @@ public class User {
 
 	public void setImageFile(Blob imageFile) {
 		this.imageFile = imageFile;
+	}
+	
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
 	}
 
 }
