@@ -73,6 +73,11 @@ body{
 	left: 0;
 }
 
+.modify-form .wrong-text{
+	background:#ff7f78;
+	outline: 2px solid #ff2216;
+}
+
 .modify-form input[type=submit]{
 	border-radius:50px;
 	background-color: #7cd7e7;
