@@ -25,9 +25,17 @@
 				<td>{{user.lastLog}}</td>		
 			</tr>			
 		</table>
-		<form action="/modified_user_{{user.userId}}" method="post" class="modify-form" enctype="multipart/form-data"><br>
-				<label for="username">New Username</label><br>
-				<input type="text" id="username" name="username"><br>
+		<form action="/modified_user_{{user.username}}" method="post" class="modify-form" enctype="multipart/form-data"><br>
+				
+				{{#duplicatedUsername}}
+					<label for="username">Username already in use!</label><br>
+					<input type="text" id="newUsername" name="newUsername" class="wrong-text"><br>	
+				{{/duplicatedUsername}}
+				
+				{{^duplicatedUsername}}
+					<label for="username">New Username</label><br>
+					<input type="text" id="newUsername" name="newUsername"><br>				
+				{{/duplicatedUsername}}
 				<label for="pwd">New Password</label><br>
 				<input type="password" id="pwd" name="pwd"><br>
 				<label for= "image">New User Image</label><br>
