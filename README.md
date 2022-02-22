@@ -40,6 +40,7 @@ La aplicación web es una página con temática de Pokémon, orientada a mostrar
 https://github.com/MrZabbah/rotom-net/projects/1
 
 ## Diagrama UML
-![UML](https://user-images.githubusercontent.com/60218308/152993552-48e7408f-217e-4e14-8a54-866733067c6f.PNG)
+![diagrama_final png](https://user-images.githubusercontent.com/60218308/155217556-0e204848-e783-4499-81c1-f34d2cbcad06.png)
+
 
 
