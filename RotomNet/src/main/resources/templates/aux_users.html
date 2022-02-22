@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html>
+<head>		
+		<link href="css/users.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	{{>header}}	
+	<div class = "user-container">	
+		<h1>Select One User</h1>		
+		<table class="user-table">
+			<tr>
+				<th>User image</th>
+				<th>Username</th>
+				<th>Show Teams</th>
+				<th>Show Deck</th>
+				<th>Battle</th>
+			</tr>
+			{{#users}}
+				<tr>
+					<td class = "td-image">
+						<img src="/{{userId}}/image" alt=""></img>
+					</td> 	
+					<td>{{username}}</td>
+					<td>
+						<form action="/displayTeams_{{username}}" class="show-teams-form" method="GET">
+							<input type="submit" value="🤝">
+						</form>
+					</td>		
+					<td>
+						<form action="/deck_{{username}}" class="show-deck-form" method="GET">
+							<input type="submit" value="🃏">
+						</form>
+					</td>	
+					<td>
+						<form action="/battle_{{username}}" class="battle-form" method="GET">
+							<input type="submit" value="⚔">
+						</form>
+					</td>	
+				</tr>
+			{{/users}}			
+		</table>
+		<h1></h1>
+	</div>
+
+</body>
+</html>

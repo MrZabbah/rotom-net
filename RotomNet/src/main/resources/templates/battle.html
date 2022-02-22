@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+	<link href="css/battle.css" rel="stylesheet" type="text/css">
+</head>
+
+<body>
+	{{>header}}	
+	<div class = "battle-container">			
+		<div class = "battle-inner-container">
+			{{^battleFinished}}
+				<h1>Battle!</h1>
+			{{/battleFinished}}
+			
+			{{#battleFinished}}
+				{{#winCondition}}
+					<h1>Has ganado un {{card}} 
+						{{#shiny}}
+							shiny
+						{{/shiny}}
+						!
+					</h1>
+				{{/winCondition}}
+			
+				{{^winCondition}}
+					<p>Has perdido el combate</p>
+				{{/winCondition}}
+			{{/battleFinished}}
+			
+			<div class = "team-container">
+				{{#enemyTeam}}
+					<p>{{pokemon.name}}<p>
+				{{/enemyTeam}}
+			</div>
+			<h2>VS</h2>
+			<div class = "team-container">
+				{{#userTeam}}
+					<p>{{pokemon.name}}<p>
+				{{/userTeam}}
+			</div>
+			{{^battleFinished}}
+				<form action="/battleResult" method="GET">
+					<input type="submit" value="⚔ Start Battle! ⚔">
+				</form>
+			{{/battleFinished}}
+			
+			{{#battleFinished}}
+				<form action="/selectUsers" method="GET">
+					<input type="submit" value="Go back to users">
+				</form>
+			{{/battleFinished}}
+		</div>
+	</div>	
+	
+</body>
+</html>

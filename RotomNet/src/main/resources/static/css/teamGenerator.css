@@ -4,13 +4,15 @@
 }
 
 #titleH1 {
-	font-size : 40px;
+	font-size : 50px;
 	text-align:center;
+	font-family: 'Roboto', sans-serif;
+	font-weight: 500;
 	background-color:white;
-	margin-top:30px;
+	padding: 20px;
+	margin-top:40px;
 	border-radius:10px;
-	margin-left: 400px;
-	margin-right:400px;
+	margin-inline: 400px;
 }
 
 div.PokemonForm{
@@ -27,7 +29,7 @@ div.PokemonFormBox{
 	box-align :center;
 	margin-left : 300px;
 	margin-right: 300px;
-	margin-top: 50px;
+	margin-top: 40px;
 	padding : 30px;
 }
 div.PokemonFormInputs{
