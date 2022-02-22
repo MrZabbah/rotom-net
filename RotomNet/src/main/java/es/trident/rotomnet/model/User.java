@@ -37,7 +37,7 @@ public class User {
 	@JsonIgnore
 	private Blob imageFile;
 	
-	@OneToMany(cascade = CascadeType.ALL)
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	private List<Team> teams;
 
 	protected User() {
@@ -72,6 +72,10 @@ public class User {
 	}
 
 	// Getter & Setters
+	
+	public long getUserId() {
+		return userId;
+	}
 	
 	public String getUsername() {
 		return username;
@@ -119,6 +123,10 @@ public class User {
 
 	public Blob getImageFile() {
 		return imageFile;
+	}
+	
+	public void setUserId(long userId) {
+		this.userId = userId;
 	}
 
 	public void setImageFile(Blob imageFile) {

@@ -31,8 +31,6 @@ public class TeamGeneratorController {
 		_pokemonService = pokemonService;
 		_teamService = teamService;
 		_userService = userService;
-		_pokemonService.createPokemon();
-		//_teamService.createTeams();
 
 	}
 
@@ -62,7 +60,7 @@ public class TeamGeneratorController {
 			anyType = true;
 		}
 
-		Team currentTeam = _pokemonService.getRandomTeam(teamName,selectedTypes,legendaryCheck);
+		Team currentTeam = _teamService.getRandomTeam(teamName,selectedTypes,legendaryCheck);
 		session.setAttribute("legendaryCheck",legendaryCheck);
 		session.setAttribute("selectedTypes",selectedTypes);
 		session.setAttribute("anyType",anyType);
@@ -96,25 +94,30 @@ public class TeamGeneratorController {
 	
 	@GetMapping("/displayTeams_{username}")
 	public String teamList(Model model, Pageable page,@PathVariable String username) {
-		Page<Team> teamsReceived = _teamService.getTeamsByUsername(page, username);
+		User selectedUser = _userService.findUserByUsername(username);
+		Page<Team> teamsReceived = _teamService.getTeamsByUser(selectedUser,page);
 		model.addAttribute("teamList",teamsReceived);
 		model.addAttribute("previous",teamsReceived.hasPrevious());
 		model.addAttribute("next",teamsReceived.hasNext());
 		model.addAttribute("nextPage",teamsReceived.getNumber()+1);
 		model.addAttribute("previousPage",teamsReceived.getNumber()-1);
+		model.addAttribute("username",username);
 		return "teamList";
 	}
 
-	@GetMapping("/showTeam_{id}")
-	public String showTeam(Model model, @PathVariable int id) {
+	@GetMapping("/showTeam_{id}_{username}")
+	public String showTeam(Model model, @PathVariable int id, @PathVariable String username) {
 		model.addAttribute("team", _teamService.getTeamById(id));
+		model.addAttribute("username",username);
 		return "teamDisplay";
 	}
 
-	@PostMapping("/deleteTeam/{id}")
-	public String deleteTeam(@PathVariable int id) {
+	@PostMapping("/deleteTeam/{id}/{user}")
+	public String deleteTeam(@PathVariable int id, @PathVariable String user) {
+		Team currentTeam = _teamService.getTeamById(id);
 		_teamService.deleteTeam(id);
-		return "redirect:/displayTeams";
+		String url = "redirect:/displayTeams_"+user;
+		return url;
 	}
 
 }

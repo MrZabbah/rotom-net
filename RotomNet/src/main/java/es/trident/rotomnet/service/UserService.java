@@ -48,6 +48,7 @@ public class UserService {
 	public User findUserByUsername(String username) {
 		return repository.findByUsername(username);
 	}
+		
 	
 	public List<User> getAllUsers(){
 
@@ -66,12 +67,13 @@ public class UserService {
 		return repository.findByUsernameAndPwd(username, pwd);
 	}
 	
-	public void saveUserWithNewTeam(User user) {
+	public void saveUserWithTeamsChanged(User user) {
 		repository.save(user);
 	}
 
 	public void modifyUser(String username, String newUsername, String pwd, MultipartFile image) throws IOException {
-		User u = repository.findByUsername(username).orElseThrow();
+		User u = repository.findByUsername(username);
+		
 		
 		//Modify the user if parameters are not null. 
 		if(!newUsername.equals("")) {u.setUsername(newUsername);}
@@ -83,7 +85,5 @@ public class UserService {
 		repository.save(u);
 	}
 
-	public User findUserByUsername(String username) {
-		return repository.findByUsername(username);
-	}
+	
 }

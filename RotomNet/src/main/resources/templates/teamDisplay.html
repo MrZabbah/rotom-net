@@ -20,7 +20,7 @@
 			</div>
 			<br>
 			<br>
-			<form action="/deleteTeam/{{id}}" method='post' align='center' >
+			<form action="/deleteTeam/{{id}}/{{#user}}{{username}}{{/user}}" method='post' align='center' >
 				<input type='submit' value='Delete team' class='customButton'>
 			</form>
 		{{/team}}

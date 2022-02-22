@@ -30,14 +30,12 @@ public class TeamService {
 	private UserService userService;
 		
 	public void saveCurrentTeam(User selectedUser, Team currentTeam) {
-		selectedUser.getTeams().add(currentTeam);
 		currentTeam.setUser(selectedUser);
-		userService.saveUserWithNewTeam(selectedUser);
 		teamRepository.save(currentTeam);
 
 	}
-	public Page<Team> getTeamsByUsername(Pageable page, String username) {
-		return teamRepository.findByUser(page,username);
+	public Page<Team> getTeamsByUser(User user,Pageable page) {
+		return teamRepository.findByUser(user, page);
 	}
 	
 	public Team getTeamById(int id) {
@@ -50,14 +48,6 @@ public class TeamService {
 		teamRepository.deleteById(id);
 	}
 	
-
-	public void createTeams() {
-		ArrayList<String> types = new ArrayList<String>();
-		types.add("Grass");
-		for(int i = 0; i < 22; ++i) {
-			Team auxTeam = pokemonService.getRandomTeam("Name",types,false);
-			teamRepository.save(auxTeam);
-
 	public Team getRandomTeam(String teamName, ArrayList<String> types, boolean legendaryCheck) {
 		ArrayList<Pokemon> team, legendaries = new ArrayList<>();
 		int numberOfNonLegendary = 6;
@@ -73,7 +63,7 @@ public class TeamService {
 		if (legendaryCheck)
 			team.add(legendaries.get(0));
 
-		Team myTeam = new Team(team, teamName);
+		Team myTeam = new Team(team, teamName,null);
 		return myTeam;
 	}
 
