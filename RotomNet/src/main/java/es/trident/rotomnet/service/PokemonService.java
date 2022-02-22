@@ -110,10 +110,7 @@ public class PokemonService {
 	}
 
 	public ArrayList<Pokemon> getRandomPokemonListBy(int number, boolean legendaries, ArrayList<String> types) {
-		ArrayList<Pokemon> selected = new ArrayList<Pokemon>();
 		ArrayList<Pokemon> pokemonList;
-		ArrayList<Integer> selectedIndex = new ArrayList<Integer>();
-		int index;
 
 		if (types == null || types.isEmpty()) {
 			pokemonList = (ArrayList<Pokemon>) pokemonRepository.findByLegendaryAndReadyToBattle(legendaries, true);
@@ -122,19 +119,43 @@ public class PokemonService {
 					legendaries, true);
 		}
 
+		return getRandomList(number, pokemonList);
+	}
+
+	public ArrayList<RotomCard> getRandomCardTeam() {
+		List<RotomCard> cardList = cardRepository.findAll();
+		return getRandomList(6, cardList);
+	}
+	
+	public void addCardToUser(RotomCard rotomCard, User user, boolean shiny) {
+		UserRotomCard card = userCardsRepository.findByUserAndRotomCard(user, rotomCard);
+		
+		if (card != null) {
+			card.increaseAmountBy(1);
+			card.updateShinyCondition(shiny);
+			userCardsRepository.save(card);
+		} else {
+			userCardsRepository.save(new UserRotomCard(user, rotomCard, shiny));
+		}
+		
+	}
+	
+	private <T> ArrayList<T> getRandomList(int number, List<T> fullList) {
+		ArrayList<Integer> selectedIndex = new ArrayList<Integer>();
+		ArrayList<T> selected = new ArrayList<T>();
+		int index;
 		for (int i = 0; i < number; ++i) {
 
 			do {
-				index = ((int) (Math.random() * 100)) % pokemonList.size();
+				index = ((int) (Math.random() * 100)) % fullList.size();
 			} while (selectedIndex.contains(index));
 
 			selectedIndex.add(index);
-			selected.add(pokemonList.get(index));
+			selected.add(fullList.get(index));
 		}
 
 		return selected;
 	}
-
 	
 	private class OrderingByPokemon extends Ordering<UserRotomCard> {
 		

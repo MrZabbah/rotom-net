@@ -6,6 +6,8 @@ import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
 
+import es.trident.rotomnet.model.util.UserRotomCardId;
+
 
 @Entity
 @IdClass(UserRotomCardId.class)
@@ -49,5 +51,9 @@ public class UserRotomCard {
 	
 	public boolean noOwner() {
 		return amount < 1;
+	}
+	
+	public void updateShinyCondition(boolean shiny) {
+		isShinyUnlocked = shiny || isShinyUnlocked;
 	}
 }
