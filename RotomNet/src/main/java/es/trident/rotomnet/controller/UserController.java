@@ -91,6 +91,12 @@ public class UserController {
 		return "modify";
 	}
 	
+	@GetMapping("/selectUser")
+	public String userTable(Model model) {
+		model.addAttribute("users", userService.getAllUsers());
+		return "aux_users";
+	}
+	
 	@GetMapping("/{id}/image")
 	public ResponseEntity<Object> downloadUserImage(@PathVariable long id) throws SQLException, MalformedURLException{
 		

@@ -34,12 +34,14 @@ public class UserService {
 		User u = new User(username, pwd, 1, time);
 		
 		try {
-			u.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
-			u.setImage(true);
-		} catch (IOException e) {
-			u.setImage(false);
-			u.setImageFile(null);
-		}
+			if(image.isEmpty()) {
+				u.setImage(false);
+				u.setImageFile(null);
+			}else {
+				u.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
+				u.setImage(true);
+			}			
+		} catch (IOException e) {}
 		
 		repository.save(u);
 		return u;
