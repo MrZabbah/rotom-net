@@ -1,6 +1,11 @@
 <html>
 	<head>
-		<title background="white">Random team generated </title>
+		{{#wrongUsername}}
+			<title>Wrong username </title>
+		{{/wrongUsername}}
+		{{^wrongUsername}}
+			<title>Random team generated </title>
+		{{/wrongUsername}}
 		<link rel='stylesheet' type='text/css' href='/css/teamGenerated.css'>
 	</head>
 	<body style='background-color:black'>
@@ -38,6 +43,7 @@
 		<br><br>
 		<div align="center">
 		<form action='saveTeam' method='post' align='center' class='transparentForm'>
+			<input type = 'text' name='username'>&emsp;
 			<input type='submit' value='Save Team' class='customButton'>
 		</form>&emsp;
 		<form action='teamGenerator'method='post' align='center'class='transparentForm'>

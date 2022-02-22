@@ -142,6 +142,7 @@ public class PokemonService {
 		public int compare(UserRotomCard s1, UserRotomCard s2) {
 			return Ints.compare(s1.getRottomCard().getPokemonDexIndex(), s2.getRottomCard().getPokemonDexIndex());
 		}
+
 	}
 
 }

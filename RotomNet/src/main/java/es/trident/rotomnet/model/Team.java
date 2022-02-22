@@ -7,6 +7,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
+
 
 @Entity
 public class Team {
@@ -19,11 +22,15 @@ public class Team {
 	private List<Pokemon> teamPokemon;
 	private String name;
 	
+	@ManyToOne
+	private User user;
+	
 	protected Team() {}
 	
-	public Team(List<Pokemon> teamPokemon, String name) {
+	public Team(List<Pokemon> teamPokemon, String name, User user) {
 		this.teamPokemon = teamPokemon;
 		this.name = name;
+		this.user = user;
 	}
 	
 	public List<Pokemon> getPokemon() {
@@ -35,14 +42,20 @@ public class Team {
 	public String getName() {
 		return name;
 	}
+	public User getUser() {
+		return user;
+	}
 	public void setPokemon(List<Pokemon> teamPokemon) {
 		this.teamPokemon = teamPokemon;
 	}
 	public void setId(int id) {
-		id = id;
+		this.id = id;
 	}
 	public void setName(String name) {
-		name = name;
+		this.name = name;
+	}
+	public void setUser(User user) {
+		this.user = user;
 	}
 }
 

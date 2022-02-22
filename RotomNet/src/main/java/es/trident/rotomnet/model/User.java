@@ -36,6 +36,9 @@ public class User {
 	@Lob
 	@JsonIgnore
 	private Blob imageFile;
+	
+	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	private List<Team> teams;
 
 	protected User() {
 	}
@@ -45,7 +48,10 @@ public class User {
 		this.pwd = pwd;
 		this.daysLogged = daysLogged;
 		this.lastLog = lastLog;
+
+		this.teams = new ArrayList<Team>();
 		deck = new ArrayList<UserRotomCard>();
+
 	}
 
 	@Override
@@ -67,6 +73,10 @@ public class User {
 
 	// Getter & Setters
 	
+	public long getUserId() {
+		return userId;
+	}
+	
 	public String getUsername() {
 		return username;
 	}
@@ -77,6 +87,10 @@ public class User {
 
 	public String getPwd() {
 		return pwd;
+	}
+	
+	public List<Team> getTeams(){
+		return teams;
 	}
 
 	public void setPwd(String pwd) {
@@ -110,9 +124,17 @@ public class User {
 	public Blob getImageFile() {
 		return imageFile;
 	}
+	
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
 
 	public void setImageFile(Blob imageFile) {
 		this.imageFile = imageFile;
+	}
+	
+	public void setTeams(List<Team> teams) {
+		this.teams = teams;
 	}
 
 	public List<UserRotomCard> getDeck() {

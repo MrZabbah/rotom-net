@@ -31,6 +31,8 @@ public class DatabaseManagementService {
 	private UserService userService;
 	@Autowired
 	private TeamService teamService;
+	
+	private User testUser;
 
 	
 	public boolean isNewDevice() {
@@ -45,7 +47,8 @@ public class DatabaseManagementService {
 
 	private void insertPokemonAndRotomCards() {
 
-		User ua = userService.saveNewUser("Test", "test");;
+		User ua = userService.saveNewUser("Test", "test");
+		testUser = ua;
 		Random r = new Random();
 		int ini = r.nextInt(0, 151);
 		int fin = r.nextInt(ini, 151);
@@ -74,7 +77,9 @@ public class DatabaseManagementService {
 		ArrayList<String> types = new ArrayList<String>();
 		List<Team> defaultTeams = new ArrayList<Team>();
 		for (int i = 0; i < 22; ++i) {
-			defaultTeams.add(teamService.getRandomTeam("Name", types, false));
+			Team newTeam = teamService.getRandomTeam("Name", types, false);
+			newTeam.setUser(testUser);
+			defaultTeams.add(newTeam);
 		}
 		_teamRepository.saveAll(defaultTeams);
 	}

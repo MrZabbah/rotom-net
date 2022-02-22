@@ -11,38 +11,41 @@ import org.springframework.stereotype.Service;
 
 import es.trident.rotomnet.model.Pokemon;
 import es.trident.rotomnet.model.Team;
+
+import es.trident.rotomnet.model.User;
+
 import es.trident.rotomnet.repository.TeamRepository;
+
 
 @Service
 public class TeamService {
 	
 	@Autowired
-	private TeamRepository _teamRepository;
+
+	private TeamRepository teamRepository;
+	
 	@Autowired
 	private PokemonService pokemonService;
+	@Autowired
+	private UserService userService;
+		
+	public void saveCurrentTeam(User selectedUser, Team currentTeam) {
+		currentTeam.setUser(selectedUser);
+		teamRepository.save(currentTeam);
+
+	}
+	public Page<Team> getTeamsByUser(User user,Pageable page) {
+		return teamRepository.findByUser(user, page);
+	}
 	
-	
-	private Team currentTeam;
-	
-	public Team getCurrentTeam() {
-		return currentTeam;
-	}
-	public void setCurrentTeam(Team currentTeam) {
-		this.currentTeam = currentTeam;
-	}
-	public void saveCurrentTeam() {
-		_teamRepository.save(currentTeam);
-	}
-	public Page<Team> getAllTeams(Pageable page) {
-		return _teamRepository.findAll(page);
-	}
 	public Team getTeamById(int id) {
-		Optional<Team> team = _teamRepository.findById(id);
+		Optional<Team> team = teamRepository.findById(id);
 		return team.orElseThrow();
 	}
+	
 	public void deleteTeam(int id) {
-		Team teamToDelete = _teamRepository.findById(id).orElseThrow();
-		_teamRepository.deleteById(id);
+		Team teamToDelete = teamRepository.findById(id).orElseThrow();
+		teamRepository.deleteById(id);
 	}
 	
 	public Team getRandomTeam(String teamName, ArrayList<String> types, boolean legendaryCheck) {
@@ -52,6 +55,7 @@ public class TeamService {
 		if (legendaryCheck) {
 			legendaries = pokemonService.getRandomPokemonListBy(1, true, types);
 			numberOfNonLegendary--;
+
 		}
 		
 		team = pokemonService.getRandomPokemonListBy(numberOfNonLegendary, false, types);
@@ -59,7 +63,7 @@ public class TeamService {
 		if (legendaryCheck)
 			team.add(legendaries.get(0));
 
-		Team myTeam = new Team(team, teamName);
+		Team myTeam = new Team(team, teamName,null);
 		return myTeam;
 	}
 
