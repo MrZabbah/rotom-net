@@ -14,6 +14,7 @@ public class MainController {
 	
 	@Autowired
 	DatabaseManagementService dbManagementService;
+	
 	@PostConstruct
 	public void BoardController() {
 		dbManagementService.poblateDatabase();
@@ -23,4 +24,6 @@ public class MainController {
 	public String mainPage(Model model) {
 		return "index";
 	}
+	
+	
 }

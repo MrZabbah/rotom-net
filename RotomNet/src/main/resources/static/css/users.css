@@ -70,7 +70,36 @@ body{
 	border-style: 1px solid black;
 }
 
-	
+.user-table .show-teams-form input[type=submit]{
+	border-radius:50%;
+	background-color: rgb(238, 17, 221, 0.8);
+	color:white;
+	font-size:25px;
+	width:40px;
+	height:40px;
+	border-style: 1px solid black;
+}
+
+
+.user-table .battle-form input[type=submit]{
+	border-radius:50%;
+	background-color: rgb(224, 36, 31, 0.8);
+	color:white;
+	font-size:20px;
+	width:40px;
+	height:40px;
+	border-style: 1px solid black;
+}
+
+.user-table .show-deck-form input[type=submit]{
+	border-radius:50%;
+	background-color: rgb(235, 187, 20, 0.8);
+	color:white;
+	font-size:20px;
+	width:40px;
+	height:40px;
+	border-style: 1px solid black;
+}
 
 
 

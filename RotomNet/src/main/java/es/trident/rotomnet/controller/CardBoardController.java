@@ -1,14 +1,14 @@
 package es.trident.rotomnet.controller;
 
-import javax.annotation.PostConstruct;
+
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 
-import es.trident.rotomnet.repository.UserRepository;
-import es.trident.rotomnet.service.DatabaseManagementService;
+import es.trident.rotomnet.model.User;
 import es.trident.rotomnet.service.PokemonService;
 import es.trident.rotomnet.service.UserService;
 
@@ -35,13 +35,14 @@ public class CardBoardController {
 		return("pokedex");
 	}
 	
-	@GetMapping("/deck")
-	public String userDeck(Model model) {
+	@GetMapping("/deck_{username}")
+	public String userDeck(Model model, @PathVariable String username) {
 		
-		model.addAttribute("cards", _pokemonService.getUserCards(userService.getUserByUsernameAndPwd("Test", "test")));
-		model.addAttribute("ratioString", _pokemonService.getUserDiscoverRatio(userService.getUserByUsernameAndPwd("Test", "test")));
+		User user = userService.findUserByUsername(username);
+		model.addAttribute("cards", _pokemonService.getUserCards(user));
+		model.addAttribute("ratioString", _pokemonService.getUserDiscoverRatio(user));
 		model.addAttribute("userDeck", true);
-		model.addAttribute("boardTitle", "YOUR DECK");
+		model.addAttribute("boardTitle", "Deck of " + username);
 		return("pokedex");
 	}
 }
