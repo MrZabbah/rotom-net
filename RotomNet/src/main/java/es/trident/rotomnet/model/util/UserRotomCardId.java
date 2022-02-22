@@ -1,4 +1,4 @@
-package es.trident.rotomnet.model;
+package es.trident.rotomnet.model.util;
 
 import java.io.Serializable;
 import java.util.Objects;
