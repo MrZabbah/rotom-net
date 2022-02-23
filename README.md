@@ -44,19 +44,21 @@ https://github.com/MrZabbah/rotom-net/projects/1
 
 ## Diagrama de navegación
 
-1- Pantalla principal: información de uso de la aplicación.
-2- Formulario de creación de equipos: selección de un nombre de equipo y diferentes parámetros para la creación del equipo de forma pseudoaleatoria. 
-3- Mostrado del equipo creado: información sobre los parámetros seleccionados en el formulario y los Pokemon obtenidos. Posibilidad de guardado en un usuario, intentar de nuevo y salida a la pantalla principal. 
-4- Pokedex: todas las cartas que puede obtener el usuario. 
-5- Selección de usuario: para mostrar sus equipos, su baraja y realizar combates.
-6- Equipos del usuario: todos los equipos del usuario (en formato enlace para poder ver su información en detalle en otra página) y posibilidad del borrado de los mismos.
-7- Selección de un equipo del usuario: información en detalle del equipo seleccionado desde la pantalla 6. También permite su borrado. 
-8- Baraja del usuario: cartas que tiene el usuario actualmente, cuántas ha descubierto y cuántas de éstas son shiny (especiales).
-9- Combate: se muestran dos equipos generados aleatoriamente (primero el enemigo y luego el del usuario) que combaten al pulsar el botón. 
-10- Resultado del combate:  información de los equipos previamente generados en la pantalla 9 y, si se ha ganado, la carta ganada por el usuario. En caso de que pierda, aparece un texto explicativo de que ha perdido. 
-11- Lista de usuarios registrados: usuarios registrados en la aplicación, así como botones que permiten tanto su modificación como su borrado. 
-12- Modificación de usuario: información sobre el usuario seleccionado, así como un formulario para modificar sus datos. 
-13- Registro de usuario: formulario para creación de usuarios. 
-14- Usuario registrado: información sobre el usuario registado desde la pantalla 13, así como un botón de enlace a todos los usuarios registrados (pantalla 11).
+1. Pantalla principal: información de uso de la aplicación.
+2. Formulario de creación de equipos: selección de un nombre de equipo y diferentes parámetros para la creación del equipo de forma pseudoaleatoria. 
+3. Mostrado del equipo creado: información sobre los parámetros seleccionados en el formulario y los Pokemon obtenidos. Posibilidad de guardado en un usuario, intentar de nuevo y salida a la pantalla principal. 
+4. Pokedex: todas las cartas que puede obtener el usuario. 
+5. Selección de usuario: para mostrar sus equipos, su baraja y realizar combates.
+6. Equipos del usuario: todos los equipos del usuario (en formato enlace para poder ver su información en detalle en otra página) y posibilidad del borrado de los mismos.
+7. Selección de un equipo del usuario: información en detalle del equipo seleccionado desde la pantalla 6. También permite su borrado. 
+8. Baraja del usuario: cartas que tiene el usuario actualmente, cuántas ha descubierto y cuántas de éstas son shiny (especiales).
+9. Combate: se muestran dos equipos generados aleatoriamente (primero el enemigo y luego el del usuario) que combaten al pulsar el botón. 
+10. Resultado del combate:  información de los equipos previamente generados en la pantalla 9 y, si se ha ganado, la carta ganada por el usuario. En caso de que pierda, aparece un texto explicativo de que ha perdido. 
+11. Lista de usuarios registrados: usuarios registrados en la aplicación, así como botones que permiten tanto su modificación como su borrado. 
+12. Modificación de usuario: información sobre el usuario seleccionado, así como un formulario para modificar sus datos. 
+13. Registro de usuario: formulario para creación de usuarios. 
+14. Usuario registrado: información sobre el usuario registado desde la pantalla 13, así como un botón de enlace a todos los usuarios registrados (pantalla 11).
 
 ![diagrama_pantallas](https://user-images.githubusercontent.com/60218308/155235046-ebeff775-e8f9-4137-a1d5-4a4623246ee0.png)
+![captura_pantallas](https://user-images.githubusercontent.com/60218308/155365950-39e47ece-90cd-47d0-80b8-6857ca993a94.png)
+
