@@ -81,7 +81,8 @@ public class PokemonService {
 	 * @return String formateado
 	 */
 	public String getUserDiscoverRatio(User user) {
-		return String.format("Discovered: [%d / %d]", userCardsRepository.countByUser(user), cardRepository.count());
+		String s = String.format("Discovered: [%d / %d]", userCardsRepository.countByUser(user), cardRepository.count());
+		return s += String.format(" Shinies: [%d / %d]", userCardsRepository.countByUserShiny(user), cardRepository.count());
 	}
 
 	/**

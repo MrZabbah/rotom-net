@@ -18,6 +18,13 @@ body
 .Board h1
 {
 	font-size:48px;
+	font-family: "Roboto", sans-serif;
+	font-weight:500;
+}
+.Board h3
+{
+	font-family: "Roboto", sans-serif;
+	font-weight:500;
 }
 .Back
 {

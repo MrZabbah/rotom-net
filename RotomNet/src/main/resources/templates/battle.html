@@ -14,7 +14,7 @@
 			
 			{{#battleFinished}}
 				{{#winCondition}}
-					<h1>Has ganado un {{card}} 
+					<h1>You won: {{card}} 
 						{{#shiny}}
 							shiny
 						{{/shiny}}
@@ -23,7 +23,7 @@
 				{{/winCondition}}
 			
 				{{^winCondition}}
-					<p>Has perdido el combate</p>
+					<h1>You lost the battle...</h1>
 				{{/winCondition}}
 			{{/battleFinished}}
 			
@@ -45,7 +45,7 @@
 			{{/battleFinished}}
 			
 			{{#battleFinished}}
-				<form action="/selectUsers" method="GET">
+				<form action="/selectUser" method="GET">
 					<input type="submit" value="Go back to users">
 				</form>
 			{{/battleFinished}}

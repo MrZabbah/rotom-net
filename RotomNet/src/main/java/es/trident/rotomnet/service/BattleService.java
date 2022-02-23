@@ -1,5 +1,6 @@
 package es.trident.rotomnet.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
@@ -13,7 +14,7 @@ public class BattleService {
 
 	public Pair<RotomCard, Boolean> generateBattleResult(List<RotomCard> userTeam, List<RotomCard> enemyTeam) {
 		Random r = new Random();
-		RotomCard result = null;
+		RotomCard result = RotomCard.NOT_FOUND;
 		int[] winningMatches = new int[2];
 		
 		for (int i = 0; i < 6; i++) {
@@ -23,12 +24,14 @@ public class BattleService {
 		
 		if (winningMatches[0] > winningMatches[1]) {
 			int index;
-			userTeam.addAll(enemyTeam);
-			index = r.nextInt(userTeam.size());
-			result = userTeam.get(index);
+			ArrayList<RotomCard> pokemon = new ArrayList<>(userTeam);
+			
+			pokemon.addAll(enemyTeam);
+			index = r.nextInt(pokemon.size());
+			result = pokemon.get(index);
 		}
 
-		return Pair.of(result, r.nextFloat() <= 0.1f);
+		return Pair.of(result, r.nextFloat() <= 1f);
 	}
 	
 	

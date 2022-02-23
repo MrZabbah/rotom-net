@@ -14,6 +14,8 @@ import javax.persistence.PrimaryKeyJoinColumn;
 
 @Entity
 public class RotomCard {
+	public static RotomCard NOT_FOUND = new RotomCard(Pokemon.NOT_FOUND, 0, 0, 0);
+	
 	@Id
     @Column(name = "CARD_ID")
     private int pokemonId;
@@ -53,6 +55,10 @@ public class RotomCard {
 
 	public int getPokemonDexIndex() {
 		return pokemon.getPokedexNumber();
+	}
+	
+	public boolean isValid() {
+		return pokemon.getPokedexNumber() > 0;
 	}
 	
 	@Override

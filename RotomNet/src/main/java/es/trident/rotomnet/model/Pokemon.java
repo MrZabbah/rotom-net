@@ -7,6 +7,7 @@ import javax.persistence.Id;
 
 @Entity
 public class Pokemon {
+	public static Pokemon NOT_FOUND = new Pokemon(-1);
 	
 	@Id
 	@Column(name = "DEX_ID")

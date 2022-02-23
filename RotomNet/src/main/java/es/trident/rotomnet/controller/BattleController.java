@@ -54,11 +54,13 @@ public class BattleController {
 		Pair<RotomCard, Boolean> result = battleService.generateBattleResult(userTeam, enemyTeam);
 		
 		model.addAttribute("card", result.getFirst().getPokemon().getName());
+		model.addAttribute("enemyTeam", enemyTeam);
+		model.addAttribute("userTeam", userTeam);
 		model.addAttribute("shiny", result.getSecond());
 		model.addAttribute("battleFinished", true);
-		model.addAttribute("winCondition", result != null);
+		model.addAttribute("winCondition", result.getFirst().isValid());
 		
-		if (user != null && result != null) {
+		if (user != null && result.getFirst().isValid()) {
 			pokemonService.addCardToUser(result.getFirst(), user, result.getSecond());
 		}
 
