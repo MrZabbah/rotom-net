@@ -4,8 +4,7 @@ RotomNet
 
 ## Descripción de la temática
 
-La aplicación web es una página con temática de Pokémon, orientada a mostrar las
-últimas noticias de la franquicia, crear equipos pseudoaleatorios para 
+La aplicación web es una página con temática de Pokémon, orientada a crear equipos pseudoaleatorios para 
 "Pokémon Showdown" y coleccionar cartas con el objetivo de completar la primera Pokédex.
 
 ## Funcionalidades públicas
@@ -22,10 +21,11 @@ La aplicación web es una página con temática de Pokémon, orientada a mostrar
 
 ## Nombre y descripción de las entidades principales
 
-1. Usuario: contiene el correo electrónico, la contraseña, su imagen, una lista de Cartas y uno o varios Equipos.
-2. Pokémon: contiene 4 ataques, uno o dos tipos, habilidad, naturaleza, EVs y un ítem.
-3. Carta: contiene un Pokémon, su representación gráfica y sus estadísticas.
-4. Equipo: contiene 6 Pokémon.
+1. User: contiene el nombre de usuario, la contraseña, su imagen, un registro de su última entrada en la web, una lista de objetos UserRotomCard y una lista de objetos Team.
+2. Pokémon: contiene un número de la Pokédex, un nombre, 4 ataques, uno o dos tipos, habilidad, naturaleza, EVs, un ítem y dos indicadores para saber si es legendario y si es compatible com Pokémon Showdown.
+3. RotomCard: contiene un Pokémon, sus estadísticas y una lista de objetos UserRotomCard.
+4. UserRotomCard: relaciona un usuario con una carta. Contiene el número de ejemplares que el usuario tiene de dicha carta y un indicador de si es shiny o no.
+5. Team: contiene un nombre, 6 Pokémon y el usuario al que está vinculado.
 
 ## Descripción de las funcionalidades del servicio interno
 
