@@ -1,9 +1,12 @@
+/**
+ * PRACTICA DESTINADA A LA ASIGNATURA DESARROLLO DE APLICACIONES DISTRIBUIDAS
+ * CAMPUS DE MÓSTOLES - CURSO 2021/2022
+ */
+
 package es.trident.rotomnet.controller;
 
 import java.util.ArrayList;
-
 import javax.servlet.http.HttpSession;
-
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Controller;
@@ -13,12 +16,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-
 import es.trident.rotomnet.model.Team;
 import es.trident.rotomnet.model.User;
 import es.trident.rotomnet.service.PokemonService;
 import es.trident.rotomnet.service.TeamService;
 import es.trident.rotomnet.service.UserService;
+
+/**
+ * TeamGeneratorController Controlador dedicado a gestionar las peticiones
+ * relacionadas con la generación automática de equipos
+ */
 
 @Controller
 public class TeamGeneratorController {
@@ -44,8 +51,12 @@ public class TeamGeneratorController {
 		return "teamGeneratorForm";
 	}
 
+	/*
+	 * Recibe la información introducida en el formulario de creación de equipos aleatorios, la interpreta,
+	 * llama a TeamService para obtener el equipo aleatorio y muestra la página donde se visualiza el equipo creado.
+	 */
+	
 	@PostMapping("/createRandomTeam")
-
 	public String createRandomTeam(Model model, @RequestParam String teamName, @RequestParam(required=false) boolean legendaryCheck,
 			 @RequestParam(required=false) boolean fireCheck, @RequestParam(required=false) boolean waterCheck, @RequestParam(required=false) boolean grassCheck, @RequestParam(required=false) boolean electricCheck,
 			 @RequestParam(required=false) boolean groundCheck, @RequestParam(required=false) boolean rockCheck, @RequestParam(required=false) boolean poisonCheck, @RequestParam(required=false) boolean psychicCheck,
@@ -75,6 +86,11 @@ public class TeamGeneratorController {
 		return "teamCreated";
 	}
 
+	/*
+	 * Recibe un usuario del campo de un formulario en la página que muestra el equipo creado. Si este es válido, 
+	 * vincula el equipoal usuario y lo guarda.Si no, vuelve a mostrar la página anterior con el título de "Wrong Username"
+	 */
+	
 	@SuppressWarnings("unchecked")
 	@PostMapping("/saveTeam")
 	public String saveTeam(Model model, @RequestParam String username, HttpSession session) {

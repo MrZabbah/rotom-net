@@ -1,10 +1,14 @@
+/**
+ * PRACTICA DESTINADA A LA ASIGNATURA DESARROLLO DE APLICACIONES DISTRIBUIDAS
+ * CAMPUS DE MÓSTOLES - CURSO 2021/2022
+ */
+
 package es.trident.rotomnet.service;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import es.trident.rotomnet.model.Pokemon;
 import es.trident.rotomnet.model.RotomCard;
@@ -15,6 +19,11 @@ import es.trident.rotomnet.repository.PokemonRepository;
 import es.trident.rotomnet.repository.RotomCardRepository;
 import es.trident.rotomnet.repository.TeamRepository;
 import es.trident.rotomnet.repository.UserRotomCardRepository;
+
+/*
+ * Servicio dedicado a configurar e insertar los objetos iniciales de la base de datos. 
+ * Las tablas afectadas son: Pokemon, Team, User, RotomCard y UserRotomCard.
+ */
 
 @Controller
 public class DatabaseManagementService {
@@ -30,6 +39,7 @@ public class DatabaseManagementService {
 	public DatabaseManagementService(PokemonRepository pokemonRepository, RotomCardRepository cardRepository,
 			UserRotomCardRepository userCardsRepository, TeamRepository _teamRepository, UserService userService,
 			TeamService teamService) {
+		
 		super();
 		this.pokemonRepository = pokemonRepository;
 		this.cardRepository = cardRepository;
@@ -78,11 +88,13 @@ public class DatabaseManagementService {
 	private void createAndInsertTeams() {
 		ArrayList<String> types = new ArrayList<String>();
 		List<Team> defaultTeams = new ArrayList<Team>();
+		
 		for (int i = 0; i < 22; ++i) {
 			Team newTeam = teamService.getRandomTeam("Name", types, false);
 			newTeam.setUser(testUser);
 			defaultTeams.add(newTeam);
 		}
+		
 		_teamRepository.saveAll(defaultTeams);
 	}
 
@@ -697,6 +709,8 @@ public class DatabaseManagementService {
 		stats.add(new ArrayList<Integer>(Arrays.asList(2, 3, 7)));
 		stats.add(new ArrayList<Integer>(Arrays.asList(10, 4, 7)));
 		stats.add(new ArrayList<Integer>(Arrays.asList(9, 2, 4)));
+		
 		return stats;
 	}
+	
 }
