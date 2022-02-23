@@ -13,8 +13,8 @@ import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
 
-/* 
- * Team Clase que representa un equipo de seis Pokemon. 
+/** 
+ * Team: Clase que representa un equipo de seis Pokemon. 
  */
 @Entity
 public class Team {

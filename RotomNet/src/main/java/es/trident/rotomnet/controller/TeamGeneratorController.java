@@ -23,7 +23,7 @@ import es.trident.rotomnet.service.TeamService;
 import es.trident.rotomnet.service.UserService;
 
 /**
- * TeamGeneratorController Controlador dedicado a gestionar las peticiones
+ * TeamGeneratorController: Controlador dedicado a gestionar las peticiones
  * relacionadas con la generación automática de equipos
  */
 

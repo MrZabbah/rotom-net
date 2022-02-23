@@ -16,8 +16,8 @@ import es.trident.rotomnet.model.User;
 import es.trident.rotomnet.repository.TeamRepository;
 
 
-/*
- * TeamService Servicio dedicado a gestionar la tabla Team de la base de datos a través del TeamRepository y ofrecer
+/**
+ * TeamService: Servicio dedicado a gestionar la tabla Team de la base de datos a través del TeamRepository y ofrecer
  * funcionalidades relacionadas con la creación de equipos a elementos externos.
  */
 

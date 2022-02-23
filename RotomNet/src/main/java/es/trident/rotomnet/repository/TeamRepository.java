@@ -11,8 +11,8 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import es.trident.rotomnet.model.Team;
 import es.trident.rotomnet.model.User;
 
-/*
- * TeamRepository Interfaz dedicada a manejar la entidad Team en la base de datos.
+/**
+ * TeamRepository: Interfaz dedicada a manejar la entidad Team en la base de datos.
  */
 
 public interface TeamRepository extends JpaRepository<Team,Integer>{

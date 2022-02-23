@@ -10,8 +10,8 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-/*
- * Pokemon Clase dedicada a representar un Pokemon, usadacomo
+/**
+ * Pokemon: Clase dedicada a representar un Pokemon, usadacomo
  * componente básico para las Cartas y los Equipos.
  */
 

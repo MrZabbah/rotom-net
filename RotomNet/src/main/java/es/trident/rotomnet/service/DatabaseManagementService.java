@@ -20,8 +20,8 @@ import es.trident.rotomnet.repository.RotomCardRepository;
 import es.trident.rotomnet.repository.TeamRepository;
 import es.trident.rotomnet.repository.UserRotomCardRepository;
 
-/*
- * Servicio dedicado a configurar e insertar los objetos iniciales de la base de datos. 
+/**
+ * DatabaseManagementService: Servicio dedicado a configurar e insertar los objetos iniciales de la base de datos. 
  * Las tablas afectadas son: Pokemon, Team, User, RotomCard y UserRotomCard.
  */
 

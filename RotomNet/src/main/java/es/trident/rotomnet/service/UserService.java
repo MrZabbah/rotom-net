@@ -16,9 +16,10 @@ import es.trident.rotomnet.model.User;
 import es.trident.rotomnet.repository.UserRepository;
 
 /**
- * PokemonService Servicio dedicado al control y manejo de las tablas
+ * UserService: Servicio dedicado al control y manejo de las tablas
  * relacionadas con usuarios, dentro de la base de datos.
  */
+
 @Service
 public class UserService {
 	

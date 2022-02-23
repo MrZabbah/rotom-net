@@ -8,8 +8,8 @@ package es.trident.rotomnet.service.util;
 import java.util.ArrayList;
 import java.util.List;
 
-/*
- * Util Clase dedicada a implementar métodos generales que puedan ser usados desde diferentes puntos. 
+/**
+ * Utils: Clase dedicada a implementar métodos generales que puedan ser usados desde diferentes puntos. 
  */
 
 public class Utils {
