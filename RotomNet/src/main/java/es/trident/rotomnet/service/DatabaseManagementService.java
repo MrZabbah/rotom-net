@@ -19,26 +19,30 @@ import es.trident.rotomnet.repository.UserRotomCardRepository;
 @Controller
 public class DatabaseManagementService {
 
-	@Autowired
 	private PokemonRepository pokemonRepository;
-	@Autowired
 	private RotomCardRepository cardRepository;
-	@Autowired
 	private UserRotomCardRepository userCardsRepository;
-	@Autowired
 	private TeamRepository _teamRepository;
-	@Autowired
 	private UserService userService;
-	@Autowired
 	private TeamService teamService;
-	
 	private User testUser;
 
-	
-	public boolean isNewDevice() {
-		return true;
+	public DatabaseManagementService(PokemonRepository pokemonRepository, RotomCardRepository cardRepository,
+			UserRotomCardRepository userCardsRepository, TeamRepository _teamRepository, UserService userService,
+			TeamService teamService) {
+		super();
+		this.pokemonRepository = pokemonRepository;
+		this.cardRepository = cardRepository;
+		this.userCardsRepository = userCardsRepository;
+		this._teamRepository = _teamRepository;
+		this.userService = userService;
+		this.teamService = teamService;
 	}
-	
+
+	public boolean isNewDevice() {
+		return pokemonRepository.count() <= 0;
+	}
+
 	public void poblateDatabase() {
 
 		insertPokemonAndRotomCards();
@@ -46,13 +50,11 @@ public class DatabaseManagementService {
 	}
 
 	private void insertPokemonAndRotomCards() {
-
 		User ua = userService.saveNewUser("Test", "test");
 		testUser = ua;
 		Random r = new Random();
 		int ini = r.nextInt(0, 151);
 		int fin = r.nextInt(ini, 151);
-		
 		List<Pokemon> pokes = createPokemon();
 		List<Pokemon> pokesForCard = createPokemonForCards();
 		List<List<Integer>> stats = createStatsForCards();
@@ -85,7 +87,6 @@ public class DatabaseManagementService {
 	}
 
 	private List<Pokemon> createPokemon() {
-
 		ArrayList<Pokemon> pokes = new ArrayList<Pokemon>();
 
 		// Grass
@@ -97,17 +98,14 @@ public class DatabaseManagementService {
 				0, 0, 252, 0, 6, 252, "Chlorophyll", "Modest", "Leftovers", false, true));
 		pokes.add(new Pokemon(640, "Virizion", "Swords dance", "Close combat", "Substitute", "Leaf blade", "Grass",
 				"Fighting", 6, 252, 0, 0, 0, 252, "Justified", "Adamant", "Lum berry", true, true));
-
 		// Fire
 		pokes.add(new Pokemon(467, "Magmortar", "Earthquake", "Fire blast", "Psychic", "Thunderbolt", "Fire", "", 252,
 				0, 252, 0, 0, 6, "Flame body", "Modest", "Leftovers", false, true));
 		pokes.add(new Pokemon(157, "Typhlosion", "Eruption", "Fire blast", "Hidden power", "Protect", "Fire", "", 6, 0,
 				252, 0, 0, 252, "Flash fire", "Modest", "Heavy-Duty boots", false, true));
-
 		// Water
 		pokes.add(new Pokemon(382, "Kyogre", "Calm mind", "Origin pulse", "Thunder", "Ice beam", "Water", "", 252, 0,
 				252, 0, 6, 0, "Drizzle", "Modest", "Leftovers", true, true));
-
 		// Electric
 		pokes.add(new Pokemon(466, "Electivire", "Earthquake", "Volt switch", "Flamethrower", "Ice punch", "Electric",
 				"", 6, 0, 252, 0, 0, 252, "Motor Drive", "Quirky", "Life orb", false, true));
@@ -115,7 +113,6 @@ public class DatabaseManagementService {
 				252, 0, 0, 0, 6, "Guts", "Adamant", "Flame orb", false, true));
 		pokes.add(new Pokemon(596, "Galvantula", "Sticky web", "Thunder", "Volt switch", "Giga drain", "Electric",
 				"Bug", 0, 0, 252, 0, 6, 252, "Compound eye", "Modest", "Focus sash", false, true));
-
 		// Ground
 		pokes.add(new Pokemon(232, "Donphan", "Stone edge", "Earthquake", "Stealth rock", "Rapid spin", "Ground", "", 6,
 				252, 252, 0, 0, 0, "Sturdy", "Adamant", "Leftovers", false, true));
@@ -125,35 +122,29 @@ public class DatabaseManagementService {
 				252, 6, 0, 252, 0, 0, "Sandstorm", "Impish", "Leftovers", false, true));
 		pokes.add(new Pokemon(383, "Groudon", "Precipice Blades", "Heat crash", "Heavy slam", "Swords dance", "Ground",
 				"", 252, 252, 0, 0, 0, 6, "Drought", "Adamant", "Leftovers", true, true));
-
 		// Rock
 		pokes.add(new Pokemon(464, "Rhyperior", "Earthquake", "Stone edge", "Megahorn", "Fire punch", "Rock", "Ground",
 				6, 252, 252, 0, 0, 0, "Solid rock", "Adamant", "Weakness policy", false, true));
 		pokes.add(new Pokemon(377, "Regirock", "Rock slide", "Curse", "Body press", "Rest", "Rock", "", 0, 252, 0, 252,
 				0, 0, "Sturdy", "Impish", "Leftovers", true, true));
-
 		// Poison
 		pokes.add(new Pokemon(569, "Garbodor", "Pain split", "Stomping tantrum", "Gunk shot", "Toxic spikes", "Poison",
 				"", 252, 252, 0, 6, 0, 0, "Aftermath", "Adamant", "Black sludge", false, true));
 		pokes.add(new Pokemon(804, "Naganadel", "Sludge wave", "Draco meteor", "Nasty plot", "U turn", "Dragon",
 				"Poison", 0, 0, 252, 0, 6, 252, "Beast boost", "Modest", "Life orb", true, true));
-
 		// Psychic
 		pokes.add(new Pokemon(196, "Espeon", "Psychic", "Shadow ball", "Signal beam", "Calm mind", "Psychic", "", 0, 0,
 				252, 0, 6, 252, "Magic Bounce", "Modest", "Life orb", false, true));
 		pokes.add(new Pokemon(202, "Wobbuffet", "Charm", "Mirror coat", "Counter", "Encore", "Psychic", "", 252, 0, 0,
 				252, 6, 0, "Shadow Tag", "Calm", "Leftovers", false, true));
-
 		// Flying
 		pokes.add(new Pokemon(663, "Talonflame", "Flare blitz", "Swords dance", "Brave bird", "Roost", "Fire", "Flying",
 				0, 252, 0, 0, 6, 252, "Gale wings", "Jolly", "Heavy-Duty boots", false, true));
 		pokes.add(new Pokemon(630, "Mandibuzz", "Foul play", "Toxic", "Roost", "U turn", "Dark", "Flying", 252, 0, 0,
 				252, 6, 0, "Overcoat", "Impish", "Leftovers", false, true));
-
 		// Bug
 		pokes.add(new Pokemon(794, "Buzzwole", "Close combat", "Leech life", "Dual wingbeat", "Darkest lariat", "Bug",
 				"Fighting", 6, 252, 0, 252, 0, 0, "Beast boost", "Adamant", "Choice band", true, true));
-
 		// Normal
 		pokes.add(new Pokemon(463, "Lickilicky", "Body slam", "Knock off", "Swords dance", "Earthquake", "Normal", "",
 				252, 252, 0, 6, 0, 0, "Own Tempo", "Adamant", "Leftovers", false, true));
@@ -165,7 +156,6 @@ public class DatabaseManagementService {
 				0, 0, 252, 0, 6, 252, "Download", "Modest", "Life orb", false, true));
 		pokes.add(new Pokemon(486, "Regigigas", "Body slam", "Substitute", "Toxic", "Protect", "Normal", "", 252, 252,
 				0, 0, 0, 6, "Slow Start", "Adamant", "Leftovers", true, true));
-
 		// Ghost
 		pokes.add(new Pokemon(356, "Dusclops", "Toxic", "Shadow ball", "Pain split", "Protect", "Ghost", "", 252, 0, 6,
 				252, 0, 0, "Frisk", "Bold", "Eviolite", false, true));
@@ -179,7 +169,6 @@ public class DatabaseManagementService {
 				"Flying", 252, 0, 252, 0, 6, 0, "Aftermath", "Modest", "Leftovers", false, true));
 		pokes.add(new Pokemon(802, "Marshadow", "Close combat", "Spectral thief", "Shadow sneak", "Bulk up", "Ghost",
 				"Fighting", 0, 252, 0, 6, 0, 252, "Technician", "Adamant", "Life orb", true, true));
-
 		// Fighting
 		pokes.add(new Pokemon(237, "Hitmontop", "Sucker punch", "Rapid spin", "Close combat", "Knock off", "Fighting",
 				"", 252, 252, 0, 6, 0, 0, "Intimidate", "Adamant", "Leftovers", false, true));
@@ -187,7 +176,6 @@ public class DatabaseManagementService {
 				"Fighting", "Steel", 0, 252, 0, 6, 0, 252, "Inner focus", "Adamant", "Life orb", false, true));
 		pokes.add(new Pokemon(638, "Cobalion", "Close combat", "Swords dance", "Iron head", "Volt switch", "Fighting",
 				"Steel", 0, 252, 0, 6, 0, 252, "Justified", "Adamant", "Leftovers", true, true));
-
 		// Steel
 		pokes.add(new Pokemon(462, "Magnezone", "Thunderbolt", "Volt switch", "Flash cannon", "Body press", "Electric",
 				"Steel", 252, 0, 252, 0, 6, 0, "Sturdy", "Modest", "Choice specs", false, true));
@@ -201,13 +189,11 @@ public class DatabaseManagementService {
 				0, 252, 0, 0, "Keen eye", "Impish", "Leftovers", false, true));
 		pokes.add(new Pokemon(303, "Mawile", "Iron head", "Play rough", "Superpower", "Sucker punch", "Steel", "Fairy",
 				0, 252, 0, 6, 0, 252, "Intimidate", "Adamant", "Choice band", false, true));
-
 		// Ice
 		pokes.add(new Pokemon(362, "Glalie", "Freeze dry", "Substitute", "Protect", "Earthquake", "Ice", "", 0, 0, 252,
 				0, 6, 252, "Moody", "Modest", "Leftovers", false, true));
 		pokes.add(new Pokemon(473, "Mamoswine", "Earthquake", "Icicle crash", "Ice shard", "Stealth rock", "Ground",
 				"Ice", 0, 252, 0, 6, 0, 252, "Thick fat", "Adamant", "Heavy-Duty boots", false, true));
-
 		// Dragon
 		pokes.add(new Pokemon(230, "Kingdra", "Hydro pump", "Rain dance", "Ice beam", "Draco meteor", "Water", "Dragon",
 				0, 0, 252, 0, 6, 252, "Swift swim", "Modest", "Life orb", false, true));
@@ -221,7 +207,6 @@ public class DatabaseManagementService {
 				"Dark", 0, 0, 252, 0, 6, 252, "Levitate", "Modest", "Choice specs", false, true));
 		pokes.add(new Pokemon(384, "Rayquaza", "Dragon Ascent", "V-Create", "Dragon dance", "Earthquake", "Dragon",
 				"Flying", 0, 252, 0, 6, 0, 252, "Air lock", "Jolly", "Heavy-Duty boots", true, true));
-
 		// Dark
 		pokes.add(new Pokemon(197, "Umbreon", "Foul play", "Protect", "Toxic", "Wish", "Dark", "", 252, 0, 0, 252, 6, 0,
 				"Synchronize", "Impish", "Leftovers", false, true));
@@ -237,7 +222,6 @@ public class DatabaseManagementService {
 				0, 252, 0, 252, 0, 6, "Defiant", "Adamant", "Focus sash", false, true));
 		pokes.add(new Pokemon(717, "Yveltal", "Dark pulse", "Oblivion wing", "Roost", "Knock off", "Dark", "Flying", 0,
 				0, 252, 0, 6, 252, "Dark aura", "Modest", "Leftovers", true, true));
-
 		// Fairy
 		pokes.add(new Pokemon(685, "Slurpuff", "Drain punch", "Facade", "Play rough", "Belly drum", "Fairy", "", 252,
 				252, 0, 0, 0, 6, "Unburden", "Adamant", "Sitrus berry", false, true));
@@ -247,12 +231,10 @@ public class DatabaseManagementService {
 				6, 0, 252, 0, 0, 252, "Serene grace", "Modest", "Heavy-Duty boots", false, true));
 		pokes.add(new Pokemon(716, "Xerneas", "Geomancy", "Moonblast", "Psyshock", "Thunderbolt", "Fairy", "", 0, 0,
 				252, 0, 6, 252, "Fairy aura", "Modest", "Power herb", true, true));
-
 		return pokes;
 	}
 
 	private List<Pokemon> createPokemonForCards() {
-
 		List<Pokemon> pokes = new ArrayList<>();
 
 		pokes.add(new Pokemon(1, "Bulbasaur", "Unknown", "Unknown", "Unknown", "Unknown", "Grass", "Poison", 5, 8, -1,
@@ -557,12 +539,10 @@ public class DatabaseManagementService {
 				"Normal", 252, 0, 252, 0, 6, 0, "Cute charm", "Modest", "Leftovers", false, true));
 		pokes.add(new Pokemon(122, "Mr. Mime", "Psychic", "Dazzling gleam", "Nasty plot", "Light screen", "Psychic",
 				"Fairy", 0, 0, 252, 0, 6, 252, "Filter", "Modest", "Life orb", false, true));
-
 		return pokes;
 	}
 
 	private List<List<Integer>> createStatsForCards() {
-
 		List<List<Integer>> stats = new ArrayList<List<Integer>>();
 
 		stats.add(new ArrayList<Integer>(Arrays.asList(6, 4, 3)));
@@ -717,7 +697,6 @@ public class DatabaseManagementService {
 		stats.add(new ArrayList<Integer>(Arrays.asList(2, 3, 7)));
 		stats.add(new ArrayList<Integer>(Arrays.asList(10, 4, 7)));
 		stats.add(new ArrayList<Integer>(Arrays.asList(9, 2, 4)));
-
 		return stats;
 	}
 }

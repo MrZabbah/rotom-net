@@ -20,20 +20,19 @@ import es.trident.rotomnet.repository.TeamRepository;
 @Service
 public class TeamService {
 	
-	@Autowired
-
 	private TeamRepository teamRepository;
-	
-	@Autowired
 	private PokemonService pokemonService;
-	@Autowired
-	private UserService userService;
-		
+	
+	public TeamService(TeamRepository teamRepository, PokemonService pokemonService) {
+		this.teamRepository = teamRepository;
+		this.pokemonService = pokemonService;
+	}
+	
 	public void saveCurrentTeam(User selectedUser, Team currentTeam) {
 		currentTeam.setUser(selectedUser);
 		teamRepository.save(currentTeam);
-
 	}
+	
 	public Page<Team> getTeamsByUser(User user,Pageable page) {
 		return teamRepository.findByUser(user, page);
 	}
@@ -45,11 +44,12 @@ public class TeamService {
 	
 	public void deleteTeam(int id) {
 		Team teamToDelete = teamRepository.findById(id).orElseThrow();
-		teamRepository.deleteById(id);
+		teamRepository.delete(teamToDelete);
 	}
 	
 	public Team getRandomTeam(String teamName, ArrayList<String> types, boolean legendaryCheck) {
-		ArrayList<Pokemon> team, legendaries = new ArrayList<>();
+		ArrayList<Pokemon> team;
+		ArrayList<Pokemon> legendaries = new ArrayList<>();
 		int numberOfNonLegendary = 6;
 
 		if (legendaryCheck) {

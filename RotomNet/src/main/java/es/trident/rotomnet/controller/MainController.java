@@ -11,18 +11,20 @@ import es.trident.rotomnet.service.DatabaseManagementService;
 
 @Controller
 public class MainController {
-	
+
 	@Autowired
 	DatabaseManagementService dbManagementService;
-	
+
 	@PostConstruct
-	public void BoardController() {
-		dbManagementService.poblateDatabase();
+	public void DatabaseController() {
+		if (dbManagementService.isNewDevice()) {
+			dbManagementService.poblateDatabase();
+		}
 	}
-	
+
 	@GetMapping("/")
 	public String mainPage(Model model) {
 		return "index";
 	}
-		
+
 }

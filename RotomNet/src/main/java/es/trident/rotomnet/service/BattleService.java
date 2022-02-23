@@ -15,14 +15,18 @@ public class BattleService {
 	public Pair<RotomCard, Boolean> generateBattleResult(List<RotomCard> userTeam, List<RotomCard> enemyTeam) {
 		Random r = new Random();
 		RotomCard result = RotomCard.NOT_FOUND;
-		int[] winningMatches = new int[2];
+		int winningMatches = 0;
 		
 		for (int i = 0; i < 6; i++) {
-			winningMatches[0] += r.nextInt(9) + 1;
-			winningMatches[1] += r.nextInt(9) + 1;
+			int userDice = r.nextInt(9) + 1;
+			int enemyDice = r.nextInt(9) + 1;
+			
+			if (userDice >= enemyDice) {
+				winningMatches += 1;
+			}
 		}
 		
-		if (winningMatches[0] > winningMatches[1]) {
+		if (winningMatches >= 3) {
 			int index;
 			ArrayList<RotomCard> pokemon = new ArrayList<>(userTeam);
 			
@@ -31,7 +35,7 @@ public class BattleService {
 			result = pokemon.get(index);
 		}
 
-		return Pair.of(result, r.nextFloat() <= 1f);
+		return Pair.of(result, r.nextFloat() <= 0.08f);
 	}
 	
 	

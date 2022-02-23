@@ -53,31 +53,34 @@ public class TeamGeneratorController {
 			 @RequestParam(required=false) boolean fightingCheck, @RequestParam(required=false) boolean steelCheck, @RequestParam(required=false) boolean iceCheck, @RequestParam(required=false) boolean dragonCheck,
 			 @RequestParam(required=false) boolean darkCheck, @RequestParam(required=false) boolean fairyCheck, HttpSession session) {
 		boolean[] types = {fireCheck,waterCheck,grassCheck,electricCheck,groundCheck,rockCheck,poisonCheck,psychicCheck,flyingCheck,bugCheck,normalCheck,ghostCheck,fightingCheck,steelCheck,iceCheck,dragonCheck,darkCheck,fairyCheck};
-
-		boolean anyType = false;
+		boolean containTypes = false;
 		ArrayList<String> selectedTypes = _pokemonService.getTypesFromRequest(types);
+		Team currentTeam;
+		
 		if (selectedTypes.isEmpty()) {
-			anyType = true;
+			containTypes = true;
 		}
 
-		Team currentTeam = _teamService.getRandomTeam(teamName,selectedTypes,legendaryCheck);
+		currentTeam = _teamService.getRandomTeam(teamName,selectedTypes,legendaryCheck);
 		session.setAttribute("legendaryCheck",legendaryCheck);
 		session.setAttribute("selectedTypes",selectedTypes);
-		session.setAttribute("anyType",anyType);
+		session.setAttribute("anyType",containTypes);
 		session.setAttribute("currentTeam",currentTeam);
 		model.addAttribute("legendaryCheck",legendaryCheck);
 		model.addAttribute("selectedTypes",selectedTypes);
-		model.addAttribute("anyType",anyType);
+		model.addAttribute("anyType",containTypes);
 		model.addAttribute("team",currentTeam);
 		model.addAttribute("wrongUsername",false);
 
 		return "teamCreated";
 	}
 
+	@SuppressWarnings("unchecked")
 	@PostMapping("/saveTeam")
 	public String saveTeam(Model model, @RequestParam String username, HttpSession session) {
 		User selectedUser = _userService.findUserByUsername(username);
 		Team currentTeam = (Team)session.getAttribute("currentTeam");
+		
 		if(selectedUser != null) {
 			_teamService.saveCurrentTeam(selectedUser,currentTeam);
 		} else {
@@ -88,10 +91,10 @@ public class TeamGeneratorController {
 			model.addAttribute("wrongUsername",true);
 			return "teamCreated";
 		}
+		
 		return "redirect:/";
 	}
 
-	
 	@GetMapping("/displayTeams_{username}")
 	public String teamList(Model model, Pageable page,@PathVariable String username) {
 		User selectedUser = _userService.findUserByUsername(username);
@@ -114,10 +117,8 @@ public class TeamGeneratorController {
 
 	@PostMapping("/deleteTeam/{id}/{user}")
 	public String deleteTeam(@PathVariable int id, @PathVariable String user) {
-		Team currentTeam = _teamService.getTeamById(id);
 		_teamService.deleteTeam(id);
-		String url = "redirect:/displayTeams_"+user;
-		return url;
+		return "redirect:/displayTeams_"+user;
 	}
 
 }

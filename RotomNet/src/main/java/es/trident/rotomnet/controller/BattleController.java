@@ -13,27 +13,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 import es.trident.rotomnet.model.RotomCard;
 import es.trident.rotomnet.model.User;
 import es.trident.rotomnet.service.BattleService;
-import es.trident.rotomnet.service.PokemonService;
+import es.trident.rotomnet.service.CardService;
 import es.trident.rotomnet.service.UserService;
 
 @Controller
 public class BattleController {
 
-	private PokemonService pokemonService;
+	private CardService cardService;
 	private BattleService battleService;
 	private UserService userService;
 
-	public BattleController(PokemonService pokemonService, BattleService battleService, UserService userService) {
-		super();
-		this.pokemonService = pokemonService;
+	public BattleController(CardService cardService, BattleService battleService, UserService userService) {
+		this.cardService = cardService;
 		this.battleService = battleService;
 		this.userService = userService;
 	}
 
 	@GetMapping("/battle_{username}")
 	public String battleScreen(Model model, @PathVariable String username, HttpSession session) {
-		ArrayList<RotomCard> userTeam = pokemonService.getRandomCardTeam();
-		ArrayList<RotomCard> enemyTeam = pokemonService.getRandomCardTeam();
+		ArrayList<RotomCard> userTeam = cardService.getRandomCardTeam();
+		ArrayList<RotomCard> enemyTeam = cardService.getRandomCardTeam();
 		User user = userService.findUserByUsername(username);
 
 		model.addAttribute("userTeam", userTeam);
@@ -61,7 +60,7 @@ public class BattleController {
 		model.addAttribute("winCondition", result.getFirst().isValid());
 		
 		if (user != null && result.getFirst().isValid()) {
-			pokemonService.addCardToUser(result.getFirst(), user, result.getSecond());
+			cardService.addCardToUser(result.getFirst(), user, result.getSecond());
 		}
 
 		return "battle";

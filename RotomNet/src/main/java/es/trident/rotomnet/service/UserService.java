@@ -21,12 +21,7 @@ public class UserService {
 	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 	public User saveNewUser(String username, String pwd) {
-		String time = dtf.format(LocalDateTime.now());
-		User u = new User(username, pwd, 1, time);
-		u.setImage(false);
-		u.setImageFile(null);
-		repository.save(u);
-		return u;
+		return saveNewUser(username, pwd, null);
 	}
 
 	public User saveNewUser(String username, String pwd, MultipartFile image) {
@@ -34,7 +29,7 @@ public class UserService {
 		User u = new User(username, pwd, 1, time);
 		
 		try {
-			if(image.isEmpty()) {
+			if(image == null ||image.isEmpty()) {
 				u.setImage(false);
 				u.setImageFile(null);
 			}else {
@@ -65,10 +60,6 @@ public class UserService {
 		repository.deleteById(id);
 	}
 
-	public User getUserByUsernameAndPwd(String username, String pwd) {
-		return repository.findByUsernameAndPwd(username, pwd);
-	}
-	
 	public void saveUserWithTeamsChanged(User user) {
 		repository.save(user);
 	}

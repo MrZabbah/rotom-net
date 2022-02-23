@@ -40,7 +40,7 @@ public class UserController {
 	
 	@PostMapping("/registered")
 	public String register(Model model, @RequestParam String username, @RequestParam String pwd,
-			@RequestParam MultipartFile image) throws IOException {
+			@RequestParam MultipartFile image) {
 		
 		if(userService.findUserByUsername(username) != null) {
 			model.addAttribute("duplicatedUsername", true);
