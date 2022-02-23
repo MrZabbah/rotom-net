@@ -10,7 +10,7 @@ import es.trident.rotomnet.model.User;
 
 /**
  * UserRepository: Repositorio encargado de las consultas de la tabla
- * de User en la base de datos
+ * de usuarios a la base de datos
  */
 public interface UserRepository extends JpaRepository<User, Long>{
 

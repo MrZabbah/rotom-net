@@ -1,25 +1,35 @@
+/**
+ * PRACTICA DESTINADA A LA ASIGNATURA DESARROLLO DE APLICACIONES DISTRIBUIDAS
+ * CAMPUS DE MÓSTOLES - CURSO 2021/2022
+ */
+
 package es.trident.rotomnet.service;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-
 import org.hibernate.engine.jdbc.BlobProxy;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
-
 import es.trident.rotomnet.model.User;
 import es.trident.rotomnet.repository.UserRepository;
 
+/**
+ * UserService: Servicio dedicado al control y manejo de las tablas
+ * relacionadas con usuarios, dentro de la base de datos.
+ */
+
 @Service
 public class UserService {
+	
+	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+	private UserRepository userRepository;
 
-	@Autowired
-	private UserRepository repository;
-	DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
-
+	public UserService(UserRepository userRepository) {
+		this.userRepository = userRepository;
+	}
+	
 	public User saveNewUser(String username, String pwd) {
 		return saveNewUser(username, pwd, null);
 	}
@@ -29,7 +39,7 @@ public class UserService {
 		User u = new User(username, pwd, 1, time);
 		
 		try {
-			if(image == null ||image.isEmpty()) {
+			if(image == null || image.isEmpty()) {
 				u.setImage(false);
 				u.setImageFile(null);
 			}else {
@@ -38,45 +48,41 @@ public class UserService {
 			}			
 		} catch (IOException e) {}
 		
-		repository.save(u);
+		userRepository.save(u);
 		return u;
 	}
 	
 	public User findUserByUsername(String username) {
-		return repository.findByUsername(username);
+		return userRepository.findByUsername(username);
 	}
 		
 	
 	public List<User> getAllUsers(){
-
-		return repository.findAll();
+		return userRepository.findAll();
 	}
 
 	public User findUserById(long id) {
-		return repository.findById(id).orElseThrow();
+		return userRepository.findById(id).orElseThrow();
 	}
 
 	public void deleteUser(long id) {
-		repository.deleteById(id);
+		userRepository.deleteById(id);
 	}
 
 	public void saveUserWithTeamsChanged(User user) {
-		repository.save(user);
+		userRepository.save(user);
 	}
 
 	public void modifyUser(String username, String newUsername, String pwd, MultipartFile image) throws IOException {
-		User u = repository.findByUsername(username);
+		User u = userRepository.findByUsername(username);
 		
-		
-		//Modify the user if parameters are not null. 
 		if(!newUsername.equals("")) {u.setUsername(newUsername);}
 		if(!pwd.equals("")) {u.setPwd(pwd);}
 		if(!image.isEmpty()) {
 			u.setImage(true);
 			u.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));
 		}
-		repository.save(u);
+		userRepository.save(u);
 	}
-
 	
 }
