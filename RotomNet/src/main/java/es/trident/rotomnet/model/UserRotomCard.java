@@ -1,3 +1,8 @@
+/**
+ * PRACTICA DESTINADA A LA ASIGNATURA DESARROLLO DE APLICACIONES DISTRIBUIDAS
+ * CAMPUS DE MÓSTOLES - CURSO 2021/2022
+ */
+
 package es.trident.rotomnet.model;
 
 import javax.persistence.Entity;
@@ -5,10 +10,12 @@ import javax.persistence.Id;
 import javax.persistence.IdClass;
 import javax.persistence.ManyToOne;
 import javax.persistence.MapsId;
-
 import es.trident.rotomnet.model.util.UserRotomCardId;
 
-
+/**
+ * UserRotomCard: Entidad encargada de establecer la tabla
+ * en la base de datos sobre las cartas que posee cada usuario
+ */
 @Entity
 @IdClass(UserRotomCardId.class)
 public class UserRotomCard {
@@ -24,7 +31,9 @@ public class UserRotomCard {
 	private int amount;
 	private boolean isShinyUnlocked;
 	
-	public UserRotomCard() { }
+	public UserRotomCard() { 
+		
+	}
 	
 	public UserRotomCard(User user, RotomCard rotomCard, boolean isShinyUnlocked) {
 		this.user = user;
@@ -56,4 +65,5 @@ public class UserRotomCard {
 	public void updateShinyCondition(boolean shiny) {
 		isShinyUnlocked = shiny || isShinyUnlocked;
 	}
+	
 }

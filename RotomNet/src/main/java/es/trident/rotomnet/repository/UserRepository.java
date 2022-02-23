@@ -1,15 +1,21 @@
+/**
+ * PRACTICA DESTINADA A LA ASIGNATURA DESARROLLO DE APLICACIONES DISTRIBUIDAS
+ * CAMPUS DE MÓSTOLES - CURSO 2021/2022
+ */
+
 package es.trident.rotomnet.repository;
 
-import java.util.List;
-
 import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.data.jpa.repository.Query;
-
-import es.trident.rotomnet.model.Team;
 import es.trident.rotomnet.model.User;
 
+/**
+ * UserRepository: Repositorio encargado de las consultas de la tabla
+ * de User en la base de datos
+ */
 public interface UserRepository extends JpaRepository<User, Long>{
 
 	public User findByUsernameAndPwd(String username, String pwd);	
+	
 	public User findByUsername(String username);
+	
 }

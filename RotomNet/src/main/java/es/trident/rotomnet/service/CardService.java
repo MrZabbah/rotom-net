@@ -1,11 +1,14 @@
+/**
+ * UserRotomCardRepository: Repositorio encargado de las consultas de la tabla
+ * de UserRotomCard a la base de datos
+ */
+
 package es.trident.rotomnet.service;
 
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-
 import org.springframework.stereotype.Service;
-
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
 import com.google.common.primitives.Ints;
@@ -17,6 +20,9 @@ import es.trident.rotomnet.repository.RotomCardRepository;
 import es.trident.rotomnet.repository.UserRotomCardRepository;
 import es.trident.rotomnet.service.util.Utils;
 
+/**
+ * CardService: Servicio dedicado a la gestión de cartas
+ */
 @Service
 public class CardService {
 	
@@ -31,6 +37,7 @@ public class CardService {
 	public List<List<RotomCard>> getAllCards() {
 		List<RotomCard> cards = cardRepository.findAll();
 		List<List<RotomCard>> subCardSets = Lists.partition(cards, 5);
+		
 		return subCardSets;
 	}
 
@@ -70,12 +77,14 @@ public class CardService {
 	public String getUserDiscoverRatio(User user) {
 		String s = String.format("Discovered: [%d / %d]", userCardsRepository.countByUser(user),
 				cardRepository.count());
+		
 		return s += String.format(" Shinies: [%d / %d]", userCardsRepository.countByUserShiny(user),
 				cardRepository.count());
 	}
 
 	public ArrayList<RotomCard> getRandomCardTeam() {
 		List<RotomCard> cardList = cardRepository.findAll();
+		
 		return Utils.getRandomList(6, cardList);
 	}
 
@@ -99,4 +108,5 @@ public class CardService {
 		}
 
 	}
+	
 }

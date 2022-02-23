@@ -1,16 +1,21 @@
+/**
+ * PRACTICA DESTINADA A LA ASIGNATURA DESARROLLO DE APLICACIONES DISTRIBUIDAS
+ * CAMPUS DE MÓSTOLES - CURSO 2021/2022
+ */
+
 package es.trident.rotomnet.model.util;
 
 import java.io.Serializable;
 import java.util.Objects;
 
-import javax.persistence.ManyToOne;
-
-
+/**
+ * UserRotomCardId: Clase destinada a representar la clave primaria compuesta de la 
+ * entidad UserRotomCard
+ */
 @SuppressWarnings("serial")
 public class UserRotomCardId implements Serializable{
 
 	private long user;
-
 	private int rotomCard;
 	
 	protected UserRotomCardId() {
@@ -54,6 +59,5 @@ public class UserRotomCardId implements Serializable{
 	public void setRottomCard(int rotomCard) {
 		this.rotomCard = rotomCard;
 	}
-	
 	
 }

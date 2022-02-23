@@ -12,9 +12,8 @@ import es.trident.rotomnet.repository.PokemonRepository;
 import es.trident.rotomnet.service.util.Utils;
 
 /**
- * PokemonService Servicio dedicado al control y manejo de las tablas
- * relacionadas con Pokemon, dentro de la base de datos. Dentro de estas tablas
- * se encuentran: Pokemon, RotomCard y UserRotomCard
+ * PokemonService: Servicio dedicado al control y manejo de las tablas
+ * relacionadas con Pokemon, dentro de la base de datos
  */
 @Service
 public class PokemonService {

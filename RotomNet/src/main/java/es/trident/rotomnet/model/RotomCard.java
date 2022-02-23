@@ -1,8 +1,12 @@
+/**
+ * PRACTICA DESTINADA A LA ASIGNATURA DESARROLLO DE APLICACIONES DISTRIBUIDAS
+ * CAMPUS DE MÓSTOLES - CURSO 2021/2022
+ */
+
 package es.trident.rotomnet.model;
 
 import java.util.List;
 import java.util.Objects;
-
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -12,14 +16,18 @@ import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.PrimaryKeyJoinColumn;
 
+/**
+ * RotomCard: Entidad encargada de establecer la tabla relacionada con
+ * cartas pokemon
+ */
 @Entity
 public class RotomCard {
+	
 	public static RotomCard NOT_FOUND = new RotomCard(Pokemon.NOT_FOUND, 0, 0, 0);
 	
 	@Id
     @Column(name = "CARD_ID")
     private int pokemonId;
-
     @OneToOne
     @MapsId
     @PrimaryKeyJoinColumn(name="CARD_ID", referencedColumnName="DEX_ID")
@@ -27,14 +35,14 @@ public class RotomCard {
 	private int health;
 	private int attack;
 	private int defense;
-	
 	@OneToMany(mappedBy="rotomCard" ,cascade = CascadeType.ALL)
 	private List<UserRotomCard> deck;
 	
-	protected RotomCard() {}
+	protected RotomCard() {
+		
+	}
 	
 	public RotomCard(Pokemon pokemon, int health, int attack, int defense) {
-		
 		this.pokemon = pokemon;
 		this.health = health;
 		this.attack = attack;
@@ -77,6 +85,5 @@ public class RotomCard {
 		RotomCard other = (RotomCard) obj;
 		return Objects.equals(pokemon, other.pokemon);
 	}
-	
 	
 }
