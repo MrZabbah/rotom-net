@@ -27,13 +27,17 @@ La aplicación web es una página con temática de Pokémon, orientada a crear e
 4. UserRotomCard: relaciona un usuario con una carta. Contiene el número de ejemplares que el usuario tiene de dicha carta y un indicador de si es shiny o no.
 5. Team: contiene un nombre, 6 Pokémon y el usuario al que está vinculado.
 
-## Descripción de las funcionalidades del servicio interno
-
-* Generar un equipo pseudoaleatorio: se seleccionan ciertos parámetros que determinarán las características del equipo final. Teniendo esto en cuenta, se seleccionan 6 Pokémon aleatorios y se plasman sus datos en un fichero de texto, adaptado para importarse en "Pokemon Showdown".
-* Enviar notificaciones por correo.
-* Publicar en redes sociales cuando consigues una carta. 
+## Descripción de las funcionalidades de la aplicación web
+* Generar un equipo pseudoaleatorio: se seleccionan ciertos parámetros que determinarán las características del equipo final. Teniendo esto en cuenta, se seleccionan 6 Pokémon aleatorios aptos para competir en Pokémon Showdown y, si un usuario lo desea, se almacena de forma peristente.
 * Realizar un combate simplificado contra el jugador.
 * Dar una carta aleatoria al jugador si es necesario.
+* Mostrar la Pokédex completa.
+* Mostrar las cartas de la baraja de un usuario.
+
+## Descripción de las funcionalidades del servicio interno
+* Plasmar los datos de un equipo en un fichero de texto y enviarlo por correo a un mail especificado.
+* Enviar notificaciones por correo.
+* Publicar en redes sociales cuando consigues una carta. 
 
 ## Organización del proyecto
 
