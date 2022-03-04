@@ -42,7 +42,7 @@ public class BattleController {
 	 * @param session
 	 * @return Plantilla a visualizar
 	 */
-	@GetMapping("/battle_{username}")
+	@GetMapping("/battle/{username}")
 	public String battleScreen(Model model, @PathVariable String username, HttpSession session) {
 		ArrayList<RotomCard> userTeam = cardService.getRandomCardTeam();
 		ArrayList<RotomCard> enemyTeam = cardService.getRandomCardTeam();

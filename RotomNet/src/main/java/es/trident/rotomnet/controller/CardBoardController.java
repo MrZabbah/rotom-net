@@ -36,7 +36,7 @@ public class CardBoardController {
 		return("pokedex");
 	}
 	
-	@GetMapping("/deck_{username}")
+	@GetMapping("/deck/{username}")
 	public String userDeck(Model model, @PathVariable String username) {
 		User user = userService.findUserByUsername(username);
 		

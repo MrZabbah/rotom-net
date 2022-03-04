@@ -61,7 +61,7 @@ public class UserController {
 		return "registered";
 	}
 	
-	@PostMapping("/modified_user_{username}")
+	@PostMapping("/modified_user/{username}")
 	public String modifyUser(Model model, @RequestParam String newUsername, @RequestParam String pwd,
 			@RequestParam MultipartFile image, @PathVariable String username) throws IOException {		
 		User u = userService.findUserByUsername(newUsername);
@@ -88,7 +88,7 @@ public class UserController {
 		return "redirect:/users";
 	}
 	
-	@PostMapping("/modify_{username}")
+	@PostMapping("/modify/{username}")
 	public String modifySelectedUser(Model model, @PathVariable String username) {
 		User user = userService.findUserByUsername(username);
 		

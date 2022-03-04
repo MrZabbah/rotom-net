@@ -9,7 +9,7 @@
 		<h1 id='titleH1'>Team list</h1>
 		<ul>
 		{{#teamList}}
-			<a href="showTeam_{{id}}_{{#user}}{{username}}{{/user}}" id= 'inlineDisplay'>
+			<a href="/showTeam/{{id}}/{{#user}}{{username}}{{/user}}" id= 'inlineDisplay'>
 				<ul>
 				Team {{id}} ({{name}}):
 				{{#teamPokemon}}

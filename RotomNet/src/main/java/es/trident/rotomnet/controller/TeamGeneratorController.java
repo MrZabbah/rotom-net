@@ -111,7 +111,7 @@ public class TeamGeneratorController {
 		return "redirect:/";
 	}
 
-	@GetMapping("/displayTeams_{username}")
+	@GetMapping("/displayTeams/{username}")
 	public String teamList(Model model, Pageable page,@PathVariable String username) {
 		User selectedUser = _userService.findUserByUsername(username);
 		Page<Team> teamsReceived = _teamService.getTeamsByUser(selectedUser,page);
@@ -124,7 +124,7 @@ public class TeamGeneratorController {
 		return "teamList";
 	}
 
-	@GetMapping("/showTeam_{id}_{username}")
+	@GetMapping("/showTeam/{id}/{username}")
 	public String showTeam(Model model, @PathVariable int id, @PathVariable String username) {
 		model.addAttribute("team", _teamService.getTeamById(id));
 		model.addAttribute("username",username);

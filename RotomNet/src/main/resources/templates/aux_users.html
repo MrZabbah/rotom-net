@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html>
 <head>		
-		<link href="css/users.css" rel="stylesheet" type="text/css">
+		<link href="/css/users.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
@@ -23,17 +23,17 @@
 					</td> 	
 					<td>{{username}}</td>
 					<td>
-						<form action="/displayTeams_{{username}}" class="show-teams-form" method="GET">
+						<form action="/displayTeams/{{username}}" class="show-teams-form" method="GET">
 							<input type="submit" value="🤝">
 						</form>
 					</td>		
 					<td>
-						<form action="/deck_{{username}}" class="show-deck-form" method="GET">
+						<form action="/deck/{{username}}" class="show-deck-form" method="GET">
 							<input type="submit" value="🃏">
 						</form>
 					</td>	
 					<td>
-						<form action="/battle_{{username}}" class="battle-form" method="GET">
+						<form action="/battle/{{username}}" class="battle-form" method="GET">
 							<input type="submit" value="⚔">
 						</form>
 					</td>	
