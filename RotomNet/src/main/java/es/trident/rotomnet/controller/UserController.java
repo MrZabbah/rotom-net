@@ -40,6 +40,16 @@ public class UserController {
 		this.userService = userService;
 	}
 	
+	@GetMapping("/login")
+	public String create(Model model) {
+		return "login";
+	}
+	
+	@GetMapping("/logout")
+	public String logout(Model model) {
+		return "logout";
+	}
+	
 	@GetMapping("/register")
 	public String login(Model model){			
 		model.addAttribute("duplicatedUsername", false);		
