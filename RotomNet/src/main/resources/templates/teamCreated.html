@@ -42,14 +42,17 @@
 		</div>
 		<br><br>
 		<div align="center">
-		<form action='saveTeam' method='post' align='center' class='transparentForm'>
-			<input type = 'text' name='username'>&emsp;
-			<input type='submit' value='Save Team' class='customButton'>
-		</form>&emsp;
+
+		{{#logged}}
+			<form action='/saveTeam/{{user_username}}' method='post' align='center' class='transparentForm'>		
+				<input type='submit' value='Save Team' class='customButton'>
+			</form>&emsp;
+		{{/logged}}
+		
 		<form action='teamGenerator'method='post' align='center'class='transparentForm'>
 			<input type='submit' value='Try again' class='customButton'>
 		</form>&emsp;
-		<form action='exit' align='center'class='transparentForm'>
+		<form action='/' align='center'class='transparentForm'>
 			<input type='submit' value='Exit' class='customButton'>
 		</form>
 		</div>	

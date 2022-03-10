@@ -45,8 +45,8 @@
 			{{/battleFinished}}
 			
 			{{#battleFinished}}
-				<form action="/selectUser" method="GET">
-					<input type="submit" value="Go back to users">
+				<form action="/deck/{{user_username}}" method="GET">
+					<input type="submit" value="Watch my cards">
 				</form>
 			{{/battleFinished}}
 		</div>

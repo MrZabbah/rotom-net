@@ -35,8 +35,8 @@ body {
 .registered-container p{
 	font-family: 'Roboto', sans-serif;
 	font-weight: 300;
-	font-size: 15px;
-	margin-top: 9px;	
+	font-size: 17px;
+	margin-top: 12px;	
 }
 .back-button input{
 	width:90%;
@@ -59,7 +59,7 @@ body {
 	font-family: 'Roboto', sans-serif;
 	font-weight: 200;	
 	font-size: 15px;
-	margin-top: 15px;
+	margin-top: 20px;
 	outline: 2px solid #439bab;
 }
 

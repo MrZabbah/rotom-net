@@ -13,9 +13,9 @@
 			<tr>
 				<th>User image</th>
 				<th>Username</th>
-				<th>Password</th>
 				<th>Days logged</th>
 				<th>Last day logged</th>
+				<th>User Deck</th>
 				<th>Modify user?</th>
 				<th>Delete user?</th>
 			</tr>
@@ -25,11 +25,20 @@
 						<img src="/{{userId}}/image" alt=""></img>
 					</td> 	
 					<td>{{username}}</td>
-					<td>{{pwd}}</td>
 					<td>{{daysLogged}}</td>
 					<td>{{lastLog}}</td>	
 					<td>
-						<form action="/modify/{{username}}" class="modify-form" method="POST">
+						<form action="/displayTeams/{{username}}" class="show-teams-form" method="GET">
+							<input type="submit" value="🤝">
+						</form>
+					</td>		
+					<td>
+						<form action="/deck/{{username}}" class="show-deck-form" method="GET">
+							<input type="submit" value="🃏">
+						</form>
+					</td>	
+					<td>
+						<form action="/modify/{{username}}" class="modify-form" method="GET">
 							<input type="submit" value="🛠">
 						</form>
 					</td>		
