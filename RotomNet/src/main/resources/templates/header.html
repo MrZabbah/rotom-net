@@ -22,11 +22,21 @@
 					<ul>
 						<li><a href="/teamGenerator">Random Team Generator</a></li>
 						<li><a href="/pokedex">Pokédex</a></li>
-						<li><a href="/selectUser">Functionality</a></li>
-						<li><a href="/users">All Users</a></li>
-						<li><a href="/register">Register</a></li>
-						<li><a href="/login">Login</a></li>
-						<li><a href="/logout">Logout</a></li>
+						{{#logged}}
+							{{#is_admin}}
+								<li><a href="/users">All Users</a></li>
+							{{/is_admin}}
+							
+							<li><a href="/deck/{{user_username}}">My Deck</a></li>
+							<li><a href="/displayTeams/{{user_username}}">My Teams</a></li>
+							<li><a href="/battle/{{user_username}}">Battle</a></li>
+							<li><a href="/modify/{{user_username}}">Profile</a></li>
+							
+							<li><a href="/logout">Logout</a></li>
+						{{/logged}}
+						{{^logged}}
+							<li><a href="/login">Login</a></li>
+						{{/logged}}
 					</ul>
 				</nav>
 			</div>				

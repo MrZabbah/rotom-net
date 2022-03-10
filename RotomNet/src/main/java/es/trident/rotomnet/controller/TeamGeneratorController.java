@@ -41,11 +41,6 @@ public class TeamGeneratorController {
 
 	}
 
-	@GetMapping("/exit")
-	public String exit() {
-		return "redirect:/";
-	}
-
 	@RequestMapping("/teamGenerator")
 	public String teamGenerator() {
 		return "teamGeneratorForm";
@@ -86,29 +81,12 @@ public class TeamGeneratorController {
 		return "teamCreated";
 	}
 
-	/*
-	 * Recibe un usuario del campo de un formulario en la página que muestra el equipo creado. Si este es válido, 
-	 * vincula el equipoal usuario y lo guarda.Si no, vuelve a mostrar la página anterior con el título de "Wrong Username"
-	 */
-	
-	@SuppressWarnings("unchecked")
-	@PostMapping("/saveTeam")
-	public String saveTeam(Model model, @RequestParam String username, HttpSession session) {
+	@PostMapping("/saveTeam/{username}")
+	public String saveTeam(Model model, @PathVariable String username, HttpSession session) {
 		User selectedUser = _userService.findUserByUsername(username);
-		Team currentTeam = (Team)session.getAttribute("currentTeam");
-		
-		if(selectedUser != null) {
-			_teamService.saveCurrentTeam(selectedUser,currentTeam);
-		} else {
-			model.addAttribute("legendaryCheck",(boolean)session.getAttribute("legendaryCheck"));
-			model.addAttribute("selectedTypes",(ArrayList<String>)session.getAttribute("selectedTypes"));
-			model.addAttribute("anyType",(boolean)session.getAttribute("anyType"));
-			model.addAttribute("team",currentTeam);
-			model.addAttribute("wrongUsername",true);
-			return "teamCreated";
-		}
-		
-		return "redirect:/";
+		Team currentTeam = (Team) session.getAttribute("currentTeam");
+		_teamService.saveCurrentTeam(selectedUser, currentTeam);
+		return "redirect:/displayTeams/" + username;
 	}
 
 	@GetMapping("/displayTeams/{username}")
@@ -134,7 +112,7 @@ public class TeamGeneratorController {
 	@PostMapping("/deleteTeam/{id}/{user}")
 	public String deleteTeam(@PathVariable int id, @PathVariable String user) {
 		_teamService.deleteTeam(id);
-		return "redirect:/displayTeams_"+user;
+		return "redirect:/displayTeams/"+user;
 	}
 
 }

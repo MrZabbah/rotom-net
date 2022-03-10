@@ -99,7 +99,7 @@ public class UserController {
 		return "redirect:/users";
 	}
 	
-	@PostMapping("/modify/{username}")
+	@GetMapping("/modify/{username}")
 	public String modifySelectedUser(Model model, @PathVariable String username) {
 		User user = userService.findUserByUsername(username);
 		
@@ -108,11 +108,6 @@ public class UserController {
 		return "modify";
 	}
 	
-	@GetMapping("/selectUser")
-	public String userTable(Model model) {		
-		model.addAttribute("users", userService.getAllUsers());		
-		return "aux_users";
-	}
 	
 	/**
 	 * Descarga la imagen de usuario si la tiene. En caso contrario, devuelve una imagen por 

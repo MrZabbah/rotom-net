@@ -9,7 +9,7 @@
 		<h1 id='titleH1'>Team list</h1>
 		<ul>
 		{{#teamList}}
-			<a href="/showTeam/{{id}}/{{#user}}{{username}}{{/user}}" id= 'inlineDisplay'>
+			<a href="/showTeam/{{id}}/{{user_username}}" id= 'inlineDisplay'>
 				<ul>
 				Team {{id}} ({{name}}):
 				{{#teamPokemon}}
@@ -18,7 +18,7 @@
 				</ul>
 			</a>
 			&emsp;&emsp;
-			<form action='/deleteTeam/{{id}}/{{#user}}{{username}}{{/user}}' method='post' id='inlineDisplay'>
+			<form action='/deleteTeam/{{id}}/{{user_username}}' method='post' id='inlineDisplay'>
 				<input type='submit' value='Delete' class = 'customButton'>
 			</form>
 				<br>
@@ -27,10 +27,10 @@
 		</ul>
 		<br>
 		{{#next}}
-			<a href="/displayTeams_{{username}}?page={{nextPage}}" class='transparentLink' >Next</a>
+			<a href="/displayTeams/{{user_username}}?page={{nextPage}}" class='transparentLink' >Next</a>
 		{{/next}}
 		{{#previous}}
-			<a href="/displayTeams_{{username}}?page={{previousPage}}" class='transparentLink' >Previous</a>
+			<a href="/displayTeams/{{user_username}}?page={{previousPage}}" class='transparentLink' >Previous</a>
 			&emsp;&emsp;
 		{{/previous}}
 		{{^teamList}}
@@ -38,7 +38,7 @@
 		{{/teamList}}
 		</div>
 		<br>
-		<form action="/selectUser" align="center">
+		<form action="/" align="center">
 			<input type='submit' value="Exit" class='customButton'>
 		</form>
 		<br>
