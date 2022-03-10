@@ -10,7 +10,9 @@ import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
+import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
 import java.sql.Blob;
 import javax.persistence.GeneratedValue;
@@ -42,6 +44,8 @@ public class User {
 	private List<UserRotomCard> deck;
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
 	private List<Team> teams;
+	@ElementCollection(fetch = FetchType.EAGER)
+	private List<String> roles;
 
 	protected User() {}
 
@@ -52,6 +56,8 @@ public class User {
 		this.lastLog = lastLog;
 		deck = new ArrayList<UserRotomCard>();
 		this.teams = new ArrayList<Team>();
+		this.roles = new ArrayList<String>();
+		roles.add("USER");
 	}
 
 	@Override
@@ -90,7 +96,7 @@ public class User {
 	public String getPwd() {
 		return pwd;
 	}
-	
+		
 	public void setPwd(String pwd) {
 		this.pwd = pwd;
 	}
@@ -142,5 +148,17 @@ public class User {
 	public void setTeams(List<Team> teams) {
 		this.teams = teams;
 	}	
+	
+	public List<String> getRoles(){
+		return roles;
+	}
+	
+	public void setRoles(List<String> roles) {
+		this.roles = roles;
+	}
+	
+	public void addRole(String role) {
+		roles.add(role);
+	}
 
 }

@@ -15,6 +15,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -60,15 +61,15 @@ public class UserController {
 	public String register(Model model, @RequestParam String username, @RequestParam String pwd,
 			@RequestParam MultipartFile image) {
 		User user;
-		
-		if(userService.findUserByUsername(username) != null) {
+		try {
+			userService.findUserByUsername(username);
 			model.addAttribute("duplicatedUsername", true);
 			return "register";
-		}
-		
-		user = userService.saveNewUser(username, pwd, image);	
-		model.addAttribute("user", user);		
-		return "registered";
+		}	catch(UsernameNotFoundException userNotFound) {
+			user = userService.saveNewUser(username, pwd, image);	
+			model.addAttribute("user", user);
+			return "registered";
+		}		
 	}
 	
 	@PostMapping("/modified_user/{username}")

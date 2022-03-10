@@ -6,10 +6,18 @@
 package es.trident.rotomnet.service;
 
 import java.io.IOException;
+import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
+import java.util.Optional;
+
 import org.hibernate.engine.jdbc.BlobProxy;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Bean;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 import es.trident.rotomnet.model.User;
@@ -25,6 +33,9 @@ public class UserService {
 	
 	private DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 	private UserRepository userRepository;
+	
+	@Autowired
+	private PasswordEncoder passwordEncoder;
 
 	public UserService(UserRepository userRepository) {
 		this.userRepository = userRepository;
@@ -33,10 +44,16 @@ public class UserService {
 	public User saveNewUser(String username, String pwd) {
 		return saveNewUser(username, pwd, null);
 	}
+	
+	public void addRoleToUser(String username, String role) {
+		User user = findUserByUsername(username);
+		user.addRole(role);
+		userRepository.save(user);
+	}
 
 	public User saveNewUser(String username, String pwd, MultipartFile image) {
 		String time = dtf.format(LocalDateTime.now());
-		User u = new User(username, pwd, 1, time);
+		User u = new User(username, passwordEncoder.encode(pwd), 1, time);
 		
 		try {
 			if(image == null || image.isEmpty()) {
@@ -52,8 +69,8 @@ public class UserService {
 		return u;
 	}
 	
-	public User findUserByUsername(String username) {
-		return userRepository.findByUsername(username);
+	public User findUserByUsername(String username) throws UsernameNotFoundException{
+		return userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
 	}
 		
 	
@@ -74,10 +91,10 @@ public class UserService {
 	}
 
 	public void modifyUser(String username, String newUsername, String pwd, MultipartFile image) throws IOException {
-		User u = userRepository.findByUsername(username);
+		User u = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
 		
 		if(!newUsername.equals("")) {u.setUsername(newUsername);}
-		if(!pwd.equals("")) {u.setPwd(pwd);}
+		if(!pwd.equals("")) {u.setPwd(passwordEncoder.encode(pwd));}
 		if(!image.isEmpty()) {
 			u.setImage(true);
 			u.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));

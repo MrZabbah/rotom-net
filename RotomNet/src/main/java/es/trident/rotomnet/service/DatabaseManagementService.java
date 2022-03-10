@@ -57,8 +57,13 @@ public class DatabaseManagementService {
 
 		insertPokemonAndRotomCards();
 		createAndInsertTeams();
+		insertAdmin();
 	}
 
+	private void insertAdmin() {
+		userService.saveNewUser("Admin","admin");
+		userService.addRoleToUser("Admin", "ADMIN");
+	}
 	private void insertPokemonAndRotomCards() {
 		User ua = userService.saveNewUser("Test", "test");
 		testUser = ua;
