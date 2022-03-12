@@ -11,7 +11,7 @@
 			<tr>
 				<th>User image</th>
 				<th>Username</th>
-				<th>Password</th>
+				<th>EMail</th>
 				<th>Days logged</th>
 				<th>Last day logged</th>
 			</tr>
@@ -20,7 +20,7 @@
 					<img src="/{{user.userId}}/image" alt=""></img>
 				</td> 	
 				<td>{{user.username}}</td>
-				<td>{{user.pwd}}</td>
+				<td>{{user.mail}}</td>
 				<td>{{user.daysLogged}}</td>
 				<td>{{user.lastLog}}</td>		
 			</tr>			
@@ -36,8 +36,19 @@
 					<label for="username">New Username</label><br>
 					<input type="text" id="newUsername" name="newUsername"><br>				
 				{{/duplicatedUsername}}
+				
 				<label for="pwd">New Password</label><br>
 				<input type="password" id="pwd" name="pwd"><br>
+				
+				{{^emptyMail}}
+					<label for="mail">EMail</label><br>
+					<input type="email" id="mail" name="mail"><br>
+				{{/emptyMail}}
+				{{#emptyMail}}
+					<label for="mail">Please enter a valid email</label><br>
+					<input type="email" id="mail" name="mail" class="wrong-text"><br>
+				{{/emptyMail}}
+				
 				<label for= "image">New User Image</label><br>
 				<input type='file' name='image' accept=".jpg, .jpeg">
 				<input type="submit" value="Accept Changes">				

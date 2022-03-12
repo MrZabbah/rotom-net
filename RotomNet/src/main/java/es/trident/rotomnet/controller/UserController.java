@@ -54,19 +54,27 @@ public class UserController {
 	@GetMapping("/register")
 	public String login(Model model){			
 		model.addAttribute("duplicatedUsername", false);		
+		model.addAttribute("emptyMail",false);
 		return "register";
 	}
 	
 	@PostMapping("/registered")
 	public String register(Model model, @RequestParam String username, @RequestParam String pwd,
-			@RequestParam MultipartFile image) {
+			@RequestParam String mail, @RequestParam MultipartFile image) {
 		User user;
 		try {
 			userService.findUserByUsername(username);
 			model.addAttribute("duplicatedUsername", true);
+			model.addAttribute("emptyMail",false);
 			return "register";
 		}	catch(UsernameNotFoundException userNotFound) {
-			user = userService.saveNewUser(username, pwd, image);	
+			
+			if(mail.equals("")) {
+				model.addAttribute("duplicatedUsername", false);
+				model.addAttribute("emptyMail",true);
+				return "register";
+			}
+			user = userService.saveNewUser(username, pwd, mail, image);	
 			model.addAttribute("user", user);
 			return "registered";
 		}		
@@ -74,17 +82,18 @@ public class UserController {
 	
 	@PostMapping("/modified_user/{username}")
 	public String modifyUser(Model model, @RequestParam String newUsername, @RequestParam String pwd,
-			@RequestParam MultipartFile image, @PathVariable String username) throws IOException {		
-		User u = userService.findUserByUsername(newUsername);
-		
-		if(u != null) {
+			@RequestParam String mail, @RequestParam MultipartFile image, @PathVariable String username) throws IOException {
+		try {
+			userService.findUserByUsername(newUsername);
+			User u = userService.findUserByUsername(username);
 			model.addAttribute("user", u);
 			model.addAttribute("duplicatedUsername", true);
+			model.addAttribute("emptyMail",false);
 			return "modify";
-		}else {			
-			userService.modifyUser(username, newUsername, pwd, image);
-			return "redirect:/users";
-		}		
+		} catch(UsernameNotFoundException userNotFound) {
+			userService.modifyUser(username, newUsername, pwd, mail, image);
+			return "redirect:/";
+		}
 	}
 	
 	@GetMapping("/users")

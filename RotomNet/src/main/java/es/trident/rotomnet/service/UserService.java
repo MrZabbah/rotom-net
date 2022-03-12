@@ -41,8 +41,8 @@ public class UserService {
 		this.userRepository = userRepository;
 	}
 	
-	public User saveNewUser(String username, String pwd) {
-		return saveNewUser(username, pwd, null);
+	public User saveNewUser(String username, String pwd, String mail) {
+		return saveNewUser(username, pwd, mail, null);
 	}
 	
 	public void addRoleToUser(String username, String role) {
@@ -51,9 +51,9 @@ public class UserService {
 		userRepository.save(user);
 	}
 
-	public User saveNewUser(String username, String pwd, MultipartFile image) {
+	public User saveNewUser(String username, String pwd, String mail, MultipartFile image) {
 		String time = dtf.format(LocalDateTime.now());
-		User u = new User(username, passwordEncoder.encode(pwd), 1, time);
+		User u = new User(username, passwordEncoder.encode(pwd), 1, time, mail);
 		
 		try {
 			if(image == null || image.isEmpty()) {
@@ -90,11 +90,12 @@ public class UserService {
 		userRepository.save(user);
 	}
 
-	public void modifyUser(String username, String newUsername, String pwd, MultipartFile image) throws IOException {
+	public void modifyUser(String username, String newUsername, String pwd, String mail,  MultipartFile image) throws IOException {
 		User u = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
 		
 		if(!newUsername.equals("")) {u.setUsername(newUsername);}
 		if(!pwd.equals("")) {u.setPwd(passwordEncoder.encode(pwd));}
+		if(!mail.equals("")) {u.setMail(mail);}
 		if(!image.isEmpty()) {
 			u.setImage(true);
 			u.setImageFile(BlobProxy.generateProxy(image.getInputStream(), image.getSize()));

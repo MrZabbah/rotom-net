@@ -37,6 +37,7 @@ public class User {
 	private int daysLogged;
 	private String lastLog;	
 	private boolean image; 
+	private String mail;
 	@Lob
 	@JsonIgnore
 	private Blob imageFile;	
@@ -49,11 +50,12 @@ public class User {
 
 	protected User() {}
 
-	public User(String username, String pwd, int daysLogged, String lastLog) {
+	public User(String username, String pwd, int daysLogged, String lastLog, String mail) {
 		this.username = username;
 		this.pwd = pwd;
 		this.daysLogged = daysLogged;
 		this.lastLog = lastLog;
+		this.mail = mail;
 		deck = new ArrayList<UserRotomCard>();
 		this.teams = new ArrayList<Team>();
 		this.roles = new ArrayList<String>();
@@ -115,6 +117,14 @@ public class User {
 
 	public void setLastLog(String lastLog) {
 		this.lastLog = lastLog;
+	}
+	
+	public String getMail() {
+		return mail;
+	}
+	
+	public void setMail(String mail) {
+		this.mail = mail;
 	}
 
 	public boolean getImage() {
