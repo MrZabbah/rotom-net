@@ -41,10 +41,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.authorizeHttpRequests().antMatchers("/pokedex").permitAll();
 		http.authorizeHttpRequests().antMatchers("/teamGenerator").permitAll();
 		http.authorizeHttpRequests().antMatchers("/createRandomTeam").permitAll();
-		http.authorizeHttpRequests().antMatchers("/createRandomTeam").permitAll();
-		http.authorizeHttpRequests().antMatchers("/{id}/image").permitAll();		
+		http.authorizeHttpRequests().antMatchers("/{id}/image").permitAll();
+		http.authorizeHttpRequests().antMatchers("/modified_user/{username}").permitAll();
+		http.authorizeHttpRequests().antMatchers("/sendByMail").permitAll();
 		http.authorizeHttpRequests().antMatchers("/users").hasRole("ADMIN");
 		http.authorizeHttpRequests().antMatchers("/selectUser").hasRole("ADMIN");
+		
     
 		http.authorizeHttpRequests().anyRequest().authenticated();
 				

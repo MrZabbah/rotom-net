@@ -1,11 +1,11 @@
 <html>
 	<head>
-		{{#wrongUsername}}
-			<title>Wrong username </title>
-		{{/wrongUsername}}
-		{{^wrongUsername}}
+		{{#wrongMail}}
+			<title>Non existing email </title>
+		{{/wrongMail}}
+		{{^wrongMail}}
 			<title>Random team generated </title>
-		{{/wrongUsername}}
+		{{/wrongMail}}
 		<link rel='stylesheet' type='text/css' href='/css/teamGenerated.css'>
 	</head>
 	<body style='background-color:black'>
@@ -43,6 +43,10 @@
 		<br><br>
 		<div align="center">
 
+		<form action='/sendByMail' method='post', align='center' class='transparentForm'>
+			<input type='email' value='{{#logged}}{{user.mail}}{{/logged}}', name='mail'>
+			<input type='submit' value='Send by email' class='customButton'>
+		</form>&emsp;
 		{{#logged}}
 			<form action='/saveTeam/{{user_username}}' method='post' align='center' class='transparentForm'>		
 				<input type='submit' value='Save Team' class='customButton'>

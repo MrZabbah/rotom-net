@@ -6,6 +6,8 @@
 package es.trident.rotomnet.controller;
 
 import java.util.ArrayList;
+
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -57,7 +59,7 @@ public class TeamGeneratorController {
 			 @RequestParam(required=false) boolean groundCheck, @RequestParam(required=false) boolean rockCheck, @RequestParam(required=false) boolean poisonCheck, @RequestParam(required=false) boolean psychicCheck,
 			 @RequestParam(required=false) boolean flyingCheck, @RequestParam(required=false) boolean bugCheck, @RequestParam(required=false) boolean normalCheck, @RequestParam(required=false) boolean ghostCheck,
 			 @RequestParam(required=false) boolean fightingCheck, @RequestParam(required=false) boolean steelCheck, @RequestParam(required=false) boolean iceCheck, @RequestParam(required=false) boolean dragonCheck,
-			 @RequestParam(required=false) boolean darkCheck, @RequestParam(required=false) boolean fairyCheck, HttpSession session) {
+			 @RequestParam(required=false) boolean darkCheck, @RequestParam(required=false) boolean fairyCheck, HttpSession session, HttpServletRequest request) {
 		boolean[] types = {fireCheck,waterCheck,grassCheck,electricCheck,groundCheck,rockCheck,poisonCheck,psychicCheck,flyingCheck,bugCheck,normalCheck,ghostCheck,fightingCheck,steelCheck,iceCheck,dragonCheck,darkCheck,fairyCheck};
 		boolean containTypes = false;
 		ArrayList<String> selectedTypes = _pokemonService.getTypesFromRequest(types);
@@ -68,17 +70,41 @@ public class TeamGeneratorController {
 		}
 
 		currentTeam = _teamService.getRandomTeam(teamName,selectedTypes,legendaryCheck);
+		
 		session.setAttribute("legendaryCheck",legendaryCheck);
 		session.setAttribute("selectedTypes",selectedTypes);
 		session.setAttribute("anyType",containTypes);
 		session.setAttribute("currentTeam",currentTeam);
+		
+		if(request.getUserPrincipal() != null) {
+			User user = _userService.findUserByUsername(request.getUserPrincipal().getName());
+			model.addAttribute("user",user);
+		}
+		
 		model.addAttribute("legendaryCheck",legendaryCheck);
 		model.addAttribute("selectedTypes",selectedTypes);
 		model.addAttribute("anyType",containTypes);
 		model.addAttribute("team",currentTeam);
-		model.addAttribute("wrongUsername",false);
-
+		model.addAttribute("wrongMail",false);
+		
 		return "teamCreated";
+	}
+	
+	@PostMapping("/sendByMail")
+	public String sendByMail(Model model, @RequestParam String mail, HttpSession session, HttpServletRequest request) {
+		if(mail.equals("")) {
+			if(request.getUserPrincipal() != null) {
+				User user = _userService.findUserByUsername(request.getUserPrincipal().getName());
+				model.addAttribute("user",user);
+			}
+			model.addAttribute("legendaryCheck",(Boolean)session.getAttribute("legendaryCheck"));
+			model.addAttribute("selectedTypes",(ArrayList<String>)session.getAttribute("selectedTypes"));
+			model.addAttribute("anyType",(Boolean)session.getAttribute("anyType"));
+			model.addAttribute("team",(Team)session.getAttribute("currentTeam"));
+			model.addAttribute("wrongMail",true);
+			return "teamCreated";
+		}
+		return "redirect:/"; //Esto luego se cambiará para ejecutar el método de REST
 	}
 
 	@PostMapping("/saveTeam/{username}")
@@ -114,5 +140,8 @@ public class TeamGeneratorController {
 		_teamService.deleteTeam(id);
 		return "redirect:/displayTeams/"+user;
 	}
+	
+	
+	
 
 }
