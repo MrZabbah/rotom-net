@@ -6,8 +6,10 @@
 package es.trident.rotomnet.service;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.hibernate.engine.jdbc.BlobProxy;
@@ -101,4 +103,21 @@ public class UserService {
 		userRepository.save(u);
 	}
 	
+	public void updateLoginData(User u) {
+		String last_log = u.getLastLog();
+		String actual = dtf.format(LocalDateTime.now());		
+		
+		//Calcular dias entre logs.
+		LocalDate d1 = LocalDate.parse(last_log, dtf);
+		LocalDate d2 = LocalDate.parse(actual, dtf);
+		
+		long days = ChronoUnit.DAYS.between(d1, d2);
+		if(days >= 2) {
+			u.setDaysLogged(1);
+		}else if(days >= 1) {
+			u.setDaysLogged(u.getDaysLogged() + 1);
+		}		
+		u.setLastLog(actual);
+		userRepository.save(u);
+	}
 }

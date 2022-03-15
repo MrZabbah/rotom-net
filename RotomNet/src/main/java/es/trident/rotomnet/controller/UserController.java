@@ -10,6 +10,9 @@ import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -106,6 +109,12 @@ public class UserController {
 		return "modify";
 	}
 	
+	@GetMapping("/updateLoginData")
+	public String updateLoginData(Model model, HttpServletRequest req) {
+		User u = userService.findUserByUsername(req.getUserPrincipal().getName());
+		userService.updateLoginData(u);
+		return "redirect:/";
+	}
 	
 	/**
 	 * Descarga la imagen de usuario si la tiene. En caso contrario, devuelve una imagen por 
