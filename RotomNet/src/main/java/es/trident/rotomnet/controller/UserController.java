@@ -81,19 +81,10 @@ public class UserController {
 	}
 	
 	@PostMapping("/modified_user/{username}")
-	public String modifyUser(Model model, @RequestParam String newUsername, @RequestParam String pwd,
-			@RequestParam String mail, @RequestParam MultipartFile image, @PathVariable String username) throws IOException {
-		try {
-			userService.findUserByUsername(newUsername);
-			User u = userService.findUserByUsername(username);
-			model.addAttribute("user", u);
-			model.addAttribute("duplicatedUsername", true);
-			model.addAttribute("emptyMail",false);
-			return "modify";
-		} catch(UsernameNotFoundException userNotFound) {
-			userService.modifyUser(username, newUsername, pwd, mail, image);
+	public String modifyUser(Model model, @RequestParam String pwd, @RequestParam String mail, 
+			@RequestParam MultipartFile image, @PathVariable String username) throws IOException {
+			userService.modifyUser(username, pwd, mail, image);
 			return "redirect:/";
-		}
 	}
 	
 	@GetMapping("/users")
@@ -110,9 +101,7 @@ public class UserController {
 	
 	@GetMapping("/modify/{username}")
 	public String modifySelectedUser(Model model, @PathVariable String username) {
-		User user = userService.findUserByUsername(username);
-		
-		model.addAttribute("duplicatedUsername", false);
+		User user = userService.findUserByUsername(username);		
 		model.addAttribute("user", user);		
 		return "modify";
 	}

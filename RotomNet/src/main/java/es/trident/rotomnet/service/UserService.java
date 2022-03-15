@@ -6,17 +6,13 @@
 package es.trident.rotomnet.service;
 
 import java.io.IOException;
-import java.security.SecureRandom;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
 import java.util.List;
-import java.util.Optional;
 
 import org.hibernate.engine.jdbc.BlobProxy;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.annotation.Bean;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -43,6 +39,13 @@ public class UserService {
 	
 	public User saveNewUser(String username, String pwd, String mail) {
 		return saveNewUser(username, pwd, mail, null);
+	}
+	
+	public User loadDefaultUsers(String username, String encoded_pwd) {
+		String time = dtf.format(LocalDateTime.now());
+		User u = new User(username, encoded_pwd, 1, time, "");
+		userRepository.save(u);
+		return u;
 	}
 	
 	public void addRoleToUser(String username, String role) {
@@ -86,14 +89,9 @@ public class UserService {
 		userRepository.deleteById(id);
 	}
 
-	public void saveUserWithTeamsChanged(User user) {
-		userRepository.save(user);
-	}
-
-	public void modifyUser(String username, String newUsername, String pwd, String mail,  MultipartFile image) throws IOException {
+	public void modifyUser(String username, String pwd, String mail,  MultipartFile image) throws IOException {
 		User u = userRepository.findByUsername(username).orElseThrow(()->new UsernameNotFoundException("User not found"));
 		
-		if(!newUsername.equals("")) {u.setUsername(newUsername);}
 		if(!pwd.equals("")) {u.setPwd(passwordEncoder.encode(pwd));}
 		if(!mail.equals("")) {u.setMail(mail);}
 		if(!image.isEmpty()) {

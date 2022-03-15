@@ -9,31 +9,69 @@
 		<h1 id='titleH1'>Team list</h1>
 		<ul>
 		{{#teamList}}
-			<a href="/showTeam/{{id}}/{{user_username}}" id= 'inlineDisplay'>
-				<ul>
-				Team {{id}} ({{name}}):
-				{{#teamPokemon}}
-					{{name}} | 
-				{{/teamPokemon}}
-				</ul>
-			</a>
-			&emsp;&emsp;
-			<form action='/deleteTeam/{{id}}/{{user_username}}' method='post' id='inlineDisplay'>
-				<input type='submit' value='Delete' class = 'customButton'>
-				<input type="hidden" name="_csrf" value="{{token}}"/>
-			</form>
+			{{#is_admin}}
+				<a href="/showTeam/{{id}}/{{selected_username}}" id= 'inlineDisplay'>
+					<ul>
+					Team {{id}} ({{name}}):
+					{{#teamPokemon}}
+						{{name}} | 
+					{{/teamPokemon}}
+					</ul>
+				</a>
+				&emsp;&emsp;
+			{{/is_admin}}
+			
+			{{^is_admin}}
+				<a href="/showTeam/{{id}}/{{user_username}}" id= 'inlineDisplay'>
+					<ul>
+					Team {{id}} ({{name}}):
+					{{#teamPokemon}}
+						{{name}} | 
+					{{/teamPokemon}}
+					</ul>
+				</a>
+				&emsp;&emsp;
+			{{/is_admin}}
+			
+			{{#is_admin}}
+				<form action='/deleteTeam/{{id}}/{{selected_username}}' method='post' id='inlineDisplay'>
+					<input type='submit' value='Delete' class = 'customButton'>
+					<input type="hidden" name="_csrf" value="{{token}}"/>
+				</form>
+			{{/is_admin}}
+			
+			{{^is_admin}}
+				<form action='/deleteTeam/{{id}}/{{user_username}}' method='post' id='inlineDisplay'>
+					<input type='submit' value='Delete' class = 'customButton'>
+					<input type="hidden" name="_csrf" value="{{token}}"/>
+				</form>
+			{{/is_admin}}
 				<br>
 				<br>
 		{{/teamList}}
 		</ul>
 		<br>
-		{{#next}}
-			<a href="/displayTeams/{{user_username}}?page={{nextPage}}" class='transparentLink' >Next</a>
-		{{/next}}
-		{{#previous}}
-			<a href="/displayTeams/{{user_username}}?page={{previousPage}}" class='transparentLink' >Previous</a>
-			&emsp;&emsp;
-		{{/previous}}
+		
+		{{#is_admin}}
+			{{#next}}
+				<a href="/displayTeams/{{selected_username}}?page={{nextPage}}" class='transparentLink' >Next</a>
+			{{/next}}
+			{{#previous}}
+				<a href="/displayTeams/{{selected_username}}?page={{previousPage}}" class='transparentLink' >Previous</a>
+				&emsp;&emsp;
+			{{/previous}}
+		{{/is_admin}}
+		
+		{{^is_admin}}
+			{{#next}}
+				<a href="/displayTeams/{{user_username}}?page={{nextPage}}" class='transparentLink' >Next</a>
+			{{/next}}
+			{{#previous}}
+				<a href="/displayTeams/{{user_username}}?page={{previousPage}}" class='transparentLink' >Previous</a>
+				&emsp;&emsp;
+			{{/previous}}
+		{{/is_admin}}
+		
 		{{^teamList}}
 			No current teams
 		{{/teamList}}
