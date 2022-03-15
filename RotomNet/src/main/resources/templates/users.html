@@ -31,21 +31,25 @@
 					<td>
 						<form action="/displayTeams/{{username}}" class="show-teams-form" method="GET">
 							<input type="submit" value="🤝">
+							<input type="hidden" name="_csrf" value="{{token}}"/>
 						</form>
 					</td>		
 					<td>
 						<form action="/deck/{{username}}" class="show-deck-form" method="GET">
 							<input type="submit" value="🃏">
+							<input type="hidden" name="_csrf" value="{{token}}"/>
 						</form>
 					</td>	
 					<td>
 						<form action="/modify/{{username}}" class="modify-form" method="GET">
 							<input type="submit" value="🛠">
+							<input type="hidden" name="_csrf" value="{{token}}"/>
 						</form>
 					</td>		
 					<td>
 						<form action="/{{userId}}/delete" class="delete-form" method="POST">
 							<input type="submit" class="btn-trash" value="🗑">
+							<input type="hidden" name="_csrf" value="{{token}}"/>
 						</form>
 					</td>	
 				</tr>

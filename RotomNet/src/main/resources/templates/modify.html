@@ -27,31 +27,17 @@
 		</table>
 		<form action="/modified_user/{{user.username}}" method="post" class="modify-form" enctype="multipart/form-data"><br>
 				
-				{{#duplicatedUsername}}
-					<label for="username">Username already in use!</label><br>
-					<input type="text" id="newUsername" name="newUsername" class="wrong-text"><br>	
-				{{/duplicatedUsername}}
-				
-				{{^duplicatedUsername}}
-					<label for="username">New Username</label><br>
-					<input type="text" id="newUsername" name="newUsername"><br>				
-				{{/duplicatedUsername}}
-				
 				<label for="pwd">New Password</label><br>
 				<input type="password" id="pwd" name="pwd"><br>
-				
-				{{^emptyMail}}
-					<label for="mail">EMail</label><br>
-					<input type="email" id="mail" name="mail"><br>
-				{{/emptyMail}}
-				{{#emptyMail}}
-					<label for="mail">Please enter a valid email</label><br>
-					<input type="email" id="mail" name="mail" class="wrong-text"><br>
-				{{/emptyMail}}
+
+				<label for="mail">EMail</label><br>
+				<input type="email" id="mail" name="mail"><br>
+			
 				
 				<label for= "image">New User Image</label><br>
 				<input type='file' name='image' accept=".jpg, .jpeg">
-				<input type="submit" value="Accept Changes">				
+				<input type="submit" value="Accept Changes">	
+				<input type="hidden" name="_csrf" value="{{token}}"/>			
 			</form>
 	</div>
 

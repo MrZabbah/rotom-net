@@ -27,6 +27,7 @@
 				</form>&emsp;
 				<form action="/deleteTeam/{{id}}/{{#user}}{{username}}{{/user}}" method='post' align='center' class='transparentForm' >
 					<input type='submit' value='Delete team' class='customButton'>
+          <input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>
 			</div>
 		{{/team}}

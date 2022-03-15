@@ -61,11 +61,11 @@ public class DatabaseManagementService {
 	}
 
 	private void insertAdmin() {
-		userService.saveNewUser("Admin","admin","");
+		userService.loadDefaultUsers("Admin", "$2a$10$nfTCMiBCYBKRn5FfjS3XE.vPGWpsGY0Au5UPivJwP0hhVpZNnlJuq");
 		userService.addRoleToUser("Admin", "ADMIN");
 	}
 	private void insertPokemonAndRotomCards() {
-		User ua = userService.saveNewUser("Test", "test","");
+		User ua = userService.loadDefaultUsers("Test", "$2a$10$L.H8lh.sgtlIqtq.PINi8.MF6KbGh4cLg45ragz44xQVbw3FFTvbC");
 		testUser = ua;
 		Random r = new Random();
 		int ini = r.nextInt(0, 151);

@@ -41,12 +41,14 @@
 			{{^battleFinished}}
 				<form action="/battleResult" method="GET">
 					<input type="submit" value="⚔ Start Battle! ⚔">
+					<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>
 			{{/battleFinished}}
 			
 			{{#battleFinished}}
 				<form action="/deck/{{user_username}}" method="GET">
 					<input type="submit" value="Watch my cards">
+					<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>
 			{{/battleFinished}}
 		</div>
