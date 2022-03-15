@@ -44,6 +44,7 @@
 					<label for="mail">EMail</label><br>
 					<input type="email" id="mail" name="mail"><br>
 				{{/emptyMail}}
+				
 				{{#emptyMail}}
 					<label for="mail">Please enter a valid email</label><br>
 					<input type="email" id="mail" name="mail" class="wrong-text"><br>
@@ -51,7 +52,8 @@
 				
 				<label for= "image">New User Image</label><br>
 				<input type='file' name='image' accept=".jpg, .jpeg">
-				<input type="submit" value="Accept Changes">				
+				<input type="submit" value="Accept Changes">	
+				<input type="hidden" name="_csrf" value="{{token}}"/>			
 			</form>
 	</div>
 

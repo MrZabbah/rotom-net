@@ -46,18 +46,22 @@
 		<form action='/sendByMail' method='post', align='center' class='transparentForm'>
 			<input type='email' value='{{#logged}}{{user.mail}}{{/logged}}', name='mail'>
 			<input type='submit' value='Send by email' class='customButton'>
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 		</form>&emsp;
 		{{#logged}}
 			<form action='/saveTeam/{{user_username}}' method='post' align='center' class='transparentForm'>		
 				<input type='submit' value='Save Team' class='customButton'>
+				<input type="hidden" name="_csrf" value="{{token}}"/>
 			</form>&emsp;
 		{{/logged}}
 		
 		<form action='teamGenerator'method='post' align='center'class='transparentForm'>
 			<input type='submit' value='Try again' class='customButton'>
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 		</form>&emsp;
 		<form action='/' align='center'class='transparentForm'>
 			<input type='submit' value='Exit' class='customButton'>
+			<input type="hidden" name="_csrf" value="{{token}}"/>
 		</form>
 		</div>	
 		<br>
