@@ -1,6 +1,6 @@
 <html>
 	<head>
-		<title>Display selected team</title>
+		<title>{{^wrongMail}}Display selected team{{/wrongMail}}{{#wrongMail}}Not a valid email{{/wrongMail}}</title>
 		<link rel = 'stylesheet' type = 'text/css' href='/css/teamDisplay.css'>
 	</head>
 	<body style='background-color:black'>
@@ -20,10 +20,16 @@
 			</div>
 			<br>
 			<br>
-			<form action="/deleteTeam/{{id}}/{{#user}}{{username}}{{/user}}" method='post' align='center' >
-				<input type='submit' value='Delete team' class='customButton'>
-				<input type="hidden" name="_csrf" value="{{token}}"/>
-			</form>
+			<div align="center">
+				<form action='/sendSelectedByMail/{{id}}' method='post' align='center' class='transparentForm'>
+					<input type='email' value='{{#logged}}{{#user}}{{mail}}{{/user}}{{/logged}}', name='mail'>&emsp;
+					<input type='submit' value='Send by email' class='customButton'>
+				</form>&emsp;
+				<form action="/deleteTeam/{{id}}/{{#user}}{{username}}{{/user}}" method='post' align='center' class='transparentForm' >
+					<input type='submit' value='Delete team' class='customButton'>
+          <input type="hidden" name="_csrf" value="{{token}}"/>
+				</form>
+			</div>
 		{{/team}}
 	</div>
 	</body>

@@ -76,5 +76,63 @@ public class TeamService {
 		Team myTeam = new Team(team, teamName,null);
 		return myTeam;
 	}
+	
+	public String parseTeam(Team team) {
+		StringBuilder teamInfo = new StringBuilder("");
+		for (Pokemon p : team.getPokemon()) {
+			teamInfo.append(p.getName()+" @ "+p.getItem() +"\n");
+			teamInfo.append("Ability: "+p.getAbility()+"\n");
+			teamInfo.append("EVs "+checkEvs(p.getHealthEVs(),p.getAttackEVs(),p.getDefenseEVs(),p.getSpAttackEVs(),p.getSpDefenseEVs(),p.getSpeedEVs())+"\n");
+			teamInfo.append(p.getNature() +" Nature\n");
+			teamInfo.append("-"+p.getAttack1()+"\n");
+			teamInfo.append("-"+p.getAttack2()+"\n");
+			teamInfo.append("-"+p.getAttack3()+"\n");
+			teamInfo.append("-"+p.getAttack4()+"\n");
+			teamInfo.append("\n");
+		}
+		return teamInfo.toString();
+	}
+	
+	public String checkEvs(int he, int at, int def, int spA, int spD, int spe) {
+		StringBuilder evs = new StringBuilder("");
+		int currentCount = 0;
+		
+		if(he != 0) {
+			evs.append(String.valueOf(he)+" HP / ");
+		}
+		currentCount += he;
+		if(at != 0) {
+			evs.append(String.valueOf(at) + " Atk / ");
+		}
+		currentCount += at;
+		if(def != 0) {
+			evs.append(String.valueOf(def) +" Def");
+			currentCount += def;
+			if(currentCount != 510) {
+				evs.append(" / ");
+			}
+		}
+		
+		if(spA != 0) {
+			evs.append(String.valueOf(spA)+" SpA");
+			currentCount += spA;
+			if(currentCount != 510) {
+				evs.append(" / ");
+			}
+		}
+		
+		if(spD != 0) {
+			evs.append(String.valueOf(spD)+" SpD");
+			currentCount += spD;
+			if(currentCount != 510) {
+				evs.append(" / ");
+			}
+		}
+
+		if(spe != 0) {
+			evs.append(String.valueOf(spe)+" Spe");
+		}
+		return evs.toString();
+	}
 
 }
