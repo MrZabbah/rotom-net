@@ -6,11 +6,18 @@
 package es.trident.rotomnet.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -18,6 +25,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.client.RestTemplate;
+
 import es.trident.rotomnet.model.Team;
 import es.trident.rotomnet.model.User;
 import es.trident.rotomnet.service.PokemonService;
@@ -90,21 +99,52 @@ public class TeamGeneratorController {
 		return "teamCreated";
 	}
 	
-	@PostMapping("/sendByMail")
-	public String sendByMail(Model model, @RequestParam String mail, HttpSession session, HttpServletRequest request) {
+	@PostMapping("/sendCreatedByMail")
+	public String sendCreatedByMail(Model model, @RequestParam String mail, HttpSession session, HttpServletRequest request) {
+		if(request.getUserPrincipal() != null) {
+			User user = _userService.findUserByUsername(request.getUserPrincipal().getName());
+			model.addAttribute("user",user);
+		}
+		model.addAttribute("legendaryCheck",(Boolean)session.getAttribute("legendaryCheck"));
+		model.addAttribute("selectedTypes",(ArrayList<String>)session.getAttribute("selectedTypes"));
+		model.addAttribute("anyType",(Boolean)session.getAttribute("anyType"));
+		model.addAttribute("team",(Team)session.getAttribute("currentTeam"));
+		
 		if(mail.equals("")) {
-			if(request.getUserPrincipal() != null) {
-				User user = _userService.findUserByUsername(request.getUserPrincipal().getName());
-				model.addAttribute("user",user);
-			}
-			model.addAttribute("legendaryCheck",(Boolean)session.getAttribute("legendaryCheck"));
-			model.addAttribute("selectedTypes",(ArrayList<String>)session.getAttribute("selectedTypes"));
-			model.addAttribute("anyType",(Boolean)session.getAttribute("anyType"));
-			model.addAttribute("team",(Team)session.getAttribute("currentTeam"));
 			model.addAttribute("wrongMail",true);
 			return "teamCreated";
 		}
-		return "redirect:/"; //Esto luego se cambiará para ejecutar el método de REST
+		
+		Team team= (Team)session.getAttribute("currentTeam");
+		sendTeamMail(team,mail);
+		model.addAttribute("wrongMail",false);
+		return "teamCreated";
+	}
+	
+	@PostMapping("/sendSelectedByMail/{id}")
+	public String sendSelectedByMail(Model model, @RequestParam String mail, @PathVariable int id) {
+		
+		Team selectedTeam = _teamService.getTeamById(id);
+		model.addAttribute("team",selectedTeam);
+		if(mail.equals("")) {
+			model.addAttribute("wrongMail", true);
+			return "teamDisplay";
+		}
+		sendTeamMail(selectedTeam,mail);
+		model.addAttribute("wrongMail",false);
+		return "teamDisplay";
+	}
+	
+	private void sendTeamMail(Team team, String mail) {
+		Map<String, String> parameterMap = new HashMap<String, String>();
+		HttpHeaders headers = new HttpHeaders();
+		RestTemplate restTemplate = new RestTemplate();
+		String teamInformation = _teamService.parseTeam(team);
+		headers.setContentType(MediaType.APPLICATION_JSON);
+		parameterMap.put("mail", mail);
+		parameterMap.put("teamInformation", teamInformation);
+		HttpEntity<Map<String, String>> myRequest = new HttpEntity<>(parameterMap, headers);
+		restTemplate.postForEntity("http://localhost:8080/mail", myRequest, String.class);
 	}
 
 	@PostMapping("/saveTeam/{username}")
@@ -129,9 +169,9 @@ public class TeamGeneratorController {
 	}
 
 	@GetMapping("/showTeam/{id}/{username}")
-	public String showTeam(Model model, @PathVariable int id, @PathVariable String username) {
+	public String showTeam(Model model, @PathVariable int id, @PathVariable String username, HttpServletRequest request) {
 		model.addAttribute("team", _teamService.getTeamById(id));
-		model.addAttribute("username",username);
+		model.addAttribute("wrongMail",false);
 		return "teamDisplay";
 	}
 

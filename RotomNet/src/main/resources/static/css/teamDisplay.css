@@ -27,6 +27,12 @@
 	margin-left: 200px;
 	margin-right:200px;
 }
+
+form.transparentForm{
+	background-color:transparent;
+	display:inline-block;
+}
+
 input.customButton{
 	border-radius:50px;
 	background-color: #7cd7e7;
