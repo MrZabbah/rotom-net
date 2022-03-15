@@ -99,8 +99,8 @@ public class TeamGeneratorController {
 		return "teamCreated";
 	}
 	
-	@PostMapping("/sendCreatedByMail")
-	public String sendCreatedByMail(Model model, @RequestParam String mail, HttpSession session, HttpServletRequest request) {
+	@PostMapping("/createdTeamMail")
+	public String createdTeamMail(Model model, @RequestParam String mail, HttpSession session, HttpServletRequest request) {
 		if(request.getUserPrincipal() != null) {
 			User user = _userService.findUserByUsername(request.getUserPrincipal().getName());
 			model.addAttribute("user",user);
@@ -116,13 +116,13 @@ public class TeamGeneratorController {
 		}
 		
 		Team team= (Team)session.getAttribute("currentTeam");
-		sendTeamMail(team,mail);
+		teamMail(team,mail);
 		model.addAttribute("wrongMail",false);
 		return "teamCreated";
 	}
 	
-	@PostMapping("/sendSelectedByMail/{id}")
-	public String sendSelectedByMail(Model model, @RequestParam String mail, @PathVariable int id) {
+	@PostMapping("/selectedTeamMail/{id}")
+	public String selectedTeamMail(Model model, @RequestParam String mail, @PathVariable int id) {
 		
 		Team selectedTeam = _teamService.getTeamById(id);
 		model.addAttribute("team",selectedTeam);
@@ -130,12 +130,12 @@ public class TeamGeneratorController {
 			model.addAttribute("wrongMail", true);
 			return "teamDisplay";
 		}
-		sendTeamMail(selectedTeam,mail);
+		teamMail(selectedTeam,mail);
 		model.addAttribute("wrongMail",false);
 		return "teamDisplay";
 	}
 	
-	private void sendTeamMail(Team team, String mail) {
+	private void teamMail(Team team, String mail) {
 		Map<String, String> parameterMap = new HashMap<String, String>();
 		HttpHeaders headers = new HttpHeaders();
 		RestTemplate restTemplate = new RestTemplate();

@@ -21,13 +21,14 @@
 			<br>
 			<br>
 			<div align="center">
-				<form action='/sendSelectedByMail/{{id}}' method='post' align='center' class='transparentForm'>
+				<form action='/selectedTeamMail/{{id}}' method='post' align='center' class='transparentForm'>
 					<input type='email' value='{{#logged}}{{#user}}{{mail}}{{/user}}{{/logged}}', name='mail'>&emsp;
 					<input type='submit' value='Send by email' class='customButton'>
+					<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>&emsp;
 				<form action="/deleteTeam/{{id}}/{{#user}}{{username}}{{/user}}" method='post' align='center' class='transparentForm' >
 					<input type='submit' value='Delete team' class='customButton'>
-          <input type="hidden" name="_csrf" value="{{token}}"/>
+          			<input type="hidden" name="_csrf" value="{{token}}"/>
 				</form>
 			</div>
 		{{/team}}

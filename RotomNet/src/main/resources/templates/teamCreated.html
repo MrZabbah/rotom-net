@@ -43,7 +43,7 @@
 		<br><br>
 		<div align="center">
 
-		<form action='/sendCreatedByMail' method='post', align='center' class='transparentForm'>
+		<form action='/createdTeamMail' method='post', align='center' class='transparentForm'>
 			<input type='email' value='{{#logged}}{{user.mail}}{{/logged}}', name='mail'>
 			<input type='submit' value='Send by email' class='customButton'>
 			<input type="hidden" name="_csrf" value="{{token}}"/>
