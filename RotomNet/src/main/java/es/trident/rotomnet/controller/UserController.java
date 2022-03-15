@@ -10,6 +10,9 @@ import java.net.MalformedURLException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+
+import javax.servlet.http.HttpServletRequest;
+
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -81,19 +84,10 @@ public class UserController {
 	}
 	
 	@PostMapping("/modified_user/{username}")
-	public String modifyUser(Model model, @RequestParam String newUsername, @RequestParam String pwd,
-			@RequestParam String mail, @RequestParam MultipartFile image, @PathVariable String username) throws IOException {
-		try {
-			userService.findUserByUsername(newUsername);
-			User u = userService.findUserByUsername(username);
-			model.addAttribute("user", u);
-			model.addAttribute("duplicatedUsername", true);
-			model.addAttribute("emptyMail",false);
-			return "modify";
-		} catch(UsernameNotFoundException userNotFound) {
-			userService.modifyUser(username, newUsername, pwd, mail, image);
+	public String modifyUser(Model model, @RequestParam String pwd, @RequestParam String mail, 
+			@RequestParam MultipartFile image, @PathVariable String username) throws IOException {
+			userService.modifyUser(username, pwd, mail, image);
 			return "redirect:/";
-		}
 	}
 	
 	@GetMapping("/users")
@@ -110,13 +104,17 @@ public class UserController {
 	
 	@GetMapping("/modify/{username}")
 	public String modifySelectedUser(Model model, @PathVariable String username) {
-		User user = userService.findUserByUsername(username);
-		
-		model.addAttribute("duplicatedUsername", false);
+		User user = userService.findUserByUsername(username);		
 		model.addAttribute("user", user);		
 		return "modify";
 	}
 	
+	@GetMapping("/updateLoginData")
+	public String updateLoginData(Model model, HttpServletRequest req) {
+		User u = userService.findUserByUsername(req.getUserPrincipal().getName());
+		userService.updateLoginData(u);
+		return "redirect:/";
+	}
 	
 	/**
 	 * Descarga la imagen de usuario si la tiene. En caso contrario, devuelve una imagen por 

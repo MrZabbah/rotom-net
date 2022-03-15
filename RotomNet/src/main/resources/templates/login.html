@@ -18,6 +18,7 @@
 				<label for="pwd">Password</label><br>
 				<input type="password" id="pwd" name="pwd"><br>
 				<input type="submit" value="Login">
+				<input type="hidden" name="_csrf" value="{{token}}"/>
 			</form>
 			<a href="/register">No account? Sign up!</a>
 		</div>

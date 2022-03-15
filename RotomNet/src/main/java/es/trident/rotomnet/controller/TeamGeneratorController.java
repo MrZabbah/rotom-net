@@ -124,7 +124,7 @@ public class TeamGeneratorController {
 		model.addAttribute("next",teamsReceived.hasNext());
 		model.addAttribute("nextPage",teamsReceived.getNumber()+1);
 		model.addAttribute("previousPage",teamsReceived.getNumber()-1);
-		model.addAttribute("username",username);
+		model.addAttribute("selected_username",username);
 		return "teamList";
 	}
 

@@ -9,7 +9,6 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import es.trident.rotomnet.service.RepositoryUserDetailsService;
 
@@ -54,12 +53,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.formLogin().usernameParameter("username");
 		http.formLogin().passwordParameter("pwd");
 		http.formLogin().failureUrl("/login");
-		http.formLogin().defaultSuccessUrl("/", true);
+		http.formLogin().defaultSuccessUrl("/updateLoginData", true);
 				
 		http.logout().logoutUrl("/logout");
 		http.logout().logoutSuccessUrl("/");
-		
-		http.csrf().disable();
 	}
 	
 	@Override
