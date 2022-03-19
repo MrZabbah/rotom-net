@@ -75,7 +75,7 @@ public class CardService {
 	 * @return String formateado
 	 */
 	public String getUserDiscoverRatio(User user) {
-		String s = String.format("Discovered: [%d / %d]", userCardsRepository.countByUser(user),
+		String s = String.format("Discovered: [%d / %d]", deckCount(user),
 				cardRepository.count());
 		
 		return s += String.format(" Shinies: [%d / %d]", userCardsRepository.countByUserShiny(user),
@@ -88,7 +88,7 @@ public class CardService {
 		return Utils.getRandomList(6, cardList);
 	}
 
-	public void addCardToUser(RotomCard rotomCard, User user, boolean shiny) {
+	public UserRotomCard addCardToUser(RotomCard rotomCard, User user, boolean shiny) {
 		UserRotomCard card = userCardsRepository.findByUserAndRotomCard(user, rotomCard);
 
 		if (card != null) {
@@ -96,8 +96,15 @@ public class CardService {
 			card.updateShinyCondition(shiny);
 			userCardsRepository.save(card);
 		} else {
-			userCardsRepository.save(new UserRotomCard(user, rotomCard, shiny));
+			card = new UserRotomCard(user, rotomCard, shiny);
+			userCardsRepository.save(card);
 		}
+		
+		return card;
+	}
+	
+	public int deckCount(User user) {
+		return userCardsRepository.countByUser(user);
 	}
 
 	private class OrderingByPokemon extends Ordering<UserRotomCard> {

@@ -348,7 +348,7 @@ public class DatabaseManagementService {
 				-1, -1, "None", "None", "", false, false));
 		pokes.add(new Pokemon(77, "Ponyta", "Unknown", "Unknown", "Unknown", "Unknown", "Fire", "", 1, 10, -1, 9, -1,
 				-1, "None", "None", "", false, false));
-		pokes.add(new Pokemon(80, "Slowbro", "Unknown", "Unknown", "Unknown", "Unknown", "Water", "Psychic", 5, 4, -1,
+		pokes.add(new Pokemon(79, "Slowpoke", "Unknown", "Unknown", "Unknown", "Unknown", "Water", "Psychic", 5, 4, -1,
 				5, -1, -1, "None", "None", "", false, false));
 		pokes.add(new Pokemon(81, "Magnemite", "Unknown", "Unknown", "Unknown", "Unknown", "Electric", "Steel", 2, 3,
 				-1, 6, -1, -1, "None", "None", "", false, false));
@@ -486,7 +486,7 @@ public class DatabaseManagementService {
 				252, 0, 6, 252, 0, 0, "Levitate", "Bold", "Black sludge", false, true));
 		pokes.add(new Pokemon(65, "Alakazam", "Psyshock", "Shadow ball", "Energy ball", "Nasty plot", "Psychic", "", 0,
 				0, 252, 0, 6, 252, "Magic guard", "Modest", "Life orb", false, true));
-		pokes.add(new Pokemon(79, "Slowbro", "Future sight", "Teleport", "Scald", "Toxic", "Water", "Psychic", 252, 0,
+		pokes.add(new Pokemon(80, "Slowbro", "Future sight", "Teleport", "Scald", "Toxic", "Water", "Psychic", 252, 0,
 				6, 252, 0, 0, "Regenerator", "Bold", "Leftovers", false, true));
 		pokes.add(new Pokemon(97, "Hypno", "Head smash", "Zen headbutt", "Toxic", "Protect", "Psychic", "", 252, 252, 0,
 				0, 0, 6, "Insomnia", "Adamant", "Leftovers", false, true));
