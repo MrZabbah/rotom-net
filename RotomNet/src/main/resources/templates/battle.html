@@ -1,58 +1,78 @@
 <!DOCTYPE HTML>
 <html>
+
 <head>
 	<link href="/css/battle.css" rel="stylesheet" type="text/css">
 </head>
 
 <body>
-	{{>header}}	
-	<div class = "battle-container">			
-		<div class = "battle-inner-container">
+	{{>header}}
+	<div class="battle-container">
+		<div class="battle-inner-container">
 			{{^battleFinished}}
-				<h1>Battle!</h1>
+			<h1>Battle!</h1>
 			{{/battleFinished}}
-			
+
 			{{#battleFinished}}
-				{{#winCondition}}
-					<h1>You won: {{card}} 
-						{{#shiny}}
-							shiny
-						{{/shiny}}
-						!
-					</h1>
-				{{/winCondition}}
-			
-				{{^winCondition}}
-					<h1>You lost the battle...</h1>
-				{{/winCondition}}
+			{{#winCondition}}
+			<h1>You won: {{card}}
+				{{#shiny}}
+				shiny
+				{{/shiny}}
+				!
+			</h1>
+			{{/winCondition}}
+
+			{{^winCondition}}
+			<h1>You lost the battle...</h1>
+			{{/winCondition}}
 			{{/battleFinished}}
-			
-			<div class = "team-container">
+
+			<div class="team-container">
 				{{#enemyTeam}}
-					<p>{{pokemon.name}}<p>
-				{{/enemyTeam}}
+				<p>{{pokemon.name}}
+				<p>
+					{{/enemyTeam}}
 			</div>
 			<h2>VS</h2>
-			<div class = "team-container">
+			<div class="team-container">
 				{{#userTeam}}
-					<p>{{pokemon.name}}<p>
-				{{/userTeam}}
+				<p>{{pokemon.name}}
+				<p>
+					{{/userTeam}}
 			</div>
 			{{^battleFinished}}
-				<form action="/battleResult" method="GET">
-					<input type="submit" value="⚔ Start Battle! ⚔">
-					<input type="hidden" name="_csrf" value="{{token}}"/>
-				</form>
+			<form action="/battle/{{user_username}}/battleResult" method="GET">
+				<input type="submit" value="⚔ Start Battle! ⚔">
+				<input type="hidden" name="_csrf" value="{{token}}" />
+			</form>
 			{{/battleFinished}}
-			
+
 			{{#battleFinished}}
-				<form action="/deck/{{user_username}}" method="GET">
-					<input type="submit" value="Watch my cards">
-					<input type="hidden" name="_csrf" value="{{token}}"/>
-				</form>
+			{{#winCondition}}
+			{{^already_in_posesion}}
+			{{^tweeted}}
+			<form action="/battle/{{user_username}}/battleResult/tweet" method="GET">
+				<input type="submit" value="Tweet on @RotomNetForum">
+				<input type="hidden" name="_csrf" value="{{token}}" />
+			</form>
+			{{/tweeted}}
+			{{#tweeted}}
+			<form action="{{tweetUrl}}" method="GET" target="_blank">
+				<input type="submit" value="See Tweet on Twitter">
+				<input type="hidden" name="_csrf" value="{{token}}" />
+			</form>
+			{{/tweeted}}
+			{{/already_in_posesion}}
+			{{/winCondition}}
+			<form action="/deck/{{user_username}}" method="GET">
+				<input type="submit" value="Watch my cards">
+				<input type="hidden" name="_csrf" value="{{token}}" />
+			</form>
 			{{/battleFinished}}
 		</div>
-	</div>	
-	
+	</div>
+
 </body>
+
 </html>

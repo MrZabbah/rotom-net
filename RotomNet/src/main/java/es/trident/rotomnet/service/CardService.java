@@ -25,7 +25,7 @@ import es.trident.rotomnet.service.util.Utils;
  */
 @Service
 public class CardService {
-	
+
 	private RotomCardRepository cardRepository;
 	private UserRotomCardRepository userCardsRepository;
 
@@ -37,7 +37,7 @@ public class CardService {
 	public List<List<RotomCard>> getAllCards() {
 		List<RotomCard> cards = cardRepository.findAll();
 		List<List<RotomCard>> subCardSets = Lists.partition(cards, 5);
-		
+
 		return subCardSets;
 	}
 
@@ -49,7 +49,7 @@ public class CardService {
 		Ordering<UserRotomCard> byPokemon = new OrderingByPokemon();
 
 		userDeck.add(Pokemon.NOT_FOUND);
-		
+
 		for (UserRotomCard userRotomCard : cards) {
 			userDeck.add(userRotomCard.getRottomCard().getPokemon());
 		}
@@ -75,20 +75,19 @@ public class CardService {
 	 * @return String formateado
 	 */
 	public String getUserDiscoverRatio(User user) {
-		String s = String.format("Discovered: [%d / %d]", userCardsRepository.countByUser(user),
-				cardRepository.count());
-		
+		String s = String.format("Discovered: [%d / %d]", deckCount(user), cardRepository.count());
+
 		return s += String.format(" Shinies: [%d / %d]", userCardsRepository.countByUserShiny(user),
 				cardRepository.count());
 	}
 
 	public ArrayList<RotomCard> getRandomCardTeam() {
 		List<RotomCard> cardList = cardRepository.findAll();
-		
+
 		return Utils.getRandomList(6, cardList);
 	}
 
-	public void addCardToUser(RotomCard rotomCard, User user, boolean shiny) {
+	public UserRotomCard addCardToUser(RotomCard rotomCard, User user, boolean shiny) {
 		UserRotomCard card = userCardsRepository.findByUserAndRotomCard(user, rotomCard);
 
 		if (card != null) {
@@ -96,8 +95,15 @@ public class CardService {
 			card.updateShinyCondition(shiny);
 			userCardsRepository.save(card);
 		} else {
-			userCardsRepository.save(new UserRotomCard(user, rotomCard, shiny));
+			card = new UserRotomCard(user, rotomCard, shiny);
+			userCardsRepository.save(card);
 		}
+
+		return card;
+	}
+
+	public int deckCount(User user) {
+		return userCardsRepository.countByUser(user);
 	}
 
 	private class OrderingByPokemon extends Ordering<UserRotomCard> {
@@ -108,5 +114,5 @@ public class CardService {
 		}
 
 	}
-	
+
 }

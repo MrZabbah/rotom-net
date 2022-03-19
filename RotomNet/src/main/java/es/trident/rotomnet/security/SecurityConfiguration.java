@@ -13,22 +13,22 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import es.trident.rotomnet.service.RepositoryUserDetailsService;
 
 @Configuration
-public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
+public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
 	private RepositoryUserDetailsService userDetailsService;
-	
-  @Bean
+
+	@Bean
 	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder(10,new SecureRandom());
+		return new BCryptPasswordEncoder(10, new SecureRandom());
 	}
-  
+
 	public SecurityConfiguration(RepositoryUserDetailsService userDetailsService) {
 		this.userDetailsService = userDetailsService;
-	}	
-	
+	}
+
 	@Override
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
-		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());		
+		auth.userDetailsService(userDetailsService).passwordEncoder(passwordEncoder());
 	}
 
 	@Override
@@ -46,24 +46,21 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter{
 		http.authorizeHttpRequests().antMatchers("/selectedTeamMail/{id}").permitAll();
 		http.authorizeHttpRequests().antMatchers("/users").hasRole("ADMIN");
 		http.authorizeHttpRequests().antMatchers("/selectUser").hasRole("ADMIN");
-		
-    
+
 		http.authorizeHttpRequests().anyRequest().authenticated();
-				
+
 		http.formLogin().loginPage("/login");
 		http.formLogin().usernameParameter("username");
 		http.formLogin().passwordParameter("pwd");
 		http.formLogin().failureUrl("/login");
 		http.formLogin().defaultSuccessUrl("/updateLoginData", true);
-				
+
 		http.logout().logoutUrl("/logout");
 		http.logout().logoutSuccessUrl("/");
 	}
-	
+
 	@Override
-    public void configure(WebSecurity web) throws Exception {
-        web
-                .ignoring()
-                .antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
-    }
+	public void configure(WebSecurity web) throws Exception {
+		web.ignoring().antMatchers("/resources/**", "/static/**", "/css/**", "/js/**", "/images/**");
+	}
 }

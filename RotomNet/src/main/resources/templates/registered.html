@@ -16,8 +16,8 @@
 			<p>Days Logged: {{user.daysLogged}}</p>
 			<p>Last Login: {{user.lastLog}}</p>
 			
-			<form action="/" method="GET" class="back-button">
-				<input type="submit" value="Go to main page">
+			<form action="/login" method="GET" class="back-button">
+				<input type="submit" value="Go to login">
 				<input type="hidden" name="_csrf" value="{{token}}"/>
 			</form>
 			
