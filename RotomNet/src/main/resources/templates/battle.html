@@ -42,7 +42,7 @@
 					{{/userTeam}}
 			</div>
 			{{^battleFinished}}
-			<form action="/battleResult" method="GET">
+			<form action="/battle/{{user_username}}/battleResult" method="GET">
 				<input type="submit" value="⚔ Start Battle! ⚔">
 				<input type="hidden" name="_csrf" value="{{token}}" />
 			</form>
@@ -50,16 +50,20 @@
 
 			{{#battleFinished}}
 			{{#winCondition}}
-				{{^tweeted}}
-				<form action="/battleResult/tweet" method="GET">
-					<input type="submit" value="Tweet on @RotomNetForum">
-					<input type="hidden" name="_csrf" value="{{token}}" />
-				</form>
-				{{/tweeted}}
-				{{#tweeted}}
-				</br>
-				<a href="#" onClick="window.open('{{tweetUrl}}', '_blank')">Ver Tweet</a>
-				{{/tweeted}}
+			{{^already_in_posesion}}
+			{{^tweeted}}
+			<form action="/battle/{{user_username}}/battleResult/tweet" method="GET">
+				<input type="submit" value="Tweet on @RotomNetForum">
+				<input type="hidden" name="_csrf" value="{{token}}" />
+			</form>
+			{{/tweeted}}
+			{{#tweeted}}
+			<form action="{{tweetUrl}}" method="GET" target="_blank">
+				<input type="submit" value="See Tweet on Twitter">
+				<input type="hidden" name="_csrf" value="{{token}}" />
+			</form>
+			{{/tweeted}}
+			{{/already_in_posesion}}
 			{{/winCondition}}
 			<form action="/deck/{{user_username}}" method="GET">
 				<input type="submit" value="Watch my cards">

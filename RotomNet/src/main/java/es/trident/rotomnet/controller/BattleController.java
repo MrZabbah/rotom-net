@@ -78,9 +78,9 @@ public class BattleController {
 	 * @param session
 	 * @return Plantilla a visualizar
 	 */
-	@GetMapping("/battleResult")
+	@GetMapping("/battle/{username}/battleResult")
 	@SuppressWarnings("unchecked")
-	public String battleResult(Model model, HttpSession session) {
+	public String battleResult(Model model, @PathVariable String username, HttpSession session) {
 		ArrayList<RotomCard> userTeam = (ArrayList<RotomCard>) session.getAttribute("userTeam");
 		ArrayList<RotomCard> enemyTeam = (ArrayList<RotomCard>) session.getAttribute("enemyTeam");
 		User user = (User) session.getAttribute("user");
@@ -107,7 +107,7 @@ public class BattleController {
 		if (user != null && result.getFirst().isValid()) {
 			userCard = cardService.addCardToUser(result.getFirst(), user, result.getSecond());
 			session.setAttribute("userCard", userCard);
-			model.addAttribute("tweeted", userCard.getAmount() != 1);
+			model.addAttribute("already_in_posesion", userCard.getAmount() != 1);
 		}
 
 		return "battle";
@@ -123,8 +123,8 @@ public class BattleController {
 	 * @return Plantilla a visualizar
 	 */
 	@SuppressWarnings("unchecked")
-	@GetMapping("/battleResult/tweet")
-	public String battleTweet(Model model, HttpSession session, HttpServletRequest request) {
+	@GetMapping("/battle/{username}/battleResult/tweet")
+	public String battleTweet(Model model, HttpSession session, @PathVariable String username, HttpServletRequest request) {
 		UserRotomCard userCard = (UserRotomCard) session.getAttribute("userCard");
 		ArrayList<RotomCard> userTeam;
 		ArrayList<RotomCard> enemyTeam;
@@ -147,6 +147,7 @@ public class BattleController {
 		model.addAttribute("battleFinished", true);
 		model.addAttribute("winCondition", true);
 		model.addAttribute("tweeted", true);
+		model.addAttribute("already_in_posesion", false);
 		model.addAttribute("tweetUrl", tweetUrl);
 		session.setAttribute("pageId", 2);
 		return "battle";
