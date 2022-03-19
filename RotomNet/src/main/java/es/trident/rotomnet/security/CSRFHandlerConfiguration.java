@@ -10,24 +10,24 @@ import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
 
-
 @SuppressWarnings("deprecation")
 @Configuration
-public class CSRFHandlerConfiguration extends WebMvcConfigurerAdapter{
-	
+public class CSRFHandlerConfiguration extends WebMvcConfigurerAdapter {
+
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(new CSRFHandlerInterceptor());
 	}
-	
+
 }
 
 @SuppressWarnings("deprecation")
-class CSRFHandlerInterceptor extends HandlerInterceptorAdapter{
+class CSRFHandlerInterceptor extends HandlerInterceptorAdapter {
 	@Override
-	public void postHandle(final HttpServletRequest req, final HttpServletResponse response, 
-			final Object handler, final ModelAndView modelAndView) throws Exception{		
+	public void postHandle(final HttpServletRequest req, final HttpServletResponse response, final Object handler,
+			final ModelAndView modelAndView) throws Exception {
 		CsrfToken token = (CsrfToken) req.getAttribute("_csrf");
+
 		modelAndView.addObject("token", token.getToken());
 	}
 }

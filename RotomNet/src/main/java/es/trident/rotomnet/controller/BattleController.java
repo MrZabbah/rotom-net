@@ -66,7 +66,7 @@ public class BattleController {
 		session.setAttribute("enemyTeam", enemyTeam);
 		session.setAttribute("user", user);
 		session.setAttribute("validBattle", true);
-		//session.setAttribute("pageId", "battle");
+		session.setAttribute("pageId", 0);
 		return "battle";
 	}
 
@@ -86,7 +86,12 @@ public class BattleController {
 		User user = (User) session.getAttribute("user");
 		Pair<RotomCard, Boolean> result;
 		UserRotomCard userCard;
-
+		int lastPageCode = (int) session.getAttribute("pageId");
+		
+		if (lastPageCode != 0) {
+			return "/";
+		}
+		
 		result = battleService.generateBattleResult(userTeam, enemyTeam);
 		model.addAttribute("card", result.getFirst().getPokemon().getName());
 		model.addAttribute("enemyTeam", enemyTeam);
@@ -97,7 +102,7 @@ public class BattleController {
 		model.addAttribute("tweeted", false);
 		session.setAttribute("userTeam", userTeam);
 		session.setAttribute("enemyTeam", enemyTeam);
-		//session.setAttribute("pageId", "battleResult");
+		session.setAttribute("pageId", 1);
 		
 		if (user != null && result.getFirst().isValid()) {
 			userCard = cardService.addCardToUser(result.getFirst(), user, result.getSecond());
@@ -124,10 +129,12 @@ public class BattleController {
 		ArrayList<RotomCard> userTeam;
 		ArrayList<RotomCard> enemyTeam;
 		String tweetUrl;
+		int lastPageCode = (int) session.getAttribute("pageId");
 		
-		if (userCard == null) {
+		if (lastPageCode != 1) {
 			return "/";
 		}
+		
 		
 		tweetUrl = tweetCardObtained(userCard);
 		userTeam = (ArrayList<RotomCard>) session.getAttribute("userTeam");
@@ -141,7 +148,7 @@ public class BattleController {
 		model.addAttribute("winCondition", true);
 		model.addAttribute("tweeted", true);
 		model.addAttribute("tweetUrl", tweetUrl);
-		//session.setAttribute("pageId", "battleTweet");
+		session.setAttribute("pageId", 2);
 		return "battle";
 	}
 

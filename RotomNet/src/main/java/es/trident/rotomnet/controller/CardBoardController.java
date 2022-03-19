@@ -6,7 +6,6 @@
 package es.trident.rotomnet.controller;
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -35,20 +34,20 @@ public class CardBoardController {
 		model.addAttribute("cards", cardService.getAllCards());
 		model.addAttribute("userDeck", false);
 		model.addAttribute("boardTitle", "ROTOM CARD SET: FIRST GEN");
-		//session.setAttribute("pageId", "pokedex");
-		return("pokedex");
+		session.setAttribute("pageId", -1);
+		return ("pokedex");
 	}
-	
+
 	@GetMapping("/deck/{username}")
 	public String userDeck(Model model, @PathVariable String username, HttpSession session) {
 		User user = userService.findUserByUsername(username);
-		
+
 		model.addAttribute("cards", cardService.getUserCards(user));
 		model.addAttribute("ratioString", cardService.getUserDiscoverRatio(user));
 		model.addAttribute("userDeck", true);
 		model.addAttribute("boardTitle", "Deck of " + username);
-		//session.setAttribute("pageId", "deck");
-		return("pokedex");
+		session.setAttribute("pageId", -1);
+		return ("pokedex");
 	}
-	
+
 }

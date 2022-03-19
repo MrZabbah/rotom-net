@@ -21,8 +21,9 @@ import es.trident.rotomnet.repository.TeamRepository;
 import es.trident.rotomnet.repository.UserRotomCardRepository;
 
 /**
- * DatabaseManagementService: Servicio dedicado a configurar e insertar los objetos iniciales de la base de datos. 
- * Las tablas afectadas son: Pokemon, Team, User, RotomCard y UserRotomCard.
+ * DatabaseManagementService: Servicio dedicado a configurar e insertar los
+ * objetos iniciales de la base de datos. Las tablas afectadas son: Pokemon,
+ * Team, User, RotomCard y UserRotomCard.
  */
 
 @Controller
@@ -39,7 +40,7 @@ public class DatabaseManagementService {
 	public DatabaseManagementService(PokemonRepository pokemonRepository, RotomCardRepository cardRepository,
 			UserRotomCardRepository userCardsRepository, TeamRepository _teamRepository, UserService userService,
 			TeamService teamService) {
-		
+
 		super();
 		this.pokemonRepository = pokemonRepository;
 		this.cardRepository = cardRepository;
@@ -64,6 +65,7 @@ public class DatabaseManagementService {
 		userService.loadDefaultUsers("Admin", "$2a$10$nfTCMiBCYBKRn5FfjS3XE.vPGWpsGY0Au5UPivJwP0hhVpZNnlJuq");
 		userService.addRoleToUser("Admin", "ADMIN");
 	}
+
 	private void insertPokemonAndRotomCards() {
 		User ua = userService.loadDefaultUsers("Test", "$2a$10$L.H8lh.sgtlIqtq.PINi8.MF6KbGh4cLg45ragz44xQVbw3FFTvbC");
 		testUser = ua;
@@ -93,13 +95,13 @@ public class DatabaseManagementService {
 	private void createAndInsertTeams() {
 		ArrayList<String> types = new ArrayList<String>();
 		List<Team> defaultTeams = new ArrayList<Team>();
-		
+
 		for (int i = 0; i < 22; ++i) {
 			Team newTeam = teamService.getRandomTeam("Name", types, false);
 			newTeam.setUser(testUser);
 			defaultTeams.add(newTeam);
 		}
-		
+
 		_teamRepository.saveAll(defaultTeams);
 	}
 
@@ -714,8 +716,8 @@ public class DatabaseManagementService {
 		stats.add(new ArrayList<Integer>(Arrays.asList(2, 3, 7)));
 		stats.add(new ArrayList<Integer>(Arrays.asList(10, 4, 7)));
 		stats.add(new ArrayList<Integer>(Arrays.asList(9, 2, 4)));
-		
+
 		return stats;
 	}
-	
+
 }
