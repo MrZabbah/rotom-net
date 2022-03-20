@@ -35,7 +35,7 @@ La aplicación web es una página con temática de Pokémon, orientada a crear e
 * Mostrar las cartas de la baraja de un usuario.
 
 ## Descripción de las funcionalidades del servicio interno
-* Plasmar los datos de un equipo en un fichero de texto y enviarlo por correo a un mail especificado.
+* Plasmar los datos de un equipo en texto y enviarlo por correo a un mail especificado.
 * Enviar notificaciones por correo.
 * Publicar en redes sociales cuando consigues una carta. 
 
