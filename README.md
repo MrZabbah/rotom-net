@@ -28,6 +28,7 @@ La aplicación web es una página con temática de Pokémon, orientada a crear e
 5. Team: contiene un nombre, 6 Pokémon y el usuario al que está vinculado.
 
 ## Descripción de las funcionalidades de la aplicación web
+
 * Generar un equipo pseudoaleatorio: se seleccionan ciertos parámetros que determinarán las características del equipo final. Teniendo esto en cuenta, se seleccionan 6 Pokémon aleatorios aptos para competir en Pokémon Showdown y, si un usuario lo desea, se almacena de forma peristente.
 * Realizar un combate simplificado contra el jugador.
 * Dar una carta aleatoria al jugador si es necesario.
@@ -35,6 +36,7 @@ La aplicación web es una página con temática de Pokémon, orientada a crear e
 * Mostrar las cartas de la baraja de un usuario.
 
 ## Descripción de las funcionalidades del servicio interno
+
 * Plasmar los datos de un equipo en texto y enviarlo por correo a un mail especificado.
 * Enviar notificaciones por correo.
 * Publicar en redes sociales cuando consigues una carta. 
@@ -48,21 +50,35 @@ https://github.com/MrZabbah/rotom-net/projects/1
 
 ## Diagrama de navegación
 
-1. Pantalla principal: información de uso de la aplicación.
+Se realiza una división principal entre páginas públicas y privadas (estas últimas diferenciadas por un candado arriba a la izquierda).
+
+1. Pantalla principal: información de uso de la aplicación (1b sería la misma pantalla, pero la cabecera muestra los enlaces de las funcionalidades privadas de cada uno de los usuarios).
 2. Formulario de creación de equipos: selección de un nombre de equipo y diferentes parámetros para la creación del equipo de forma pseudoaleatoria. 
-3. Mostrado del equipo creado: información sobre los parámetros seleccionados en el formulario y los Pokemon obtenidos. Posibilidad de guardado en un usuario, intentar de nuevo y salida a la pantalla principal. 
+3. Mostrado del equipo creado: información sobre los parámetros seleccionados en el formulario y los Pokemon obtenidos. Posibilidad de envío a un determinado correo electrónico (siempre que sea válido), intentar de nuevo y salida a la pantalla principal. (3b sería la misma página, pero ofrece al usuario loggeado la posibilidad de guardar el equipo en su lista de equipos). 
 4. Pokedex: todas las cartas que puede obtener el usuario. 
-5. Selección de usuario: para mostrar sus equipos, su baraja y realizar combates.
-6. Equipos del usuario: todos los equipos del usuario (en formato enlace para poder ver su información en detalle en otra página) y posibilidad del borrado de los mismos.
-7. Selección de un equipo del usuario: información en detalle del equipo seleccionado desde la pantalla 6. También permite su borrado. 
-8. Baraja del usuario: cartas que tiene el usuario actualmente, cuántas ha descubierto y cuántas de éstas son shiny (especiales).
-9. Combate: se muestran dos equipos generados aleatoriamente (primero el enemigo y luego el del usuario) que combaten al pulsar el botón. 
-10. Resultado del combate:  información de los equipos previamente generados en la pantalla 9 y, si se ha ganado, la carta ganada por el usuario. En caso de que pierda, aparece un texto explicativo de que ha perdido. 
-11. Lista de usuarios registrados: usuarios registrados en la aplicación, así como botones que permiten tanto su modificación como su borrado. 
-12. Modificación de usuario: información sobre el usuario seleccionado, así como un formulario para modificar sus datos. 
-13. Registro de usuario: formulario para creación de usuarios. 
-14. Usuario registrado: información sobre el usuario registado desde la pantalla 13, así como un botón de enlace a todos los usuarios registrados (pantalla 11).
+5. Login: pantalla para loggeo de un usuario siempre que exista, además de un enlace que redirige al registro para nuevos usuarios.
+6. Registro de usuarios: formulario para creación de usuarios. 
+7. Usuario registrado: información sobre el usuario registado desde la pantalla 6, así como un botón de enlace al login (pantalla 5).
+8. Equipos del usuario: todos los equipos del usuario (en formato enlace para poder ver su información en detalle en otra página) y posibilidad del borrado de los mismos.
+9. Selección de un equipo del usuario: información en detalle del equipo seleccionado desde la pantalla 8. También permite su borrado y envío a un determinado correo (por defecto, el correo con el que se registró). 
+10. Baraja del usuario: cartas que tiene el usuario actualmente, cuántas ha descubierto y cuántas de éstas son shiny (especiales).
+11. Combate: se muestran dos equipos generados aleatoriamente (primero el enemigo y luego el del usuario) que combaten al pulsar el botón.
+12. Resultado del combate (perdido): información de los equipos previamente generados en la pantalla 11 y aparece un texto explicativo de que ha perdido.
+13. Resultado del combate (ganado): información de los equipos previamente generados en la pantalla 11 y la carta ganada por el usuario, además de la opción de poder publicar, si es la primera vez que la obtiene, un Tweet en @ RotomNetForum. 
+14. Modificación de usuario: información sobre el usuario, así como un formulario para modificar sus datos.
+15. Logout: permite desloggearse al usuario actual.
 
-![diagrama_pantallas](https://user-images.githubusercontent.com/60218308/155235046-ebeff775-e8f9-4137-a1d5-4a4623246ee0.png)
-![captura_pantallas](https://user-images.githubusercontent.com/60218308/155365950-39e47ece-90cd-47d0-80b8-6857ca993a94.png)
+![diagrama_pantallas_2](https://user-images.githubusercontent.com/60218308/159799244-3a7e1493-98fd-4a62-9202-60959281688a.png)
 
+## Diagrama de clases
+
+Se divide por un esquema de colores:
+* Verde: controladores.
+* Azul: servicios.
+* Morado: repositorios.
+
+![diagrama_clases](https://user-images.githubusercontent.com/60218308/159800807-7cf4ca1c-a9cf-4081-9abf-d80a09d34e0b.png)
+
+## Enlace del repositorio con el servicio interno
+
+https://github.com/MrZabbah/rotom-net-api-rest
