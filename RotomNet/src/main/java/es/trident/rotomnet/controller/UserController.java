@@ -67,7 +67,11 @@ public class UserController {
 	public String register(Model model, @RequestParam String username, @RequestParam String pwd,
 			@RequestParam String mail, @RequestParam MultipartFile image) {
 		User user;
-
+		if (username.equals("")) {
+			model.addAttribute("duplicatedUsername", true);
+			model.addAttribute("emptyMail", false);
+			return "register";
+		}
 		try {
 			userService.findUserByUsername(username);
 			model.addAttribute("duplicatedUsername", true);
@@ -89,7 +93,13 @@ public class UserController {
 
 	@PostMapping("/modified_user/{username}")
 	public String modifyUser(Model model, @RequestParam String pwd, @RequestParam String mail,
-			@RequestParam MultipartFile image, @PathVariable String username) throws IOException {
+			@RequestParam MultipartFile image, @PathVariable String username, HttpServletRequest req) throws IOException {
+		String actual_user = req.getUserPrincipal().getName();
+		boolean is_admin = req.isUserInRole("ADMIN");	
+		
+		if (!actual_user.equals(username) && !is_admin) {
+			return "redirect:/";
+		}
 		userService.modifyUser(username, pwd, mail, image);
 		return "redirect:/";
 	}
@@ -101,13 +111,20 @@ public class UserController {
 	}
 
 	@PostMapping("/{id}/delete")
-	public String deleteSelectedUser(Model model, @PathVariable long id) {
+	public String deleteSelectedUser(Model model, @PathVariable long id, HttpServletRequest req) {
 		userService.deleteUser(id);
 		return "redirect:/users";
 	}
 
 	@GetMapping("/modify/{username}")
-	public String modifySelectedUser(Model model, @PathVariable String username, HttpSession session) {
+	public String modifySelectedUser(Model model, @PathVariable String username, HttpSession session, HttpServletRequest req) {
+		String actual_user = req.getUserPrincipal().getName();
+		boolean is_admin = req.isUserInRole("ADMIN");	
+		
+		if (!actual_user.equals(username) && !is_admin) {
+			return "redirect:/";
+		}
+		
 		User user = userService.findUserByUsername(username);
 
 		model.addAttribute("user", user);

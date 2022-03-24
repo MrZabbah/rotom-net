@@ -5,6 +5,7 @@
 
 package es.trident.rotomnet.controller;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,9 +40,15 @@ public class CardBoardController {
 	}
 
 	@GetMapping("/deck/{username}")
-	public String userDeck(Model model, @PathVariable String username, HttpSession session) {
+	public String userDeck(Model model, @PathVariable String username, HttpSession session, HttpServletRequest req) {
+		String actual_user = req.getUserPrincipal().getName();
+		boolean is_admin = req.isUserInRole("ADMIN");	
+		
+		if (!actual_user.equals(username) && !is_admin) {
+			return "redirect:/";
+		}
+		
 		User user = userService.findUserByUsername(username);
-
 		model.addAttribute("cards", cardService.getUserCards(user));
 		model.addAttribute("ratioString", cardService.getUserDiscoverRatio(user));
 		model.addAttribute("userDeck", true);

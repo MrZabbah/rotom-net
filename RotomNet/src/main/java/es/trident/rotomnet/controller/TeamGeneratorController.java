@@ -161,16 +161,31 @@ public class TeamGeneratorController {
 	}
 
 	@PostMapping("/saveTeam/{username}")
-	public String saveTeam(Model model, @PathVariable String username, HttpSession session) {
+	public String saveTeam(Model model, @PathVariable String username, HttpSession session, HttpServletRequest req) {
+		String actual_user = req.getUserPrincipal().getName();
+		boolean is_admin = req.isUserInRole("ADMIN");	
+		
+		if (!actual_user.equals(username) && !is_admin) {
+			return "redirect:/";
+		}
+		
 		User selectedUser = _userService.findUserByUsername(username);
 		Team currentTeam = (Team) session.getAttribute("currentTeam");
+		
 
 		_teamService.saveCurrentTeam(selectedUser, currentTeam);
 		return "redirect:/displayTeams/" + username;
 	}
 
 	@GetMapping("/displayTeams/{username}")
-	public String teamList(Model model, Pageable page, @PathVariable String username) {
+	public String teamList(Model model, Pageable page, @PathVariable String username, HttpServletRequest req) {
+		String actual_user = req.getUserPrincipal().getName();
+		boolean is_admin = req.isUserInRole("ADMIN");	
+		
+		if (!actual_user.equals(username) && !is_admin) {
+			return "redirect:/";
+		}
+		
 		User selectedUser = _userService.findUserByUsername(username);
 		Page<Team> teamsReceived = _teamService.getTeamsByUser(selectedUser, page);
 
@@ -185,16 +200,23 @@ public class TeamGeneratorController {
 
 	@GetMapping("/showTeam/{id}/{username}")
 	public String showTeam(Model model, @PathVariable int id, @PathVariable String username,
-			HttpServletRequest request) {
+			HttpServletRequest req) {
+		String actual_user = req.getUserPrincipal().getName();
+		boolean is_admin = req.isUserInRole("ADMIN");	
+		
+		if (!actual_user.equals(username) && !is_admin) {
+			return "redirect:/";
+		}
+		
 		model.addAttribute("team", _teamService.getTeamById(id));
 		model.addAttribute("wrongMail", false);
 		return "teamDisplay";
 	}
 
-	@PostMapping("/deleteTeam/{id}/{user}")
-	public String deleteTeam(@PathVariable int id, @PathVariable String user) {
+	@PostMapping("/deleteTeam/{id}/{username}")
+	public String deleteTeam(@PathVariable int id, @PathVariable String username, HttpServletRequest req) {
 		_teamService.deleteTeam(id);
-		return "redirect:/displayTeams/" + user;
+		return "redirect:/displayTeams/" + username;
 	}
 
 }
