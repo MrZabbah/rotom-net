@@ -11,7 +11,7 @@
 			<form action="/registered" method="post" class="register-form" enctype="multipart/form-data"><br>
 				<h1>User Register</h1>
 				{{#duplicatedUsername}}
-					<label for="username">Username already in use!</label><br>
+					<label for="username">Username not valid!</label><br>
 					<input type="text" id="username" name="username" class="wrong-text"><br>
 				{{/duplicatedUsername}}
 				
