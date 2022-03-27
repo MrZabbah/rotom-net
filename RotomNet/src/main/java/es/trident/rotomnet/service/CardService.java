@@ -46,7 +46,7 @@ public class CardService {
 		List<Pokemon> userDeck = new ArrayList<>();
 		List<List<UserRotomCard>> subCardSets;
 		List<RotomCard> pokemonCardsNotOwned;
-		Ordering<UserRotomCard> byPokemon = new OrderingByPokemon();
+		//Ordering<UserRotomCard> byPokemon = new OrderingByPokemon();
 
 		userDeck.add(Pokemon.NOT_FOUND);
 
@@ -62,7 +62,8 @@ public class CardService {
 			cards.add(noOwnedCard);
 		}
 
-		Collections.sort(cards, byPokemon);
+		//Collections.sort(cards, byPokemon);
+		cards.sort(null);
 		subCardSets = Lists.partition(cards, 5);
 		return subCardSets;
 	}

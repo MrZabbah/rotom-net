@@ -5,6 +5,8 @@
 
 package es.trident.rotomnet.model;
 
+import java.util.Comparator;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -18,7 +20,7 @@ import es.trident.rotomnet.model.util.UserRotomCardId;
  */
 @Entity
 @IdClass(UserRotomCardId.class)
-public class UserRotomCard {
+public class UserRotomCard implements Comparator<UserRotomCard>, Comparable<UserRotomCard>{
 	
 	@Id
 	@MapsId("user")
@@ -64,6 +66,17 @@ public class UserRotomCard {
 	
 	public void updateShinyCondition(boolean shiny) {
 		isShinyUnlocked = shiny || isShinyUnlocked;
+	}
+
+	@Override
+	public int compareTo(UserRotomCard o) {
+		return rotomCard.compareTo(o.rotomCard);
+	}
+
+	@Override
+	public int compare(UserRotomCard o1, UserRotomCard o2) {
+		// TODO Auto-generated method stub
+		return rotomCard.compare(o1.rotomCard, o2.rotomCard);
 	}
 	
 }

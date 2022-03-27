@@ -5,6 +5,7 @@
 
 package es.trident.rotomnet.model;
 
+import java.util.Comparator;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,7 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Pokemon {
+public class Pokemon implements Comparator<Pokemon>, Comparable<Pokemon>{
 	public static Pokemon NOT_FOUND = new Pokemon(-1);
 	
 	@Id
@@ -243,6 +244,16 @@ public class Pokemon {
 		
 		Pokemon other = (Pokemon) obj;
 		return pokedexNumber == other.pokedexNumber;
+	}
+
+	@Override
+	public int compareTo(Pokemon o) {
+		return this.pokedexNumber - o.pokedexNumber;
+	}
+
+	@Override
+	public int compare(Pokemon o1, Pokemon o2) {
+		return o1.pokedexNumber - o2.pokedexNumber;
 	}
 	
 }
