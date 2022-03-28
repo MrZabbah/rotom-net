@@ -14,6 +14,7 @@ import java.sql.SQLException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.core.io.InputStreamResource;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.UrlResource;
@@ -37,7 +38,7 @@ import es.trident.rotomnet.service.UserService;
 @Controller
 public class UserController {
 
-	private static final Path IMAGE_FOLDER = Paths.get(System.getProperty("user.dir"), "images");
+	//private static final Path IMAGE_FOLDER = Paths.get(System.getProperty("user.dir"), "images");
 	private UserService userService;
 
 	public UserController(UserService userService) {
@@ -158,8 +159,9 @@ public class UserController {
 			return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg")
 					.contentLength(user.getImageFile().length()).body(file);
 		} else {
-			Path default_path = IMAGE_FOLDER.resolve("default.jpg");
-			Resource file = new UrlResource(default_path.toUri());
+			//Path default_path = IMAGE_FOLDER.resolve("default.jpg");
+			//Resource file = new UrlResource(default_path.toUri());
+			Resource file = new ClassPathResource("/images/default.jpg");
 			return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "image/jpeg").body(file);
 		}
 	}
@@ -173,8 +175,9 @@ public class UserController {
 	 */
 	@GetMapping("/image/rotom")
 	public ResponseEntity<Object> downloadRotomImage(Model model) throws MalformedURLException {
-		Path image_path = IMAGE_FOLDER.resolve("rotom.png");
-		Resource image = new UrlResource(image_path.toUri());
+		//Path image_path = IMAGE_FOLDER.resolve("rotom.png");
+		//Resource image = new UrlResource(image_path.toUri());
+		Resource image = new ClassPathResource("images/rotom.png");
 
 		return ResponseEntity.ok().header(HttpHeaders.CONTENT_TYPE, "rotom/png").body(image);
 	}

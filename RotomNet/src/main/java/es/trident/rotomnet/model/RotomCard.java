@@ -5,7 +5,6 @@
 
 package es.trident.rotomnet.model;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -22,7 +21,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
  * cartas pokemon
  */
 @Entity
-public class RotomCard implements Comparator<RotomCard>, Comparable<RotomCard>{
+public class RotomCard{
 	
 	public static RotomCard NOT_FOUND = new RotomCard(Pokemon.NOT_FOUND, 0, 0, 0);
 	
@@ -87,15 +86,4 @@ public class RotomCard implements Comparator<RotomCard>, Comparable<RotomCard>{
 		return Objects.equals(pokemon, other.pokemon);
 	}
 
-	@Override
-	public int compareTo(RotomCard o) {
-		
-		return pokemon.compareTo(o.pokemon);
-	}
-
-	@Override
-	public int compare(RotomCard o1, RotomCard o2) {
-		return pokemon.compare(o1.pokemon, o2.pokemon);
-	}
-	
 }
