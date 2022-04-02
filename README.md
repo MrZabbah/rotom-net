@@ -95,35 +95,36 @@ La aplicación web y la API REST van a ser ejecutadas en una Máquina Virtual Li
   - Iniciar la Máquina Virtual y seguir el proceso de configuración e instalación predeterminado.
 3. Instalar Java
   - Ejecutar el siguiente comando para instalar Java mediante el jdk-17.
-  '''
+  ```
   sudo apt install openjdk-17-jre-headless
-  '''
+  ```
 5. Instalar MySQL Server
   - Ejecutar los siguientes comandos para actualizar el entorno e instalar el Servidor MySQL.
-  '''
+  ```
   sudo apt update
   sudo apt install mysql-server
-  '''
+  ```
   - Iniciar la instalación de MySQL. 
     - Se ha seleccionado "No" para una contraseña del sistema.
     - Se ha establecido "root" como contraseña de root.
     - Se han aceptado las opciones de seguridad y se ha configurado la autenticación y los privilegios.
-  '''
+  ```
   sudo mysql_secure_installation
-  '''
+  ```
 7. Configurar la base de datos
   - Ejecutar el siguiente comando para poder continuar la configuración:
-  '''
+  ```
   sudo mysql
-  '''
+  ```
   - Finalizar la configuración de la base de datos y el acceso a root.
-  '''
+  ```
   ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY 'root';
   CREATE DATABASE pokemon_schema;
   GRANT ALL PRIVILEGES ON pokemon_schema.* TO 'root'@'localhost';
   FLUSH PRIVILEGES
   EXIT;
+  ```
 9. Ejecutar las aplicaciones:
-'''
+```
 sudo java -jar nombreDeEjecutable.jar
-'''
+```
