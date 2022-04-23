@@ -49,9 +49,9 @@ jobs:
           username: ${{ github.actor }}
           password: ${{ secrets.GITHUB_TOKEN }}
           
-      - id: Build and push on DockerHub
+      - name: Build and push on DockerHub
         run: docker build -t ${{ secrets.DOCKER_HUB_USERNAME }}/rotom-net:latest ./RotomNet | docker push
         
-      - id: Build and push on GitHub registry
+      - name: Build and push on GitHub registry
         if: github.event_name != 'pull_request'
         run: docker build -t ghcr.io/${{ secrets.DOCKER_HUB_USERNAME }}/rotom-net ./RotomNet | docker push
