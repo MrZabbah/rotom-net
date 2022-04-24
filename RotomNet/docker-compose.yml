@@ -1,20 +1,20 @@
 version: "3.8"
 services:
   app:
+    image: ghcr.io/mrzabbah/rotom-net:latest
     depends_on:
       - db
-    image: ghcr.io/mrzabbah/rotom-net:latest
     ports:
       - 8843:8843
     environment:
       MYSQL_HOST: mysql
+      MYSQL_MODE: create
 
   # api:
   #   image: ghcr.io/mrzabbah/api-rotom-net:latest
   db:
     container_name: mysql
     image: mysql:8.0.28-oracle
-    command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root 
       MYSQL_DATABASE: pokemon_schema
