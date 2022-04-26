@@ -10,6 +10,7 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import org.springframework.core.env.Environment;
 import org.springframework.data.util.Pair;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -37,11 +38,13 @@ public class BattleController {
 	private CardService cardService;
 	private BattleService battleService;
 	private UserService userService;
+	private Environment env;
 
-	public BattleController(CardService cardService, BattleService battleService, UserService userService) {
+	public BattleController(CardService cardService, BattleService battleService, UserService userService, Environment env) {
 		this.cardService = cardService;
 		this.battleService = battleService;
 		this.userService = userService;
+		this.env = env;
 	}
 
 	/**
@@ -161,7 +164,7 @@ public class BattleController {
 	 */
 	private String tweetCardObtained(UserRotomCard card) {
 		Map<String, String> parameterMap = new HashMap<String, String>();
-		String url = "http://localhost:8080/" + card.getUser().getUsername() + "/card/"
+		String url = "http://" + env.getProperty("rotomnet.api.host") + ":8080/" + card.getUser().getUsername() + "/card/"
 				+ card.getRottomCard().getPokemon().getName() + "/tweet";
 		HttpHeaders headers = new HttpHeaders();
 		RestTemplate restTemplate = new RestTemplate();
