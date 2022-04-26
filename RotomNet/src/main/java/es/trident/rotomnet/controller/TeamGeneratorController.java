@@ -10,6 +10,8 @@ import java.util.HashMap;
 import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+
+import org.springframework.core.env.Environment;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpEntity;
@@ -40,12 +42,14 @@ public class TeamGeneratorController {
 	private PokemonService _pokemonService;
 	private TeamService _teamService;
 	private UserService _userService;
+	private Environment _env;
 
-	public TeamGeneratorController(PokemonService pokemonService, TeamService teamService, UserService userService) {
+	
+	public TeamGeneratorController(PokemonService pokemonService, TeamService teamService, UserService userService, Environment env) {
 		_pokemonService = pokemonService;
 		_teamService = teamService;
 		_userService = userService;
-
+		_env = env;
 	}
 
 	@RequestMapping("/teamGenerator")
@@ -157,7 +161,7 @@ public class TeamGeneratorController {
 		parameterMap.put("mail", mail);
 		parameterMap.put("teamInformation", teamInformation);
 		myRequest = new HttpEntity<>(parameterMap, headers);
-		restTemplate.postForEntity("http://localhost:8080/mail", myRequest, String.class);
+		restTemplate.postForEntity("http://" + _env.getProperty("rotomnet.api.host") + ":8080/mail", myRequest, String.class);
 	}
 
 	@PostMapping("/saveTeam/{username}")

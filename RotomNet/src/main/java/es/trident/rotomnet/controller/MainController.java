@@ -4,7 +4,6 @@
  */
 
 package es.trident.rotomnet.controller;
-
 import javax.annotation.PostConstruct;
 import javax.servlet.http.HttpSession;
 import org.springframework.stereotype.Controller;

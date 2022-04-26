@@ -5,7 +5,7 @@ RUN mvn clean verify
 COPY /src /project/src
 RUN mvn package -o
 
-FROM openjdk:17-alpine3.14
+FROM openjdk:17.0-slim-buster
 WORKDIR /urs/src/app/
 COPY --from=builder /project/target/*.jar /urs/src/app/
 EXPOSE 8080
