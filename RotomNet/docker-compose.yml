@@ -1,6 +1,9 @@
 version: "3.8"
 
-
+volumes:
+  dbdata:
+networks:
+  rotomnet:
 services:
   db:
     image: mysql:8.0.28
@@ -11,27 +14,110 @@ services:
       MYSQL_DATABASE: pokemon_schema
     volumes:
       - dbdata:/var/lib/mysql
-
+    networks:
+      - rotomnet
+    ports:
+      - 3307:3306
   app:
     image: mrzabbah/rotom-net:latest
     restart: always
     depends_on:
       - db
       - api
-    ports:
-      - 8443:8443
+    networks:
+      - rotomnet
+    # ports:
+    #  - 8080:8080 # poniendo solo 8080 hace que ese puerto del container se bindee a otro del host si esta ocupado el 8080
     environment:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
-      SPRING_JPA_HIBERNATE_DDL-AUTO: create #Must be comented after first launch!
+      # SPRING_JPA_HIBERNATE_DDL-AUTO: create #Must be comented after first launch!
       ROTOMNET_API_HOST: api
+      #SERVICE_PORTS: 80
+    # labels:
+    #   - "traefik.frontend.rule=Host:app.docker.localhost"
 
   api:
     image: mrzabbah/api-rotom-net:latest
     restart: always
+    networks:
+      - rotomnet
+  lb:
+    image: haproxy:2.1
+    ports: 
+      - "8080:8080"
+      - "8084:8084"
+    volumes:
+      - "./haproxy.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
+    depends_on:
+      - app
+    networks:
+      - rotomnet
 
 
-volumes:
-  dbdata:
+
+  # lb:
+  #   image: 'dockercloud/haproxy:latest'
+  #   depends_on:
+  #     - app
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+  #   ports:
+  #     - "8080:80"
+  # reverse-proxy:
+  #   image: traefik 
+  #   command: --providers.docker
+  #   ports:
+  #     - "8080:8080"     # The HTTP port
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock # So that Traefik can listen to the Docker events
+  # # lb:
+  #   image: haproxy
+  #   restart: always
+  #   depends_on:
+  #     - app
+  #   ports:
+  #     - 8080:8080
+  #   volumes:
+  #     - ./haproxy.cfg:/usr/local/etc/haproxy.cfg:ro
+
+  # nginx:
+  #   image: nginx
+  #   restart: always
+  #   depends_on:
+  #     - app
+  #   volumes:
+  #     - ./nginx.conf:/etc/nginx/nginx.conf:ro
+  #   ports:
+  #     - "8080:8080"
+  # lb:
+  #   image: dockercloud/haproxy
+  #   restart: always
+  #   links:
+  #     - app
+  #   ports: 
+  #     - 8080:8080
+  #   # environment:
+  #   #   BALANCE: leastconn
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+    # deploy:
+    #   placement:
+    #     constraints: [node.role == manager]
+  # proxy:
+  #   image: dockercloud/haproxy
+  #   depends_on:
+  #     - app
+  #   ports:
+  #     - 8080:8080 # Cambiar a 8443
+  #   environment:
+  #     BALANCE: leastconn
+  #     # DEFAULT_SSL_CERT: CERTIFICADO AQUI
+  #   volumes:
+  #     - /var/run/docker.sock:/var/run/docker.sock
+
       
-
+# networks:
+#   default:
+#     driver: bridge
+#     name: rotomnet
