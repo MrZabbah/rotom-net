@@ -20,19 +20,17 @@ services:
       - 3307:3306
 
   lb-app:
-    image: haproxy:2.1
+    build: ./haproxyConfig
     ports: 
-      - "8080:8080"
+      - "8443:8443"
       - "8084:8084"
-    volumes:
-      - "./haproxy-app.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
+    
     depends_on:
       - app1
       - app2
     networks:
       - rotomnet
-    # environment:
-      # HAPROXY_SSL_CERT: #CERTIFICADO
+    
 
   app1:
     image: mrzabbah/rotom-net:latest
