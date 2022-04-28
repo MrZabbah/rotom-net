@@ -1,6 +1,9 @@
 version: "3.8"
 
-
+volumes:
+  dbdata:
+networks:
+  rotomnet:
 services:
   db:
     image: mysql:8.0.28
@@ -11,27 +14,56 @@ services:
       MYSQL_DATABASE: pokemon_schema
     volumes:
       - dbdata:/var/lib/mysql
+    networks:
+      - rotomnet
+    ports:
+      - 3307:3306
 
-  app:
+  lb-app:
+    image: haproxy:2.1
+    ports: 
+      - "8080:8080"
+      - "8084:8084"
+    volumes:
+      - "./haproxy-app.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
+    depends_on:
+      - app1
+      - app2
+    networks:
+      - rotomnet
+    # environment:
+      # HAPROXY_SSL_CERT: #CERTIFICADO
+
+  app1:
     image: mrzabbah/rotom-net:latest
     restart: always
     depends_on:
       - db
       - api
-    ports:
-      - 8443:8443
+    networks:
+      - rotomnet
     environment:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
-      SPRING_JPA_HIBERNATE_DDL-AUTO: create #Must be comented after first launch!
+      # SPRING_JPA_HIBERNATE_DDL-AUTO: create #Must be comented after first launch!
       ROTOMNET_API_HOST: api
 
+  app2:
+    image: mrzabbah/rotom-net:latest
+    restart: always
+    depends_on:
+      - db
+      - api
+    networks:
+      - rotomnet
+    environment:
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
+      ROTOMNET_API_HOST: api
+
+# BALANCEADOR A LA API
   api:
     image: mrzabbah/api-rotom-net:latest
     restart: always
-
-
-volumes:
-  dbdata:
-      
-
+    networks:
+      - rotomnet
