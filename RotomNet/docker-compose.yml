@@ -20,11 +20,12 @@ services:
       - 3307:3306
 
   lb-app:
-    build: ./haproxyAppConfig
+    image: haproxy:2.1
     ports: 
       - "8443:8443"
       - "8084:8084"
-    
+    volumes:
+      - "./haproxy-app.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
     depends_on:
       - app1
       - app2
