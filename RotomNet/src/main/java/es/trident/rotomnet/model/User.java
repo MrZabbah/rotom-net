@@ -14,6 +14,8 @@ import javax.persistence.ElementCollection;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.Id;
+
+import java.io.Serializable;
 import java.sql.Blob;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
@@ -26,7 +28,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
  * del usuario.
  */
 @Entity
-public class User {
+public class User implements Serializable{
 	
 	@Id
 	@Column(name = "USER_ID")
@@ -42,8 +44,10 @@ public class User {
 	@JsonIgnore
 	private Blob imageFile;	
 	@OneToMany(mappedBy="user" ,cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<UserRotomCard> deck;
 	@OneToMany(mappedBy="user", cascade = CascadeType.ALL)
+	@JsonIgnore
 	private List<Team> teams;
 	@ElementCollection(fetch = FetchType.EAGER)
 	private List<String> roles;

@@ -5,6 +5,7 @@
 
 package es.trident.rotomnet.model;
 
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -17,7 +18,7 @@ import javax.persistence.ManyToOne;
  * Team: Clase que representa un equipo de seis Pokemon. 
  */
 @Entity
-public class Team {
+public class Team implements Serializable{
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
