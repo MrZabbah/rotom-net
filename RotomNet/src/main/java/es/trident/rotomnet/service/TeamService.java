@@ -7,6 +7,11 @@ package es.trident.rotomnet.service;
 
 import java.util.ArrayList;
 import java.util.Optional;
+
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.CachePut;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
@@ -22,6 +27,7 @@ import es.trident.rotomnet.repository.TeamRepository;
  */
 
 @Service
+@CacheConfig
 public class TeamService {
 	
 	private TeamRepository teamRepository;
@@ -32,20 +38,24 @@ public class TeamService {
 		this.pokemonService = pokemonService;
 	}
 	
+	@CacheEvict(value="teams", key="#selectedUser.userId")
 	public void saveCurrentTeam(User selectedUser, Team currentTeam) {
 		currentTeam.setUser(selectedUser);
 		teamRepository.save(currentTeam);
 	}
 	
+	@CachePut(value="teams", key="#user.userId")
 	public Page<Team> getTeamsByUser(User user,Pageable page) {
 		return teamRepository.findByUser(user, page);
 	}
 	
+	@Cacheable(value="teams", key="#id")
 	public Team getTeamById(int id) {
 		Optional<Team> team = teamRepository.findById(id);
 		return team.orElseThrow();
 	}
 	
+	@CacheEvict(value="teams", key="#id")
 	public void deleteTeam(int id) {
 		Team teamToDelete = teamRepository.findById(id).orElseThrow();
 		teamRepository.delete(teamToDelete);
@@ -56,8 +66,7 @@ public class TeamService {
 	 * @param types Tipos seleccionados para el equipo
 	 * @param legendaryCheck Confirmación de un legendario en el equipo
 	 * @return myTeam Equipo creado aleatoriamente
-	 */
-	
+	 */	
 	public Team getRandomTeam(String teamName, ArrayList<String> types, boolean legendaryCheck) {
 		ArrayList<Pokemon> team;
 		ArrayList<Pokemon> legendaries = new ArrayList<>();

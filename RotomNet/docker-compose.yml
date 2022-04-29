@@ -13,7 +13,7 @@ services:
       - dbdata:/var/lib/mysql
 
   app:
-    image: mrzabbah/rotom-net:latest
+    image: davidgonzalezrueda/rotom-net-app:latest
     restart: always
     depends_on:
       - db
