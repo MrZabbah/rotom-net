@@ -33,7 +33,7 @@ services:
     
 
   app1:
-    image: manu/rotom-net
+    image: mrzabbah/rotom-net:latest
     restart: always
     depends_on:
       - db
@@ -47,7 +47,7 @@ services:
       ROTOMNET_API_HOST: lb-api
 
   app2:
-    image: manu/rotom-net
+    image: mrzabbah/rotom-net:latest
     restart: always
     depends_on:
       - db
