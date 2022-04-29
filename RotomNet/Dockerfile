@@ -8,5 +8,5 @@ RUN mvn package -o
 FROM openjdk:17.0-slim-buster
 WORKDIR /urs/src/app/
 COPY --from=builder /project/target/*.jar /urs/src/app/
-EXPOSE 8080
+EXPOSE 8443
 CMD [ "java", "-jar", "RotomNet-0.0.1-SNAPSHOT.jar" ]

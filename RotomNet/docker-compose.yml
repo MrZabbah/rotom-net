@@ -20,49 +20,65 @@ services:
       - 3307:3306
 
   lb-app:
-    image: haproxy:2.1
+    build: ./haproxyAppConfig
     ports: 
-      - "8080:8080"
+      - "8443:8443"
       - "8084:8084"
-    volumes:
-      - "./haproxy-app.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
+    
     depends_on:
       - app1
       - app2
     networks:
       - rotomnet
-    # environment:
-      # HAPROXY_SSL_CERT: #CERTIFICADO
+    
 
   app1:
     image: mrzabbah/rotom-net:latest
     restart: always
     depends_on:
       - db
-      - api
+      - lb-api
     networks:
       - rotomnet
     environment:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
       # SPRING_JPA_HIBERNATE_DDL-AUTO: create #Must be comented after first launch!
-      ROTOMNET_API_HOST: api
+      ROTOMNET_API_HOST: lb-api
 
   app2:
     image: mrzabbah/rotom-net:latest
     restart: always
     depends_on:
       - db
-      - api
+      - lb-api
     networks:
       - rotomnet
     environment:
       MYSQL_HOST: db
       MYSQL_PORT: 3306
-      ROTOMNET_API_HOST: api
+      ROTOMNET_API_HOST: lb-api
 
-# BALANCEADOR A LA API
-  api:
+
+  lb-api:
+    image: haproxy:2.1
+    ports: 
+      - "8085:8084"
+    volumes:
+      - "./haproxy-api.cfg:/usr/local/etc/haproxy/haproxy.cfg:ro"
+    depends_on:
+      - api1
+      - api2
+    networks:
+      - rotomnet  
+
+  api1:
+    image: mrzabbah/api-rotom-net:latest
+    restart: always
+    networks:
+      - rotomnet
+      
+  api2:
     image: mrzabbah/api-rotom-net:latest
     restart: always
     networks:
