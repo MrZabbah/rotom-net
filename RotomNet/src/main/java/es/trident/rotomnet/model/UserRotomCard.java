@@ -5,6 +5,8 @@
 
 package es.trident.rotomnet.model;
 
+import java.io.Serializable;
+
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.IdClass;
@@ -18,8 +20,12 @@ import es.trident.rotomnet.model.util.UserRotomCardId;
  */
 @Entity
 @IdClass(UserRotomCardId.class)
-public class UserRotomCard{
+public class UserRotomCard implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@MapsId("user")
 	@ManyToOne

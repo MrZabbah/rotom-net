@@ -5,6 +5,7 @@
 
 package es.trident.rotomnet.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 import javax.persistence.CascadeType;
@@ -21,8 +22,13 @@ import javax.persistence.PrimaryKeyJoinColumn;
  * cartas pokemon
  */
 @Entity
-public class RotomCard{
+public class RotomCard implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static RotomCard NOT_FOUND = new RotomCard(Pokemon.NOT_FOUND, 0, 0, 0);
 	
 	@Id

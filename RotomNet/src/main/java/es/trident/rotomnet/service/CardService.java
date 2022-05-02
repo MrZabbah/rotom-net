@@ -8,6 +8,11 @@ package es.trident.rotomnet.service;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
+import org.springframework.cache.annotation.Caching;
 import org.springframework.stereotype.Service;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Ordering;
@@ -24,6 +29,7 @@ import es.trident.rotomnet.service.util.Utils;
  * CardService: Servicio dedicado a la gestión de cartas
  */
 @Service
+@CacheConfig
 public class CardService {
 
 	private RotomCardRepository cardRepository;
@@ -34,6 +40,7 @@ public class CardService {
 		this.userCardsRepository = userCardsRepository;
 	}
 
+	
 	public List<List<RotomCard>> getAllCards() {
 		List<RotomCard> cards = cardRepository.findAll();
 		List<List<RotomCard>> subCardSets = Lists.partition(cards, 5);
@@ -67,6 +74,8 @@ public class CardService {
 		return subCardSets;
 	}
 
+	
+	
 	/**
 	 * Método encargado de devolver un String en formato {Discovered:
 	 * [cartasPoseidas / cartasTotales]}
@@ -74,6 +83,7 @@ public class CardService {
 	 * @param user Usuario a analizar
 	 * @return String formateado
 	 */
+	@Cacheable(value="cards", key = "#root.methodName + #user.userId")
 	public String getUserDiscoverRatio(User user) {
 		String s = String.format("Discovered: [%d / %d]", deckCount(user), cardRepository.count());
 
@@ -87,6 +97,11 @@ public class CardService {
 		return Utils.getRandomList(6, cardList);
 	}
 
+	@Caching(evict = {
+			@CacheEvict(value = "cards", key = "'getUserDiscoverRatio' + #user.userId"), 
+			@CacheEvict(value = "cards", key = "'findByUser' + #user.userId"), 
+			@CacheEvict(value = "cards", key = "'deckCount' + #user.userId")
+	})	
 	public UserRotomCard addCardToUser(RotomCard rotomCard, User user, boolean shiny) {
 		UserRotomCard card = userCardsRepository.findByUserAndRotomCard(user, rotomCard);
 
@@ -102,6 +117,7 @@ public class CardService {
 		return card;
 	}
 
+	@Cacheable(value = "cards", key = "#root.methodName + #user.userId")
 	public int deckCount(User user) {
 		return userCardsRepository.countByUser(user);
 	}

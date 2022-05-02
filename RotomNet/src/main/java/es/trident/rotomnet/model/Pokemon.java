@@ -5,6 +5,7 @@
 
 package es.trident.rotomnet.model;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -16,7 +17,12 @@ import javax.persistence.Id;
  */
 
 @Entity
-public class Pokemon{
+public class Pokemon implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static Pokemon NOT_FOUND = new Pokemon(-1);
 	
 	@Id
