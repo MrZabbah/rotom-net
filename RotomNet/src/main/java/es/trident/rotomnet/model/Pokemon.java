@@ -18,6 +18,11 @@ import javax.persistence.Id;
 
 @Entity
 public class Pokemon implements Serializable{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static Pokemon NOT_FOUND = new Pokemon(-1);
 	
 	@Id

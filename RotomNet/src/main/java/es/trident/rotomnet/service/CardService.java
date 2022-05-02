@@ -40,7 +40,7 @@ public class CardService {
 		this.userCardsRepository = userCardsRepository;
 	}
 
-	@Cacheable(value="cards")
+	
 	public List<List<RotomCard>> getAllCards() {
 		List<RotomCard> cards = cardRepository.findAll();
 		List<List<RotomCard>> subCardSets = Lists.partition(cards, 5);
@@ -48,7 +48,6 @@ public class CardService {
 		return subCardSets;
 	}
 
-	@Cacheable(value="cards", key="#root.methodName + #user.userId")
 	public List<List<UserRotomCard>> getUserCards(User user) {
 		List<UserRotomCard> cards = userCardsRepository.findByUser(user);
 		List<Pokemon> userDeck = new ArrayList<>();
@@ -100,7 +99,7 @@ public class CardService {
 
 	@Caching(evict = {
 			@CacheEvict(value = "cards", key = "'getUserDiscoverRatio' + #user.userId"), 
-			@CacheEvict(value = "cards", key = "'getUserCards' + #user.userId"), 
+			@CacheEvict(value = "cards", key = "'findByUser' + #user.userId"), 
 			@CacheEvict(value = "cards", key = "'deckCount' + #user.userId")
 	})	
 	public UserRotomCard addCardToUser(RotomCard rotomCard, User user, boolean shiny) {

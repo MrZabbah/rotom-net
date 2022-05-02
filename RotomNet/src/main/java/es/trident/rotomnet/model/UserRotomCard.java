@@ -22,6 +22,10 @@ import es.trident.rotomnet.model.util.UserRotomCardId;
 @IdClass(UserRotomCardId.class)
 public class UserRotomCard implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@MapsId("user")
 	@ManyToOne

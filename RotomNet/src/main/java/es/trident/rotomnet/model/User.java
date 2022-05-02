@@ -30,6 +30,10 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class User implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	@Id
 	@Column(name = "USER_ID")
 	@GeneratedValue(strategy = GenerationType.AUTO)

@@ -24,6 +24,11 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @Entity
 public class RotomCard implements Serializable{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
 	public static RotomCard NOT_FOUND = new RotomCard(Pokemon.NOT_FOUND, 0, 0, 0);
 	
 	@Id

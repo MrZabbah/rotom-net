@@ -6,6 +6,9 @@
 package es.trident.rotomnet.repository;
 
 import java.util.List;
+
+import org.springframework.cache.annotation.CacheConfig;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import es.trident.rotomnet.model.RotomCard;
@@ -17,8 +20,10 @@ import es.trident.rotomnet.model.util.UserRotomCardId;
  * UserRotomCardRepository: Repositorio encargado de las consultas de la tabla
  * de UserRotomCard a la base de datos
  */
+@CacheConfig
 public interface UserRotomCardRepository extends JpaRepository<UserRotomCard,UserRotomCardId>{
 	
+	@Cacheable(value="cards", key="'findByUser' + #user.userId")
 	List<UserRotomCard> findByUser(User user);
 	
 	int countByUser(User user);
