@@ -8,11 +8,15 @@ package es.trident.rotomnet.model;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 /** 
  * Team: Clase que representa un equipo de seis Pokemon. 
@@ -26,9 +30,10 @@ public class Team implements Serializable{
 	private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private int id;
+	private int id;	
+	@LazyCollection(LazyCollectionOption.FALSE)
 	@ManyToMany
-	private List<Pokemon> teamPokemon;
+	private List<Pokemon> teamPokemon;	
 	private String name;
 	@ManyToOne
 	private User user;

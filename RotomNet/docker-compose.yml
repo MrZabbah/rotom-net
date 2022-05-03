@@ -16,8 +16,7 @@ services:
       - dbdata:/var/lib/mysql
     networks:
       - rotomnet
-    ports:
-      - 3307:3306
+
 
   lb-app:
     image: haproxy:2.1
