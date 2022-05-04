@@ -2,18 +2,53 @@ version: "3.8"
 
 volumes:
   dbdata:
+  dbslavedata:
 networks:
   rotomnet:
 services:
   db:
     image: mysql:8.0.28
     restart: always
+    container_name: db
+    command: --default-authentication-plugin=mysql_native_password
+        
+    environment:
+      MYSQL_ROOT_PASSWORD: root 
+      MYSQL_DATABASE: pokemon_schema
+    volumes:
+      - ./master_config/my.cnf:/etc/mysql/my.cnf
+      - dbdata:/var/lib/mysql
+      - ./master_config/init.sql:/docker-entrypoint-initdb.d/init.sql
+    networks:
+      - rotomnet
+      
+  dbslave:
+    image: mysql:8.0.28
+    restart: always
+    container_name: dbslave
     command: --default-authentication-plugin=mysql_native_password
     environment:
       MYSQL_ROOT_PASSWORD: root 
       MYSQL_DATABASE: pokemon_schema
     volumes:
-      - dbdata:/var/lib/mysql
+      - ./slave_config/my.cnf:/etc/mysql/my.cnf
+      - dbslavedata:/var/lib/mysql
+      - ./slave_config/init.sql:/docker-entrypoint-initdb.d/init.sql
+    depends_on:
+      - db
+    networks:
+      - rotomnet
+      
+  proxysql:
+    image: proxysql/proxysql:2.0.12
+    restart: always
+    container_name: proxysql
+    volumes:
+      - ./proxysql/proxysql.cnf:/etc/proxysql.cnf
+      - ./proxysql/data:/var/lib/proxysql
+    depends_on:
+      - db
+      - dbslave
     networks:
       - rotomnet
 
@@ -33,30 +68,30 @@ services:
     
 
   app1:
-    image: davidgonzalezrueda/rotom-net-app:latest
+    image: mrzabbah/rotom-net:latest
     restart: always
     depends_on:
-      - db
+      - proxysql
       - lb-api
     networks:
       - rotomnet
     environment:
-      MYSQL_HOST: db
-      MYSQL_PORT: 3306
-      # SPRING_JPA_HIBERNATE_DDL-AUTO: create #Must be comented after first launch!
+      MYSQL_HOST: proxysql #No es mysql ya, ahora apunta al proxysql
+      MYSQL_PORT: 6033 #No es el puerto de mysql, es el puerto de proxysql
+      SPRING_JPA_HIBERNATE_DDL-AUTO: create #Must be comented after first launch!
       ROTOMNET_API_HOST: lb-api
 
   app2:
-    image: davidgonzalezrueda/rotom-net-app:latest
+    image: mrzabbah/rotom-net:latest
     restart: always
     depends_on:
-      - db
+      - proxysql
       - lb-api
     networks:
       - rotomnet
     environment:
-      MYSQL_HOST: db
-      MYSQL_PORT: 3306
+      MYSQL_HOST: proxysql 
+      MYSQL_PORT: 6033 
       ROTOMNET_API_HOST: lb-api
 
 
