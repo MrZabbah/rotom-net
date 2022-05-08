@@ -7,7 +7,7 @@ networks:
   rotomnet:
 services:
   db:
-    image: mysql:8.0.28
+    image: mysql:5.7
     restart: always
     container_name: db
     command: --default-authentication-plugin=mysql_native_password
@@ -17,13 +17,13 @@ services:
       MYSQL_DATABASE: pokemon_schema
     volumes:
       - ./master_config/my.cnf:/etc/mysql/my.cnf
-      - dbdata:/var/lib/mysql
+      - ./master_config/data:/var/lib/mysql
       - ./master_config/init.sql:/docker-entrypoint-initdb.d/init.sql
     networks:
       - rotomnet
       
   dbslave:
-    image: mysql:8.0.28
+    image: mysql:5.7
     restart: always
     container_name: dbslave
     command: --default-authentication-plugin=mysql_native_password
@@ -32,7 +32,7 @@ services:
       MYSQL_DATABASE: pokemon_schema
     volumes:
       - ./slave_config/my.cnf:/etc/mysql/my.cnf
-      - dbslavedata:/var/lib/mysql
+      - ./slave_config/data:/var/lib/mysql
       - ./slave_config/init.sql:/docker-entrypoint-initdb.d/init.sql
     depends_on:
       - db
@@ -76,8 +76,8 @@ services:
     networks:
       - rotomnet
     environment:
-      MYSQL_HOST: proxysql #No es mysql ya, ahora apunta al proxysql
-      MYSQL_PORT: 6033 #No es el puerto de mysql, es el puerto de proxysql
+      MYSQL_HOST: db #No es mysql ya, ahora apunta al proxysql
+      MYSQL_PORT: 3306 #No es el puerto de mysql, es el puerto de proxysql
       SPRING_JPA_HIBERNATE_DDL-AUTO: create #Must be comented after first launch!
       ROTOMNET_API_HOST: lb-api
 
@@ -90,8 +90,8 @@ services:
     networks:
       - rotomnet
     environment:
-      MYSQL_HOST: proxysql 
-      MYSQL_PORT: 6033 
+      MYSQL_HOST: db
+      MYSQL_PORT: 3306
       ROTOMNET_API_HOST: lb-api
 
 
