@@ -76,9 +76,9 @@ services:
     networks:
       - rotomnet
     environment:
-      MYSQL_HOST: db #No es mysql ya, ahora apunta al proxysql
-      MYSQL_PORT: 3306 #No es el puerto de mysql, es el puerto de proxysql
-      SPRING_JPA_HIBERNATE_DDL-AUTO: create #Must be comented after first launch!
+      MYSQL_HOST: db # Must be service db at first launch to create the database scheme, after that change it to proxysql
+      MYSQL_PORT: 3306 # Must be db port 3306 at first launch to create database scheme, after that cange it to proxysql port 6033
+      SPRING_JPA_HIBERNATE_DDL-AUTO: create # Must be comented after first launch!
       ROTOMNET_API_HOST: lb-api
 
   app2:
@@ -90,8 +90,8 @@ services:
     networks:
       - rotomnet
     environment:
-      MYSQL_HOST: db
-      MYSQL_PORT: 3306
+      MYSQL_HOST: proxysql
+      MYSQL_PORT: 6033
       ROTOMNET_API_HOST: lb-api
 
 
