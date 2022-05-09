@@ -199,3 +199,37 @@ select * from test;
 docker compose down
 ```
 2. Configuración de ProxySQL
+  - En el fichero 'docker-compose.yml', cambiar los parámetros de la primera aplicación para que se conecte a ProxySQL y al puerto 6033. Además, se debe comentar la propiedad 'JPA_HIBERNATE_DDL-AUTO = create', puesto que las tablas ya están creadas.
+```
+environment:
+      MYSQL_HOST: proxysql
+      MYSQL_PORT: 6033 
+      #SPRING_JPA_HIBERNATE_DDL-AUTO: create 
+      ROTOMNET_API_HOST: lb-api
+```
+  - Lanzar la ejecución de los contenedores en segundo plano
+```
+docker compose up -d
+```
+  - Entrar en la terminal de la base de datos Slave
+```
+docker-compose exec dbslave bash
+```
+  - Entrar en la terminal de MySQL. Es posible que se deniegue la conexión varias veces porque los contenedores aún no estén preparados. Continuar ejecutando el comando de forma periódica hasta tener éxito.
+```
+mysql -u root -proot
+```
+  - Mostrar la información de la base de datos Slave. Se puede observar que, en esta ocasión, los campos 'Slave_IO_Running' y 'Slave_SQL_Running' muestran el valor "No". Esto se debe a que, al ejecutarse por segunda vez, se han desincronizado de la base de datos Master.
+```
+show slave status\G;
+```
+  - Reiniciar la base de datos Slave para sincronizarla de nuevo con la base de datos Master.
+```
+stop slave;
+reset slave;
+start slave;
+```
+  - Mostrar de nuevo la información de la base de datos Slave. Al reiniciarla, se ha sincronizado de nuevo con la base de datos Master y ahora los campos 'Slave_IO_Running' y 'Slave_SQL_Running' muestran el valor "Yes"
+```
+show slave status\G;
+```
