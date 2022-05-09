@@ -128,3 +128,74 @@ La aplicación web y la API REST van a ser ejecutadas en una Máquina Virtual Li
 ```
 sudo java -jar nombreDeEjecutable.jar
 ```
+
+## Configuración de la base de datos replicada
+Se la implementado una base de datos replicada con un modelo Master/Slave, apoyada en ProxySQL. Las escrituras son realizadas exclusivamente sobre la base de datos Master y replicadas automáticamente a la Slave, mientras que las lecturas pueden ser ejecutadas sobre cualquiera de las dos.
+1. Configuración del esquema Master/Slave
+  - En caso de que exista, eliminar la subcarpeta 'data' de las carpetas 'master_config', 'slave_config' y 'proxysql'.
+  - En las carpetas 'master_config' y 'slave_config' cambiar los permisos del fichero 'my.cnf' a "Solo Lectura":
+    * Click derecho
+    * Propiedades
+    * En Atributos, marcar casilla de "Solo lectura"
+  - En el fichero 'docker-compose.yml' conectar la primera instancia de la aplicación a la base de datos y al puerto 3306.
+```
+environment:
+    MYSQL_HOST: db
+    MYSQL_PORT: 3306
+    SPRING_JPA_HIBERNATE_DDL-AUTO: create
+    ROTOMNET_API_HOST: lb-api
+ ```
+  - Lanzar la ejecución de los contenedores en segundo plano
+```
+docker compose up -d
+```
+  - Entrar en la terminal de la base de datos Master
+```
+docker-compose exec db bash
+```
+  - Entrar en la terminal de MySQL. Es posible que se deniegue la conexión varias veces porque los contenedores aún no estén preparados. Continuar ejecutando el comando de forma periódica hasta tener éxito.
+```
+mysql -u root -proot
+```
+  - Mostrar la información de la base de datos Master. Memorizar el fichero binario que se muestra en el apartado 'File', puesto que debería mostrarse igual posteriormente en la base de datos Slave.
+```
+show master status\G;
+```
+  - Comprobar que las tablas han sido creadas correctamente.
+```
+use pokemon_schema
+show tables;
+```
+  - Comprobar que la replicación se realiza correctamente. Crear una tabla e insertar valores.
+```
+create table test (a int, b int);
+insert into test values (2,2)
+```
+  - Abrir una nueva consola o salir de MySQL y de la base de datos Master ejecutando 'exit' dos veces.
+  - Entrar en la terminal de la base de datos Slave.
+```
+docker-compose exec dbslave bash
+```
+  - Entrar en la terminal de MySQL. De nuevo es posible que se deniegue el acceso varias veces porque los contenedores aún no estén preparados. Continuar ejecutando el comando de forma periódica hasta tener éxito.
+```
+mysql -u root -proot
+```
+  - Mostrar la información de la base de datos Slave. Observar el campo 'Master_Log_File' y comparar con el campo 'File' observado previamente en la base de datos Master. El fichero mostrado debería ser el mismo. Adicionalmente, los campos 'Slave_IO_Running' y 'Slave_SQL_Running' deberían ser "Yes".
+```
+show slave status\G;
+```
+  - Comprobar que las tablas han sido creadas correctamente. Deberían mostrarse todas las tablas, incluida la nueva tabla "test"
+```
+use pokemon_schema
+show tables;
+```
+  - Comprobar que la replicación se ha realizado adecuadamente. Se deberían devolver los datos insertados previamente en la base de datos Master.
+```
+select * from test;
+```
+  - Salir de MySQL y la base de datos Slave ejecutando 'exit' dos veces.
+  - Parar la ejecución de los contenedores.
+```
+docker compose down
+```
+2. Configuración de ProxySQL
