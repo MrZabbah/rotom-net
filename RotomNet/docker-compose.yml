@@ -68,7 +68,7 @@ services:
     
 
   app1:
-    image: mrzabbah/rotom-net:latest
+    image: ghcr.io/mrzabbah/rotom-net:latest
     restart: always
     depends_on:
       - proxysql
@@ -82,7 +82,7 @@ services:
       ROTOMNET_API_HOST: lb-api
 
   app2:
-    image: mrzabbah/rotom-net:latest
+    image: ghcr.io/mrzabbah/rotom-net:latest
     restart: always
     depends_on:
       - proxysql

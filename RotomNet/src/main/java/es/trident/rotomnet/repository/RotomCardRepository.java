@@ -14,7 +14,6 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import es.trident.rotomnet.model.Pokemon;
 import es.trident.rotomnet.model.RotomCard;
-import es.trident.rotomnet.model.User;
 
 /**
  * RotomCardRepository: Repositorio encargado de las consultas de la tabla
