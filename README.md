@@ -2,6 +2,10 @@
 
 RotomNet
 
+## Enlace de video de YouTube (Práctica 4)
+
+[![image](https://user-images.githubusercontent.com/60218308/167568533-2aae329d-b7f9-4685-9063-3feaf1d9a4bb.png)](https://www.youtube.com/watch?v=ildhpboq_gw)
+
 ## Descripción de la temática
 
 La aplicación web es una página con temática de Pokémon, orientada a crear equipos pseudoaleatorios para 
@@ -233,3 +237,8 @@ start slave;
 ```
 show slave status\G;
 ```
+
+## Topología del despliegue de la aplicación con Docker Compose
+
+![Esquema_infraestructura_DAD](https://user-images.githubusercontent.com/60218308/167568873-0922f57d-f6a9-434f-bc73-a926cc2157f9.png)
+
